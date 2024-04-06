@@ -26,7 +26,7 @@ public class ProductInput {
     }
 
     public Product make() throws IncorrectScriptException, InvalidFormException, InvalidValueException {
-        var product = new Product(inputProductName(), inputCoordinates(), inputPrice(), inputUnitOfMeasure(), inputPerson());
+        Product product = new Product(inputProductName(), inputCoordinates(), inputPrice(), inputUnitOfMeasure(), inputPerson());
         if (!product.validate()) throw new InvalidFormException();
         return product;
     }
@@ -36,7 +36,7 @@ public class ProductInput {
      */
     private String inputProductName() throws IncorrectScriptException {
         String name;
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         Pattern pattern = Pattern.compile("^[^\\p{P}\\d\\s].*");
         while (true) {
             try {
@@ -79,12 +79,12 @@ public class ProductInput {
      */
     private Integer inputX() throws IncorrectScriptException {
         Integer x;
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         while (true) {
             try {
                 console.println("Введите координату X (должно быть целым числом):");
                 console.ps1();
-                var strX = InputSteamer.getScanner().nextLine().trim();
+                String strX = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strX);
                 x = Integer.parseInt(strX);
                 break;
@@ -108,12 +108,12 @@ public class ProductInput {
      */
     private Double inputY() throws IncorrectScriptException {
         Double y;
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         while (true) {
             try {
                 console.println("Введите координату Y (должно быть числом с плавающей точкой):");
                 console.ps1();
-                var strY = InputSteamer.getScanner().nextLine().trim();
+                String strY = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strY);
                 y = Double.parseDouble(strY);
                 if (y < -Double.MAX_VALUE || y > Double.MAX_VALUE) throw new InvalidValueException();
@@ -140,13 +140,13 @@ public class ProductInput {
      * Ввод цены продукта
      */
     private Integer inputPrice() throws IncorrectScriptException {
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         Integer price;
         while (true) {
             try {
                 console.println("Введите цену продукта:");
                 console.ps1();
-                var strPrice = InputSteamer.getScanner().nextLine().trim();
+                String strPrice = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strPrice);
                 price = Integer.parseInt(strPrice);
                 if (price <= 0) throw new InvalidRangeException();
@@ -172,7 +172,7 @@ public class ProductInput {
      * Ввод единиц измерения
      */
     private UnitOfMeasure inputUnitOfMeasure() throws IncorrectScriptException {
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
 
         String strUnitOfMeasure;
         UnitOfMeasure unitOfMeasure;
@@ -204,7 +204,7 @@ public class ProductInput {
      * Создание покупателя
      */
     private Person inputPerson() throws IncorrectScriptException {
-        var person = new Person(inputPersonName(), inputPassportID(), inputHairColor(), inputNationality(), inputLocation());
+        Person person = new Person(inputPersonName(), inputPassportID(), inputHairColor(), inputNationality(), inputLocation());
         return person;
     }
 
@@ -213,7 +213,7 @@ public class ProductInput {
      */
     private String inputPersonName() throws IncorrectScriptException {
         String name;
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         Pattern pattern = Pattern.compile("^[^\\p{P}\\d\\s].*");
         while (true) {
             try {
@@ -248,7 +248,7 @@ public class ProductInput {
      */
     private String inputPassportID() throws IncorrectScriptException {
         String passportID;
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         Pattern pattern = Pattern.compile("^[\\p{L}\\d]+$");
         while (true) {
             try {
@@ -283,7 +283,7 @@ public class ProductInput {
      * Ввод цвета волос покупателя
      */
     private Color inputHairColor() throws IncorrectScriptException {
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         String strColor;
         Color color;
         while (true) {
@@ -313,7 +313,7 @@ public class ProductInput {
      * Ввод национальности покупателя
      */
     private Country inputNationality() throws IncorrectScriptException {
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
 
         String strCountry;
         Country country;
@@ -362,12 +362,12 @@ public class ProductInput {
      */
     private long inputLocationX() throws IncorrectScriptException {
         long x;
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         while (true) {
             try {
                 console.println("Введите координату X покупателя (должно быть числом с плавающей точкой):");
                 console.ps1();
-                var strX = InputSteamer.getScanner().nextLine().trim();
+                String strX = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strX);
                 x = Long.parseLong(strX);
                 break;
@@ -390,12 +390,12 @@ public class ProductInput {
      */
     private int inputLocationY() throws IncorrectScriptException {
         int y;
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         while (true) {
             try {
                 console.println("Введите координату Y покупателя (должно быть целым числом):");
                 console.ps1();
-                var strY = InputSteamer.getScanner().nextLine().trim();
+                String strY = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strY);
                 y = Integer.parseInt(strY);
                 break;
@@ -419,7 +419,7 @@ public class ProductInput {
      */
     private String inputLocationName() throws IncorrectScriptException {
         String name;
-        var fileMode = InputSteamer.getFileMode();
+        boolean fileMode = InputSteamer.getFileMode();
         Pattern pattern = Pattern.compile("^[^\\p{P}\\d\\s].*");
         while (true) {
             try {

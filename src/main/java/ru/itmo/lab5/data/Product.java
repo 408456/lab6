@@ -77,19 +77,22 @@ public class Product implements Validateable, Comparable<Product> {
     }
 
     /**
-     * Сравнивает данный объект Product с указанным объектом Product по их идентификаторам.
+     * Сравнивает данный объект Product с указанным объектом Product по цене и имени.
      *
      * @param o объект Product для сравнения
      * @return отрицательное целое число, ноль или положительное целое число, если этот объект меньше, равен или больше указанного объекта Product
      */
     @Override
     public int compareTo(Product o) {
-        return (int) (this.id - o.getId());
+        int price = this.price.compareTo(o.price);
+        if (price != 0) {
+            return price;
+        }
+        return this.name.compareTo(o.name);
     }
 
     /**
      * Возвращает строковое представление объекта Product.
-     *
      * @return строковое представление объекта Product
      */
     @Override
@@ -182,7 +185,7 @@ public class Product implements Validateable, Comparable<Product> {
      * @return массив строк, представляющий объект Product
      */
     public static String[] toArray(Product e) {
-        var list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<String>();
         list.add(e.getId().toString());
         list.add(e.getName());
         list.add(e.getCreationDate().toInstant().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_DATE_TIME));

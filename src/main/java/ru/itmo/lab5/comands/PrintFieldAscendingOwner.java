@@ -10,18 +10,30 @@ import java.util.Comparator;
 import java.util.Objects;
 
 /**
- * Команда для вывода полей owner всех элементов в порядке возрастания
+ * Команда для вывода полей owner всех элементов в порядке возрастания.
  */
 public class PrintFieldAscendingOwner extends Command {
-    private final Console console;
-    private final CollectionManager collectionManager;
+    private final Console console;          // Консоль для взаимодействия с пользователем
+    private final CollectionManager collectionManager; // Менеджер коллекции
 
+    /**
+     * Конструктор класса.
+     *
+     * @param console            объект класса Console для взаимодействия с пользователем
+     * @param collectionManager объект класса CollectionManager для управления коллекцией
+     */
     public PrintFieldAscendingOwner(Console console, CollectionManager collectionManager) {
         super("print_field_ascending_owner", "вывести значения поля owner всех элементов в порядке возрастания");
         this.console = console;
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду вывода полей owner всех элементов в порядке возрастания.
+     *
+     * @param args аргументы команды (в данном случае не используются)
+     * @return true, если команда выполнена успешно, иначе false
+     */
     @Override
     public boolean execute(String[] args) {
         try {

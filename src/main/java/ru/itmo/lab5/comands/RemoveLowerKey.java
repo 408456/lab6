@@ -25,7 +25,7 @@ public class RemoveLowerKey extends Command {
     public boolean execute(String[] args) {
         try {
             if (!args[1].isEmpty()) throw new InvalidAmountException();
-            var product = ((new ProductInput(console).make()));
+            ru.itmo.lab5.data.Product product = ((new ProductInput(console).make()));
             collectionManager.removeLowerKey(product);
             console.println("Продукты успешно удалены!");
             return true;

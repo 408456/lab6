@@ -11,18 +11,30 @@ import ru.itmo.lab5.input.Console;
 import ru.itmo.lab5.managers.CollectionManager;
 
 /**
- * Команда для обновления значения элемента коллекции по id
+ * Команда для обновления значения элемента коллекции по ID.
  */
 public class Update extends Command {
-    private final Console console;
-    private final CollectionManager collectionManager;
+    private final Console console; // Консоль для взаимодействия с пользователем
+    private final CollectionManager collectionManager; // Менеджер коллекции
 
+    /**
+     * Конструктор класса.
+     *
+     * @param console            объект класса Console для взаимодействия с пользователем
+     * @param collectionManager объект класса CollectionManager для управления коллекцией
+     */
     public Update(Console console, CollectionManager collectionManager) {
         super("update <id> {element}", "обновить значение элемента коллекции по ID");
         this.console = console;
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду обновления значения элемента коллекции по ID.
+     *
+     * @param args аргументы команды
+     * @return true, если команда выполнена успешно, иначе false
+     */
     @Override
     public boolean execute(String[] args) {
         try {

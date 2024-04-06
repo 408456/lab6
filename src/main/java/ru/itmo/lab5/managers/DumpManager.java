@@ -1,7 +1,7 @@
 package ru.itmo.lab5.managers;
 
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.CSVWriter;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 import ru.itmo.lab5.data.Product;
 
 import java.io.*;
@@ -37,8 +37,8 @@ public class DumpManager {
     private String collection2CSV(Collection<Product> collection) {
         try {
             StringWriter sw = new StringWriter();
-            CSVWriter csvWriter = new CSVWriter(sw, ';');
-            for (var e : collection) {
+            CSVWriter csvWriter = new CSVWriter(sw);
+            for (Product e : collection) {
                 csvWriter.writeNext(Product.toArray(e));
             }
             csvWriter.close();
@@ -54,19 +54,15 @@ public class DumpManager {
      * @param collection Коллекция для записи
      */
     public void writeCollection(Collection<Product> collection) {
-        try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(fileName))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             String csv = collection2CSV(collection);
             if (csv == null) return;
             writer.write(csv);
-            writer.flush();
             console.println("Коллекция успешно сохранена в файл!");
-        } catch (FileNotFoundException | NullPointerException e) {
-            console.printError("Файл не найден");
         } catch (IOException e) {
             console.printError("Неожиданная ошибка сохранения");
         }
     }
-
     /**
      * Преобразует CSV-строку в коллекцию.
      * @param s CSV-строка
@@ -75,7 +71,7 @@ public class DumpManager {
     private LinkedList<Product> CSV2collection(String s) {
         try {
             StringReader sr = new StringReader(s);
-            CSVReader csvReader = new CSVReader(sr, ';');
+            CSVReader csvReader = new CSVReader(sr);
             LinkedList<Product> ds = new LinkedList<>();
             String[] record;
             while ((record = csvReader.readNext()) != null) {
@@ -101,7 +97,7 @@ public class DumpManager {
     public LinkedList<Product> readCollection() {
         LinkedList<Product> collection = new LinkedList<>();
         if (fileName != null && !fileName.isEmpty()) {
-            try (var fileReader = new Scanner(new File(fileName))) {
+            try (Scanner fileReader = new Scanner(new File(fileName))) {
                 StringBuilder s = new StringBuilder();
                 while (fileReader.hasNextLine()) {
                     s.append(fileReader.nextLine());

@@ -143,7 +143,7 @@ public class CollectionManager {
     @Override
     public String toString() {
         if (collection.isEmpty()) return "Коллекция пуста!";
-        var last = getLast();
+        Product last = getLast();
 
         StringBuilder info = new StringBuilder();
         for (Product product : collection.values()) {

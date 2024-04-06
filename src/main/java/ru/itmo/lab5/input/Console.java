@@ -1,7 +1,10 @@
 package ru.itmo.lab5.input;
 
+/**
+ * Класс для чтения и вывода в консоль
+ */
 public class Console {
-    private static final String PS1 = "> "; // PS1
+    private static final String PS1 = "> ";
 
     /**
      * Выводит obj.toString() в консоль
@@ -43,7 +46,7 @@ public class Console {
     }
 
     /**
-     * @return PS1 текущей консоли
+     * @return PS1
      */
     public String getPS1() {
         return PS1;

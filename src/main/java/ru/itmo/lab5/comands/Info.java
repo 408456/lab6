@@ -6,19 +6,30 @@ import ru.itmo.lab5.managers.CollectionManager;
 import java.time.LocalDateTime;
 
 /**
- * Команда для вывода информации о коллекции
- *
+ * Команда для вывода информации о коллекции.
  */
 public class Info extends Command {
-    private final Console console;
-    private final CollectionManager collectionManager;
+    private final Console console;          // Консоль для взаимодействия с пользователем
+    private final CollectionManager collectionManager; // Менеджер коллекции
 
-    public Info(Console console, CollectionManager collectionController) {
+    /**
+     * Конструктор класса.
+     *
+     * @param console            объект класса Console для взаимодействия с пользователем
+     * @param collectionManager объект класса CollectionManager для управления коллекцией
+     */
+    public Info(Console console, CollectionManager collectionManager) {
         super("info", "вывести информацию о коллекции");
         this.console = console;
-        this.collectionManager = collectionController;
+        this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду вывода информации о коллекции.
+     *
+     * @param args аргументы команды (в данном случае не используются)
+     * @return true, так как команда успешно выполнена
+     */
     @Override
     public boolean execute(String[] args) {
         if (!args[1].isEmpty()) {
@@ -39,4 +50,3 @@ public class Info extends Command {
         return true;
     }
 }
-

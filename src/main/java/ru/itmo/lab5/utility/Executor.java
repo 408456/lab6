@@ -19,10 +19,7 @@ public class Executor {
     private final CommandManager commandManager;
     /** Стек скриптов для контроля рекурсии */
     private final Set<String> scriptStack = new HashSet<>();
-
-    /** Флаг */
     boolean flag = false;
-    /** Глубина рекурсии */
     Integer depth = 0;
 
     /**
@@ -39,7 +36,7 @@ public class Executor {
      * Интерактивный режим
      */
     public void fromConsole() {
-        var userScanner = InputSteamer.getScanner();
+        Scanner userScanner = InputSteamer.getScanner();
         try {
             ExitCode exitCode = ExitCode.OK;
             String[] inputCommand;
@@ -144,7 +141,7 @@ public class Executor {
      */
     private ExitCode apply(String[] inputCommand) {
         if (inputCommand[0].equals("")) return ExitCode.OK;
-        var command = commandManager.getCommands().get(inputCommand[0]);
+        ru.itmo.lab5.comands.Command command = commandManager.getCommands().get(inputCommand[0]);
 
         if (command == null) {
             console.printError("Команда '" + inputCommand[0] + "' не найдена. Наберите 'help' для справки");
