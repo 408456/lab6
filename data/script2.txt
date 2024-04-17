@@ -1,9 +1,4 @@
 info
 history
 save
-update 1
-remove_greater 100000
 execute_script data/script1.txt
-count_less_than_owner name; 40840586; yellow; france; Location{x=10, y=20, name='place'}
-remove_greater_key 10
-remove_lower_key 1

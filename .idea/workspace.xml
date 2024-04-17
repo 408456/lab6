@@ -5,38 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bce78c0c-56fb-4128-a8da-fb9ab9b08736" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/p.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/p2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/script1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/script2.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/utility/DateTimeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/product.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/p1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/p1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/p2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/p2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/script1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/script1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/script2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/script2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Clear.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/CountLessThanOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/CountLessThanOwner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/ExecuteScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/ExecuteScript.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/PrintFieldAscendingOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/PrintFieldAscendingOwner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/PrintFieldDescendingPrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/PrintFieldDescendingPrice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveGreater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveGreater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Save.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Show.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveGreaterKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveGreaterKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveLowerKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveLowerKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/Console.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/InputSteamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/InputSteamer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/ProductInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/ProductInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/CollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/DumpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/DumpManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/utility/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/utility/Executor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,6 +51,9 @@
     "Application.Main.executor": "Run",
     "Application.Products.executor": "Run",
     "Application.p.csv.executor": "Run",
+    "Maven.lab5 [clean].executor": "Run",
+    "Maven.lab5 [compile].executor": "Run",
+    "Maven.lab5 [package].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -66,7 +63,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.importing",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -74,7 +71,7 @@
     <configuration name="Products" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.lab5.Main" />
       <module name="lab5" />
-      <option name="PROGRAM_PARAMETERS" value="data/p.csv" />
+      <option name="PROGRAM_PARAMETERS" value="data/p1.csv" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -98,12 +95,16 @@
       <updated>1713331297018</updated>
       <workItem from="1713331301421" duration="5000" />
       <workItem from="1713331322653" duration="301000" />
-      <workItem from="1713331710150" duration="6230000" />
+      <workItem from="1713331710150" duration="16700000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/lab5$p_csv.ic" NAME="p.csv Coverage Results" MODIFIED="1713331592221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

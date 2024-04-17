@@ -36,18 +36,13 @@ public class PrintFieldDescendingPrice extends Command {
     @Override
     public boolean execute(String[] args) {
         try {
-            if (args.length != 1) {
-                throw new InvalidAmountException();
-            }
             List<Product> productList = new ArrayList<>(collectionManager.getCollection().values());
             productList.sort((product1, product2) -> product2.getPrice().compareTo(product1.getPrice()));
             productList.forEach(product -> console.println(product.getPrice()));
             return true;
-        } catch (InvalidAmountException e) {
-            console.printError("Неправильное количество аргументов!");
         } catch (Exception e) {
             console.printError("Произошла ошибка при выполнении команды: " + e.getMessage());
+            return false;
         }
-        return false;
     }
 }

@@ -1,35 +1,13 @@
-"5","Lettuce","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","500","CENTIMETERS","Person{
-  name='Eve',
-  passportID='E12345',
-  hairColor=ORANGE,
-  nationality=UNITED_KINGDOM,
-  location=Location{x=90, y=100, name=''FifthAvenue''}
-}"
-"4","Grape","Coordinates{x=7, y=8.0}","Wed Apr 17 10:30:00 MSK 2024","4","METERS","Person{
-  name='David',
-  passportID='D12345',
-  hairColor=YELLOW,
-  nationality=ITALY,
-  location=Location{x=70, y=80, name=''RegentStreet''}
-}"
-"3","Carrot","Coordinates{x=5, y=6.0}","Wed Apr 17 10:20:00 MSK 2024","300","CENTIMETERS","Person{
-  name='Charlie',
-  passportID='C12345',
-  hairColor=BROWN,
-  nationality=FRANCE,
-  location=Location{x=50, y=60, name=''RueDeLaPaix''}
-}"
-"2","Banana","Coordinates{x=3, y=4.0}","Wed Apr 17 10:10:00 MSK 2024","200","METERS","Person{
-  name='Bob',
-  passportID='B12345',
-  hairColor=ORANGE,
-  nationality=GERMANY,
-  location=Location{x=30, y=40, name=''ChampsElysees''}
-}"
-"1","Apple","Coordinates{x=1, y=2.0}","Wed Apr 17 10:00:00 MSK 2024","1","CENTIMETERS","Person{
-  name='Alice',
-  passportID='A12345',
-  hairColor=YELLOW,
-  nationality=UNITED_KINGDOM,
-  location=Location{x=10, y=20, name=''OxfordStreet''}
-}"
+"44","apple 9","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","1357","CENTIMETERS","Person{name='Solomon', passportID='E31415926535JE31415926535K', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"90","apple 6","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","150037","CENTIMETERS","Person{name='Liza', passportID='E31415926535F', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"88","apple 5","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","1003","CENTIMETERS","Person{name='Rick', passportID='E31415926535E', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"19","apple 12","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","7153700","CENTIMETERS","Person{name='Markus', passportID='E31415926535RE31415926535S', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"13","apple 10","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","9300","CENTIMETERS","Person{name='David', passportID='E31415926535LE31415926535M', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"59","apple 11","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","75300","CENTIMETERS","Person{name='Mark', passportID='E31415926535', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"11","apple 4","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","573","CENTIMETERS","Person{name='Andrey', passportID='E314159265359', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"10","apple 3","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","530","CENTIMETERS","Person{name='Anton', passportID='E31415926535D', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"5","apple 1","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","5030","CENTIMETERS","Person{name='Eve', passportID='E31415926535A', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"10009","apple 90","Coordinates{x=20, y=30.0}","Wed Apr 17 13:44:11 MSK 2024","90000","METERS","Person{name='person', passportID='909090111', hairColor=YELLOW, nationality=FRANCE, location=Location{x=19920, y=939, name='place'}}"
+"4","apple 8","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","25007030","CENTIMETERS","Person{name='Adam', passportID='E31415926535H', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"94","apple 18","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","2500030","CENTIMETERS","Person{name='Don', passportID='E31415926535PE31415926535Q', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"
+"1","apple 2","Coordinates{x=9, y=10.0}","Wed Apr 17 10:40:00 MSK 2024","150370","CENTIMETERS","Person{name='Bob', passportID='E31415926535B', hairColor=ORANGE, nationality=UNITED_KINGDOM, location=Location{x=90, y=100, name=''''FifthAvenue''''}}"

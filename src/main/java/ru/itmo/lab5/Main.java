@@ -13,6 +13,7 @@ import java.util.Scanner;
 /**
  * Основной класс программы.
  */
+
 public class Main {
     /**
      * Точка входа в программу.
@@ -28,7 +29,7 @@ public class Main {
 
         // Проверка наличия аргумента командной строки (пути к файлу)
         if (args.length == 0) {
-            console.printError("Введите имя загружаемого файла как аргумент командной строки");
+            console.printError("Необходимо ввести имя загружаемого файла как аргумент командной строки");
             System.exit(1);
         }
         DumpManager dumpManager = new DumpManager(args[0], console);
@@ -37,7 +38,6 @@ public class Main {
         // Проверка валидности коллекции и её элементов
         collectionManager.validateAll(console);
 
-        // Создание менеджера команд и добавление команд
         CommandManager commandManager = new CommandManager() {
             {
                 commandAdd("clear", new Clear(console, collectionManager));

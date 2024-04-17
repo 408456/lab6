@@ -1,11 +1,7 @@
 package ru.itmo.lab5.comands;
 
-import ru.itmo.lab5.exceptions.IncorrectScriptException;
 import ru.itmo.lab5.exceptions.InvalidAmountException;
-import ru.itmo.lab5.exceptions.InvalidFormException;
-import ru.itmo.lab5.exceptions.InvalidValueException;
 import ru.itmo.lab5.input.Console;
-import ru.itmo.lab5.input.ProductInput;
 import ru.itmo.lab5.managers.CollectionManager;
 
 /**
@@ -16,7 +12,7 @@ public class RemoveLowerKey extends Command {
     private final CollectionManager collectionManager;
 
     public RemoveLowerKey(Console console, CollectionManager collectionManager) {
-        super("remove_lower_key {element}", "удалить из коллекции все элементы, ключ которых меньше, чем заданный");
+        super("remove_lower_key <id>", "удалить из коллекции все элементы, ключ которых меньше, чем заданный");
         this.console = console;
         this.collectionManager = collectionManager;
     }
@@ -24,16 +20,17 @@ public class RemoveLowerKey extends Command {
     @Override
     public boolean execute(String[] args) {
         try {
-            if (!args[1].isEmpty()) throw new InvalidAmountException();
-            ru.itmo.lab5.data.Product product = ((new ProductInput(console).make()));
-            collectionManager.removeLowerKey(product);
+            if (args.length != 2) throw new InvalidAmountException();
+
+            Long id = Long.parseLong(args[1]);
+            collectionManager.removeLowerKey(id);
             console.println("Продукты успешно удалены!");
             return true;
+
+        } catch (NumberFormatException e) {
+            console.printError("Неверный формат id! Введите целое число.");
         } catch (InvalidAmountException exception) {
             console.printError("Неправильное количество аргументов!");
-        } catch (InvalidFormException | InvalidValueException e) {
-            console.printError("Поля продукта не валидны! Продукт не создан!");
-        } catch (IncorrectScriptException ignored) {
         }
         return false;
     }

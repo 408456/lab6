@@ -64,35 +64,35 @@ public class Person implements Validateable, Comparable<Person> {
         return location != null;
     }
 
-    //    /**
-//     * Переопределение метода toString.
-//     *
-//     * @return строковое представление объекта Person
-//     */
-//    @Override
-//    public String toString() {
-//        return "Person{" +
-//                "name='" + name + '\'' +
-//                ", passportID='" + passportID + '\'' +
-//                ", hairColor=" + hairColor +
-//                ", nationality=" + nationality +
-//                ", location=" + location +
-//                '}';
-//    }
+        /**
+     * Переопределение метода toString.
+     *
+     * @return строковое представление объекта Person
+     */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Person{\n");
-        sb.append("  name='").append(name).append("',\n");
-        sb.append("  passportID='").append(passportID).append("',\n");
-        sb.append("  hairColor=").append(hairColor).append(",\n");
-        sb.append("  nationality=").append(nationality).append(",\n");
-        sb.append("  location=").append(location).append("\n");
-        sb.append("}");
-
-        return sb.toString();
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", passportID='" + passportID + '\'' +
+                ", hairColor=" + hairColor +
+                ", nationality=" + nationality +
+                ", location=" + location +
+                '}';
     }
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//
+//        sb.append("Person{\n");
+//        sb.append("name='").append(name).append("',\n");
+//        sb.append("passportID='").append(passportID).append("',\n");
+//        sb.append("hairColor=").append(hairColor).append(",\n");
+//        sb.append("nationality=").append(nationality).append(",\n");
+//        sb.append("location=").append(location).append("\n");
+//        sb.append("}");
+//
+//        return sb.toString();
+//    }
 
     /**
      * Переопределение методов equals и hashCode.

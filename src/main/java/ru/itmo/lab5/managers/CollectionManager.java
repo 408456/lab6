@@ -192,30 +192,29 @@ public class CollectionManager {
 
 
     /**
-     * Удаляет из коллекции все элементы, ключ которых меньше заданного.
+     * Удаляет из коллекции все элементы, ключ которых меньше заданного id.
      *
-     * @param product Продукт, с которым сравниваются ключи
+     * @param id Заданный id
      */
-    public void removeLowerKey(Product product) {
-        collection.entrySet().removeIf(entry -> entry.getKey() < product.getId());
+    public void removeLowerKey(Long id) {
+        collection.entrySet().removeIf(entry -> entry.getKey() < id);
     }
 
     /**
-     * Удаляет из коллекции все элементы, ключ которых больше заданного.
+     * Удаляет из коллекции все элементы, ключ которых больше заданного id.
      *
-     * @param product Продукт, с которым сравниваются ключи
+     * @param id Заданный id
      */
-    public void removeGreaterKey(Product product) {
-        collection.entrySet().removeIf(entry -> entry.getKey() > product.getId());
+    public void removeGreaterKey(Long id) {
+        collection.entrySet().removeIf(entry -> entry.getKey() > id);
     }
-
     /**
-     * Удаляет из коллекции все элементы, цена которых превышает заданную.
+     * Удаляет из коллекции все элементы, ключ которых больше, чем у заданного продукта.
      *
-     * @param price заданная цена
+     * @param product заданный продукт
      */
-    public void removeGreater(Integer price) {
-        collection.values().removeIf(p -> p.getPrice() != null && p.getPrice() > price);
+    public void removeGreater(Product product) {
+        collection.values().removeIf(p -> p.compareTo(product) > 0);
     }
 
     /**
