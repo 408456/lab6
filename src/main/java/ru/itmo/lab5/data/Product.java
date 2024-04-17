@@ -2,12 +2,13 @@ package ru.itmo.lab5.data;
 
 import ru.itmo.lab5.utility.Validateable;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Product implements Validateable, Comparable<Product> {
@@ -39,22 +40,11 @@ public class Product implements Validateable, Comparable<Product> {
         this.id = nextId++; // Генерация уникального идентификатора для продукта
     }
 
-    /**
-     * Конструктор для создания объекта класса Product с заданным идентификатором.
-     *
-     * @param id            идентификатор продукта
-     * @param name          наименование продукта
-     * @param coordinates   координаты продукта
-     * @param creationDate  дата создания продукта
-     * @param price         цена продукта
-     * @param unitOfMeasure единица измерения продукта
-     * @param owner         владелец продукта
-     */
-    public Product(Long id, String name, Coordinates coordinates, Date creationDate, Integer price, UnitOfMeasure unitOfMeasure, Person owner) {
+    public Product(Long id, String name, Coordinates coordinates, Instant creationDate, Integer price, UnitOfMeasure unitOfMeasure, Person owner) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
-        this.creationDate = creationDate;
+        this.creationDate = Date.from(creationDate);
         this.price = price;
         this.unitOfMeasure = unitOfMeasure;
         this.owner = owner;
@@ -72,8 +62,7 @@ public class Product implements Validateable, Comparable<Product> {
         if (creationDate == null) return false;
         if (price == null || price < 0) return false;
         if (unitOfMeasure == null) return false;
-        if (owner == null) return false;
-        return true;
+        return owner != null;
     }
 
     /**
@@ -91,21 +80,33 @@ public class Product implements Validateable, Comparable<Product> {
         return this.name.compareTo(o.name);
     }
 
-    /**
-     * Возвращает строковое представление объекта Product.
-     * @return строковое представление объекта Product
-     */
+    //    /**
+//     * Возвращает строковое представление объекта Product.
+//     *
+//     * @return строковое представление объекта Product
+//     */
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "id=" + id +
+//                ", name='" + name + '\'' +
+//                ", coordinates=" + coordinates +
+//                ", creationDate=" + creationDate +
+//                ", price=" + price +
+//                ", unitOfMeasure=" + unitOfMeasure +
+//                ", owner=" + owner +
+//                '}';
+//    }
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
-                ", price=" + price +
-                ", unitOfMeasure=" + unitOfMeasure +
-                ", owner=" + owner +
-                '}';
+
+        return "ID: " + id + "\n" +
+                "Name: " + name + "\n" +
+                "Coordinates: " + coordinates + "\n" +
+                "Creation Date: " + creationDate + "\n" +
+                "Price: " + price + "\n" +
+                "Unit of Measure: " + unitOfMeasure + "\n" +
+                "Owner: " + owner + "\n";
     }
 
     /**
@@ -122,77 +123,68 @@ public class Product implements Validateable, Comparable<Product> {
         return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(coordinates, product.coordinates) && Objects.equals(creationDate, product.creationDate) && Objects.equals(price, product.price) && unitOfMeasure == product.unitOfMeasure && Objects.equals(owner, product.owner);
     }
 
-    /**
-     * Возвращает хеш-код для данного объекта Product.
-     *
-     * @return хеш-код объекта Product
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, coordinates, creationDate, price, unitOfMeasure, owner);
-    }
-
-    /**
-     * Создает объект Product из массива строк.
-     *
-     * @param a массив строк, содержащий данные о продукте
-     * @return объект Product, созданный из массива строк
-     */
-
     public static Product fromArray(String[] a) {
-        Long id;
-        String name;
-        Coordinates coordinates;
-        Date creationDate;
-        Integer price;
-        UnitOfMeasure unitOfMeasure;
-        Person owner;
+        if (a.length < 7) {
+            throw new IllegalArgumentException("Недостаточно данных для создания объекта Product");
+        }
 
         try {
-            try {
-                id = Long.parseLong(a[0]);
-            } catch (NumberFormatException e) {
-                id = null;
+            long id = Long.parseLong(a[0]);
+            if (id <= 0) {
+                throw new IllegalArgumentException("Неверное значение для id: " + a[0]);
             }
-            name = a[1];
-            coordinates = Coordinates.fromString(a[2]);
-            try {
-                creationDate = Date.from(LocalDate.parse(a[3], DateTimeFormatter.ISO_DATE).atStartOfDay(ZoneId.systemDefault()).toInstant());
-            } catch (DateTimeParseException e) {
-                creationDate = null;
+
+            String name = a[1];
+            if (name == null || name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Неверное значение для name: " + a[1]);
             }
-            try {
-                price = (a[4].equals("null") ? null : Integer.parseInt(a[4]));
-            } catch (NumberFormatException e) {
+
+            Coordinates coordinates = Coordinates.fromString(a[2]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+            ZonedDateTime zonedDateTime = ZonedDateTime.parse(a[3], formatter);
+            Instant creationDate = zonedDateTime.toInstant();
+
+            Integer price;
+            if ("null".equalsIgnoreCase(a[4])) {
                 price = null;
+            } else {
+                price = Integer.parseInt(a[4]);
+                if (price <= 0) {
+                    throw new IllegalArgumentException("Неверное значение для price: " + a[4]);
+                }
             }
-            try {
-                unitOfMeasure = UnitOfMeasure.valueOf(a[5]);
-            } catch (NullPointerException | IllegalArgumentException e) {
-                unitOfMeasure = null;
+
+            UnitOfMeasure unitOfMeasure = UnitOfMeasure.valueOf(a[5]);
+
+            Person owner;
+            if ("null".equalsIgnoreCase(a[6])) {
+                owner = null;
+            } else {
+                owner = Person.fromString(a[6]);
+                if (!owner.validate()) {
+                    throw new IllegalArgumentException("Некорректные данные для owner: " + a[6]);
+                }
             }
-            owner = (a[6].equals("null") ? null : new Person(a[6]));
+
             return new Product(id, name, coordinates, creationDate, price, unitOfMeasure, owner);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (NumberFormatException | DateTimeParseException e) {
+            throw new IllegalArgumentException("Ошибка парсинга значений", e);
         }
-        return null;
     }
 
-    /**
-     * Преобразует объект Product в массив строк.
-     *
-     * @param e объект Product для преобразования
-     * @return массив строк, представляющий объект Product
-     */
     public static String[] toArray(Product e) {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         list.add(e.getId().toString());
         list.add(e.getName());
-        list.add(e.getCreationDate().toInstant().atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_DATE_TIME));
         list.add(e.getCoordinates().toString());
-        list.add(e.getUnitOfMeasure() == null ? "null" : e.getUnitOfMeasure().toString());
+        list.add(e.getCreationDate().toString());
+        list.add(e.getPrice() == null ? "null" : e.getPrice().toString());
+        list.add(e.getUnitOfMeasure().toString());
+        list.add(e.getOwner() == null ? "null" : e.getOwner().toString());
+
         return list.toArray(new String[0]);
     }
+
 
     /**
      * Возвращает идентификатор данного объекта Product.

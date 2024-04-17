@@ -1,0 +1,4 @@
+help
+show
+insert 100
+execute_script data/script2.txt

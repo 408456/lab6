@@ -4,6 +4,7 @@ import ru.itmo.lab5.utility.Validateable;
 
 import java.util.Objects;
 
+
 /**
  * Класс, представляющий человека.
  */
@@ -32,6 +33,24 @@ public class Person implements Validateable, Comparable<Person> {
     }
 
     /**
+     * Конструктор, принимающий строку вида "name ; passportID ; hairColor ; nationality ; location".
+     *
+     * @param s строка с данными о человеке
+     */
+    public Person(String s) {
+        try {
+            String[] parts = s.split(" ; ");
+            this.name = parts[0];
+            this.passportID = parts[1].equals("null") ? null : parts[1];
+            this.hairColor = Color.valueOf(parts[2]);
+            this.nationality = Country.valueOf(parts[3]);
+            this.location = new Location(parts[4]);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    /**
      * Проверяет, что данные человека валидны.
      *
      * @return true, если данные валидны, иначе false
@@ -42,24 +61,37 @@ public class Person implements Validateable, Comparable<Person> {
         if (passportID == null || passportID.isEmpty() || passportID.length() > 42) return false;
         if (hairColor == null) return false;
         if (nationality == null) return false;
-        if (location == null) return false;
-        return true;
+        return location != null;
     }
 
-    /**
-     * Переопределение метода toString.
-     *
-     * @return строковое представление объекта Person
-     */
+    //    /**
+//     * Переопределение метода toString.
+//     *
+//     * @return строковое представление объекта Person
+//     */
+//    @Override
+//    public String toString() {
+//        return "Person{" +
+//                "name='" + name + '\'' +
+//                ", passportID='" + passportID + '\'' +
+//                ", hairColor=" + hairColor +
+//                ", nationality=" + nationality +
+//                ", location=" + location +
+//                '}';
+//    }
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", passportID='" + passportID + '\'' +
-                ", hairColor=" + hairColor +
-                ", nationality=" + nationality +
-                ", location=" + location +
-                '}';
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Person{\n");
+        sb.append("  name='").append(name).append("',\n");
+        sb.append("  passportID='").append(passportID).append("',\n");
+        sb.append("  hairColor=").append(hairColor).append(",\n");
+        sb.append("  nationality=").append(nationality).append(",\n");
+        sb.append("  location=").append(location).append("\n");
+        sb.append("}");
+
+        return sb.toString();
     }
 
     /**
@@ -76,24 +108,6 @@ public class Person implements Validateable, Comparable<Person> {
     @Override
     public int hashCode() {
         return Objects.hash(name, passportID, hairColor, nationality, location);
-    }
-
-    /**
-     * Конструктор, принимающий строку вида "name ; passportID ; hairColor ; nationality ; location".
-     *
-     * @param s строка с данными о человеке
-     */
-    public Person(String s) {
-        try {
-            String[] parts = s.split(" ; ");
-            this.name = parts[0];
-            this.passportID = parts[1].equals("null") ? null : parts[1];
-            this.hairColor = Color.valueOf(parts[2]);
-            this.nationality = Country.valueOf(parts[3]);
-            this.location = new Location(parts[4]);
-        } catch (Exception e) {
-            // Handle exception
-        }
     }
 
     /**
@@ -128,4 +142,46 @@ public class Person implements Validateable, Comparable<Person> {
     public String getPassportID() {
         return passportID;
     }
+
+    public static Person fromString(String s) {
+        if (s == null || s.trim().isEmpty()) {
+            throw new IllegalArgumentException("Строка для парсинга Person не может быть null или пустой");
+        }
+
+        try {
+            String data = s.substring(s.indexOf("{") + 1, s.lastIndexOf("}"));
+
+            String[] parts = data.split(", ");
+
+            String a1 = parts[0].substring(6);
+            String nameProm = a1.substring(0, a1.length() - 1);
+
+            String a2 = parts[1].substring(12);
+            String passportProm = a2.substring(0, a2.length() - 1);
+
+            String hairColorProm = parts[2].substring(10);
+
+            String nationalityProm = parts[3].substring(12);
+
+            String locationProm1 = parts[4] + ", " + parts[5] + ", " + parts[6];
+            String locationProm = locationProm1.substring(9);
+
+            if (parts.length != 7) {
+                throw new IllegalArgumentException("Некорректный формат строки для создания объекта Person");
+            }
+
+            String passportID = passportProm.equals("null") ? null : passportProm;
+            Color hairColor = Color.valueOf(hairColorProm);
+            Country nationality = Country.valueOf(nationalityProm);
+            Location location = Location.fromString(locationProm);
+
+            return new Person(nameProm, passportID, hairColor, nationality, location);
+
+        } catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Ошибка парсинга строки в объект Person", e);
+        }
+    }
+
 }

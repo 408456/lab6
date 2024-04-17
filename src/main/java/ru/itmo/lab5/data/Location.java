@@ -84,4 +84,41 @@ public class Location implements Validateable {
             throw new IllegalArgumentException("Некорректный формат строки для создания объекта Location");
         }
     }
+
+    public static Location fromString(String s) {
+        try {
+            String[] parts = s.split(", ");
+            if (parts.length != 3) {
+                throw new IllegalArgumentException("Некорректный формат строки для создания объекта Location");
+            }
+
+            long x;
+            int y;
+            String name;
+
+            try {
+                String promX = parts[0].split("=")[1];
+                x = promX.equals("null") ? -1 : Long.parseLong(promX);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Ошибка преобразования x в объект Location", e);
+            }
+
+            try {
+                String promY = parts[1].split("=")[1];
+                y = promY.equals("null") ? 0 : Integer.parseInt(promY);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Ошибка преобразования y в объект Location", e);
+            }
+
+            String[] nameParts = parts[2].split("=");
+            name = nameParts[1].substring(0, nameParts[1].length() - 1);
+
+            return new Location(x, y, name);
+
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Ошибка преобразования строки в объект Location", e);
+        }
+    }
+
+
 }

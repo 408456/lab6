@@ -13,18 +13,23 @@ import java.util.*;
  * Класс для выполнения программы
  */
 public class Executor {
-    /** Консоль для вывода информации и сообщений об ошибках */
+    /**
+     * Консоль для вывода информации и сообщений об ошибках
+     */
     private final Console console;
-    /** Менеджер команд */
+    /**
+     * Менеджер команд
+     */
     private final CommandManager commandManager;
-    /** Стек скриптов для контроля рекурсии */
+    /**
+     * Стек скриптов для контроля рекурсии
+     */
     private final Set<String> scriptStack = new HashSet<>();
-    boolean flag = false;
-    Integer depth = 0;
 
     /**
      * Конструктор класса.
-     * @param console Консоль для вывода информации и сообщений об ошибках
+     *
+     * @param console        Консоль для вывода информации и сообщений об ошибках
      * @param commandManager Менеджер команд
      */
     public Executor(Console console, CommandManager commandManager) {
@@ -63,11 +68,11 @@ public class Executor {
 
     /**
      * Режим для запуска скрипта.
+     *
      * @param argument Аргумент скрипта
      * @return Код завершения.
      */
     public ExitCode fromScript(String argument) {
-        Integer maxDepth = 3;
         String[] inputCommand;
         ExitCode exitCode;
         scriptStack.add(argument);
@@ -93,26 +98,14 @@ public class Executor {
 
                 console.println(console.getPS1() + String.join(" ", inputCommand));
                 if (inputCommand[0].equals("execute_script")) {
-                    if (!scriptStack.add(inputCommand[1])) {
-                        if (!flag) {
-                            InputSteamer.setScanner(tmpScanner);
-                            InputSteamer.setFileMode(false);
-                            InputSteamer.setFileMode(false);
-                            InputSteamer.setScanner(scriptScanner);
-                            InputSteamer.setFileMode(true);
-                            flag = true;
-                        }
-                        depth++;
-                    }
-                    if (depth > maxDepth) throw new ScriptRecursionException();
+                    if (!scriptStack.add(inputCommand[1])) throw new ScriptRecursionException();
+
                 }
                 exitCode = apply(inputCommand);
             } while (exitCode == ExitCode.OK && scriptScanner.hasNextLine());
 
             InputSteamer.setScanner(tmpScanner);
             InputSteamer.setFileMode(false);
-            flag = false;
-            depth = 0;
 
             if (exitCode == ExitCode.ERROR && !(inputCommand[0].equals("execute_script") && !inputCommand[1].isEmpty())) {
                 console.println("Проверьте скрипт на корректность введенных данных!");
@@ -136,6 +129,7 @@ public class Executor {
 
     /**
      * Выполняет команду
+     *
      * @param inputCommand Команда для запуска
      * @return Код завершения.
      */
@@ -161,7 +155,9 @@ public class Executor {
     }
 
 
-    /** Перечисление для кодов завершения */
+    /**
+     * Перечисление для кодов завершения
+     */
     public enum ExitCode {
         OK,
         ERROR,

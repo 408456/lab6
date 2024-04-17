@@ -8,21 +8,28 @@ import java.io.*;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Scanner;
+
+
 import ru.itmo.lab5.input.Console;
 
 /**
  * Использует файл для сохранения и загрузки коллекции.
  */
 public class DumpManager {
-    /** Имя файла для сохранения и загрузки коллекции */
+    /**
+     * Имя файла для сохранения и загрузки коллекции
+     */
     private final String fileName;
-    /** Консоль для вывода информации и сообщений об ошибках */
+    /**
+     * Консоль для вывода информации и сообщений об ошибках
+     */
     private final Console console;
 
     /**
      * Конструктор класса.
+     *
      * @param fileName Имя файла для сохранения и загрузки коллекции
-     * @param console Консоль для вывода информации и сообщений об ошибках
+     * @param console  Консоль для вывода информации и сообщений об ошибках
      */
     public DumpManager(String fileName, Console console) {
         this.fileName = fileName;
@@ -31,6 +38,7 @@ public class DumpManager {
 
     /**
      * Преобразует коллекцию в CSV-строку.
+     *
      * @param collection Коллекция для преобразования
      * @return CSV-строка
      */
@@ -51,6 +59,7 @@ public class DumpManager {
 
     /**
      * Записывает коллекцию в файл.
+     *
      * @param collection Коллекция для записи
      */
     public void writeCollection(Collection<Product> collection) {
@@ -63,8 +72,10 @@ public class DumpManager {
             console.printError("Неожиданная ошибка сохранения");
         }
     }
+
     /**
      * Преобразует CSV-строку в коллекцию.
+     *
      * @param s CSV-строка
      * @return Коллекция продуктов
      */
@@ -75,23 +86,31 @@ public class DumpManager {
             LinkedList<Product> ds = new LinkedList<>();
             String[] record;
             while ((record = csvReader.readNext()) != null) {
-                Product p = Product.fromArray(record);
-                if (p != null && p.validate()) {
-                    ds.add(p);
-                } else {
-                    console.printError("Файл с коллекцией содержит недействительные данные");
+                try {
+                    Product p = Product.fromArray(record);
+                    if (p != null && p.validate()) {
+                        ds.add(p);
+                    } else {
+                        console.printError("Файл с коллекцией содержит недействительные данные: " + String.join(", ", record));
+                    }
+                } catch (IllegalArgumentException e) {
+                    console.printError("Ошибка при обработке строки: " + String.join(", ", record));
+                    console.printError(e.getMessage());
                 }
             }
             csvReader.close();
             return ds;
         } catch (Exception e) {
             console.printError("Ошибка десериализации");
+            console.printError(e.getMessage());
             return null;
         }
     }
 
+
     /**
      * Считывает коллекцию из файла.
+     *
      * @return Считанная коллекция
      */
     public LinkedList<Product> readCollection() {

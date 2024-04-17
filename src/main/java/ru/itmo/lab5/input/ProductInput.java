@@ -78,7 +78,7 @@ public class ProductInput {
      * Ввод х координаты
      */
     private Integer inputX() throws IncorrectScriptException {
-        Integer x;
+        int x;
         boolean fileMode = InputSteamer.getFileMode();
         while (true) {
             try {
@@ -107,7 +107,7 @@ public class ProductInput {
      * Ввод y координаты
      */
     private Double inputY() throws IncorrectScriptException {
-        Double y;
+        double y;
         boolean fileMode = InputSteamer.getFileMode();
         while (true) {
             try {
@@ -141,7 +141,7 @@ public class ProductInput {
      */
     private Integer inputPrice() throws IncorrectScriptException {
         boolean fileMode = InputSteamer.getFileMode();
-        Integer price;
+        int price;
         while (true) {
             try {
                 console.println("Введите цену продукта:");
@@ -199,13 +199,11 @@ public class ProductInput {
         return unitOfMeasure;
     }
 
-
     /**
      * Создание покупателя
      */
     private Person inputPerson() throws IncorrectScriptException {
-        Person person = new Person(inputPersonName(), inputPassportID(), inputHairColor(), inputNationality(), inputLocation());
-        return person;
+        return new Person(inputPersonName(), inputPassportID(), inputHairColor(), inputNationality(), inputLocation());
     }
 
     /**
@@ -252,11 +250,12 @@ public class ProductInput {
         Pattern pattern = Pattern.compile("^[\\p{L}\\d]+$");
         while (true) {
             try {
-                console.println("Введите номер паспорта покупателя (до 42 символов):");
+                console.println("Введите номер паспорта покупателя (от 8 до 42 символов):");
                 console.ps1();
                 passportID = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(passportID);
-                if (passportID.isEmpty() || passportID.length() > 42) throw new InvalidFormException();
+                if (passportID.length() < 8 || passportID.length() > 42)
+                    throw new InvalidFormException();
                 Matcher matcher = pattern.matcher(passportID);
                 if (!matcher.matches()) throw new InvalidValueException();
 
@@ -265,7 +264,7 @@ public class ProductInput {
                 console.printError("Номер паспорта не распознан!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (InvalidFormException exception) {
-                console.printError("Номер паспорта не соответствует формату (строка до 42 символов)!");
+                console.printError("Номер паспорта должен содержать от 8 до 42 символов!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (InvalidValueException exception) {
                 console.printError("Номер паспорта не должен содержать специальных символов и знаков препинания!");
@@ -277,7 +276,6 @@ public class ProductInput {
         }
         return passportID;
     }
-
 
     /**
      * Ввод цвета волос покупателя
@@ -413,14 +411,13 @@ public class ProductInput {
         return y;
     }
 
-
     /**
      * Ввод названия местоположения
      */
     private String inputLocationName() throws IncorrectScriptException {
         String name;
         boolean fileMode = InputSteamer.getFileMode();
-        Pattern pattern = Pattern.compile("^[^\\p{P}\\d\\s].*");
+        Pattern pattern = Pattern.compile("^[^\\p{P}\\d]+$");
         while (true) {
             try {
                 console.println("Введите название местоположения покупателя:");
@@ -438,7 +435,7 @@ public class ProductInput {
                 console.printError("Название местоположения не может быть пустым!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (InvalidValueException exception) {
-                console.printError("Название не может начинаться с знаков препинания, чисел или специальных символов!");
+                console.printError("Название не может содержать знаки препинания, числа или специальные символы!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (IllegalStateException exception) {
                 console.printError("Непредвиденная ошибка!");
@@ -447,7 +444,6 @@ public class ProductInput {
         }
         return name;
     }
-
 }
 
 

@@ -4,6 +4,7 @@ import ru.itmo.lab5.utility.Validateable;
 
 import java.util.Objects;
 
+
 /**
  * Класс, представляющий координаты.
  */
@@ -62,29 +63,34 @@ public class Coordinates implements Validateable {
         return Objects.hash(x, y);
     }
 
-    /**
-     * Создает объект Coordinates из строки.
-     *
-     * @param coordinatesString строка с координатами
-     * @return объект Coordinates
-     * @throws IllegalArgumentException если строка не соответствует ожидаемому формату
-     */
-    public static Coordinates fromString(String coordinatesString) {
-        if (coordinatesString == null) {
-            return null;
-        }
-
-        String[] parts = coordinatesString.split(",");
-        if (parts.length != 2) {
-            throw new IllegalArgumentException("Invalid coordinates string format: " + coordinatesString);
-        }
-
+    public static Coordinates fromString(String s) {
         try {
-            Integer x = Integer.parseInt(parts[0]);
-            Double y = Double.parseDouble(parts[1]);
+            // Разбиваем строку по запятой и пробелу
+            String[] parts = s.split(", ");
+
+            Integer x = null;
+            Double y = null;
+
+            try {
+                // Извлекаем значения x
+                x = Integer.parseInt(parts[0].split("=")[1]);
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ignored) { }
+
+            try {
+                String original = parts[1].split("=")[1];
+                StringBuilder sb = new StringBuilder(original);
+                sb.deleteCharAt(original.length() - 1);
+                String modified = sb.toString();
+                // Извлекаем значения y
+                y = Double.parseDouble(modified);
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException ignored) { }
+
             return new Coordinates(x, y);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid coordinates values: " + coordinatesString);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Ошибка преобразования строки в объект Coordinates", e);
         }
     }
+
+
+
 }

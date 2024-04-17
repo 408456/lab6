@@ -27,7 +27,7 @@ public class ExecuteScript extends Command {
     @Override
     public boolean execute(String[] args) {
         if (args[1].isEmpty()) {
-            console.println("Пожалуйста введите команду в правильном формате");
+            console.println("Пожалуйста введите команду в правильном формате!");
             return false;
         }
         console.println("Выполнение скрипта '" + args[1] + "':");

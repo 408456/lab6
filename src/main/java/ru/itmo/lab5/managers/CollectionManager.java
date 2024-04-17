@@ -5,25 +5,33 @@ import ru.itmo.lab5.data.Product;
 import ru.itmo.lab5.input.Console;
 
 import java.time.LocalDateTime;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Класс для управления коллекцией продуктов
  */
 public class CollectionManager {
-    /** Коллекция продуктов */
+    /**
+     * Коллекция продуктов
+     */
     private final Hashtable<Long, Product> collection = new Hashtable<>();
-    /** Время последней инициализации коллекции */
+    /**
+     * Время последней инициализации коллекции
+     */
     private LocalDateTime lastInitTime;
-    /** Время последнего сохранения коллекции */
+    /**
+     * Время последнего сохранения коллекции
+     */
     private LocalDateTime lastSaveTime;
-    /** Менеджер для сохранения/загрузки коллекции */
+    /**
+     * Менеджер для сохранения/загрузки коллекции
+     */
     private final DumpManager dumpManager;
 
     /**
      * Конструктор класса.
+     *
      * @param dumpManager Менеджер для сохранения/загрузки коллекции
      */
     public CollectionManager(DumpManager dumpManager) {
@@ -34,10 +42,9 @@ public class CollectionManager {
         loadCollection();
     }
 
-    // Методы доступа к коллекции и времени инициализации/сохранения
-
     /**
      * Получает коллекцию продуктов.
+     *
      * @return Коллекция продуктов
      */
     public Hashtable<Long, Product> getCollection() {
@@ -46,6 +53,7 @@ public class CollectionManager {
 
     /**
      * Получает время последней инициализации коллекции.
+     *
      * @return Время последней инициализации коллекции
      */
     public LocalDateTime getLastInitTime() {
@@ -54,6 +62,7 @@ public class CollectionManager {
 
     /**
      * Получает время последнего сохранения коллекции.
+     *
      * @return Время последнего сохранения коллекции
      */
     public LocalDateTime getLastSaveTime() {
@@ -62,6 +71,7 @@ public class CollectionManager {
 
     /**
      * Возвращает тип коллекции.
+     *
      * @return Тип коллекции
      */
     public String getType() {
@@ -70,6 +80,7 @@ public class CollectionManager {
 
     /**
      * Возвращает размер коллекции.
+     *
      * @return Размер коллекции
      */
     public int getSize() {
@@ -78,6 +89,7 @@ public class CollectionManager {
 
     /**
      * Возвращает последний добавленный продукт.
+     *
      * @return Последний добавленный продукт
      */
     public Product getLast() {
@@ -87,6 +99,7 @@ public class CollectionManager {
 
     /**
      * Возвращает продукт по указанному ключу.
+     *
      * @param id Ключ продукта
      * @return Продукт с указанным ключом
      */
@@ -98,6 +111,7 @@ public class CollectionManager {
 
     /**
      * Добавляет продукт в коллекцию.
+     *
      * @param product Добавляемый продукт
      */
     public void addToCollection(Product product) {
@@ -131,30 +145,55 @@ public class CollectionManager {
 
     /**
      * Проверяет валидность всех продуктов в коллекции.
+     *
      * @param console Консоль для вывода сообщений об ошибках
      */
     public void validateAll(Console console) {
         collection.values().stream()
                 .filter(product -> !product.validate())
                 .forEach(product -> console.println("Продукт с id = " + product.getId() + " имеет невалидные поля."));
-        console.println("> Загруженные продукты валидны.");
+        console.println("Загруженные продукты валидны!");
     }
 
+    //    @Override
+//    public String toString() {
+//        if (collection.isEmpty()) return "Коллекция пуста!";
+//        Product last = getLast();
+//
+//        StringBuilder info = new StringBuilder();
+//        for (Product product : collection.values()) {
+//            info.append(product);
+//            if (product != last) info.append("\n\n");
+//        }
+//        return info.toString();
+//    }
     @Override
     public String toString() {
         if (collection.isEmpty()) return "Коллекция пуста!";
-        Product last = getLast();
 
         StringBuilder info = new StringBuilder();
-        for (Product product : collection.values()) {
-            info.append(product);
-            if (product != last) info.append("\n\n");
+
+        info.append("Продукты, отсортированные по убыванию цены:\n");
+        for (Product product : getProductsSortedByPriceDesc()) {
+            info.append(product).append("\n");
         }
+//        info.append("Продукты, отсортированные по возрастанию цены:\n");
+//        for (Product product : getProductsSortedByPriceAsc()) {
+//            info.append(product).append("\n");
+//        }
+//        info.append("\n");
+//        info.append("Продукты, отсортированные по ключу: \n");
+//        for (Long key : getSortedKeys()) {
+//            info.append(collection.get(key)).append("\n");
+//        }
+
         return info.toString();
     }
 
+
     /**
      * Удаляет из коллекции все элементы, ключ которых меньше заданного.
+     *
      * @param product Продукт, с которым сравниваются ключи
      */
     public void removeLowerKey(Product product) {
@@ -163,6 +202,7 @@ public class CollectionManager {
 
     /**
      * Удаляет из коллекции все элементы, ключ которых больше заданного.
+     *
      * @param product Продукт, с которым сравниваются ключи
      */
     public void removeGreaterKey(Product product) {
@@ -170,15 +210,17 @@ public class CollectionManager {
     }
 
     /**
-     * Удаляет из коллекции все элементы, превышающие заданный.
-     * @param product Продукт, с которым сравниваются элементы коллекции
+     * Удаляет из коллекции все элементы, цена которых превышает заданную.
+     *
+     * @param price заданная цена
      */
-    public void removeGreater(Product product) {
-        collection.values().removeIf(p -> p.compareTo(product) > 0);
+    public void removeGreater(Integer price) {
+        collection.values().removeIf(p -> p.getPrice() != null && p.getPrice() > price);
     }
 
     /**
      * Возвращает количество продуктов, у которых владелец меньше заданного.
+     *
      * @param owner Владелец, с которым сравнивается владелец каждого продукта
      * @return Количество продуктов, у которых владелец меньше заданного
      */
@@ -190,10 +232,44 @@ public class CollectionManager {
 
     /**
      * Проверяет, содержит ли коллекция элемент с указанным ключом.
+     *
      * @param key Ключ для проверки
      * @return true, если коллекция содержит элемент с указанным ключом, иначе false
      */
     public boolean contains(Long key) {
         return collection.containsKey(key);
+    }
+
+    /**
+     * Возвращает отсортированный список ключей из коллекции.
+     *
+     * @return Отсортированный список ключей
+     */
+    public List<Long> getSortedKeys() {
+        List<Long> keys = new ArrayList<>(collection.keySet());
+        Collections.sort(keys);
+        return keys;
+    }
+
+    /**
+     * Возвращает отсортированные продукты по возрастанию цены.
+     *
+     * @return Отсортированные продукты по возрастанию цены
+     */
+    public List<Product> getProductsSortedByPriceAsc() {
+        return collection.values().stream()
+                .sorted(Comparator.comparingInt(Product::getPrice))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Возвращает отсортированные продукты по убыванию цены.
+     *
+     * @return Отсортированные продукты по убыванию цены
+     */
+    public List<Product> getProductsSortedByPriceDesc() {
+        return collection.values().stream()
+                .sorted(Comparator.comparingInt(Product::getPrice).reversed())
+                .collect(Collectors.toList());
     }
 }

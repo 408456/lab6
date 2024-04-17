@@ -58,8 +58,6 @@ public class Main {
                 commandAdd("update", new Update(console, collectionManager));
             }
         };
-
-        // Создание исполнителя команд и запуск программы
         new Executor(console, commandManager).fromConsole();
     }
 }

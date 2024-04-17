@@ -41,7 +41,7 @@ public class CountLessThanOwner extends Command {
             // Получение количества элементов, значение поля owner которых меньше заданного
             Integer countProduct = collectionManager.countLessThanOwner(owner);
             if (countProduct == 0)
-                console.println(", у которых поле owner меньше заданной подстроки не обнаружено!");
+                console.println("Продуктов, у которых поле owner меньше заданной подстроки не обнаружено!");
             else
                 console.println(countProduct);
 

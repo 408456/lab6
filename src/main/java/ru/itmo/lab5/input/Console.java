@@ -21,6 +21,9 @@ public class Console {
     public void println(Object obj) {
         System.out.println(obj);
     }
+    public void println(Object ... obj) {
+        System.out.println(obj);
+    }
 
     /**
      * Выводит error: obj.toString() в консоль

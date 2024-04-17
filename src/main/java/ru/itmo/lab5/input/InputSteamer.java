@@ -5,9 +5,6 @@ import java.util.Scanner;
  * Класс для управления потоком ввода в приложении
  */
 
-/**
- * Класс для контроля за потоком ввода
- */
 public class InputSteamer {
     /** Переменная, указывающая на режим файла */
     private static boolean fileMode = false;
