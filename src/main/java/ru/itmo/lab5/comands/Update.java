@@ -38,7 +38,7 @@ public class Update extends Command {
             try {
                 id = Long.parseLong(args[1]);
             } catch (NumberFormatException e) {
-                console.printError("ID продукта должен быть числом!");
+                console.printError("ID продукта должен быть целым числом!");
                 return false;
             }
 

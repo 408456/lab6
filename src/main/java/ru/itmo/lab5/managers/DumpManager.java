@@ -119,12 +119,7 @@ public class DumpManager {
     /**
      * Считывает коллекцию из файла.
      *
-     * @return Считанная коллекция
-     */
-    /**
-     * Считывает коллекцию из файла.
-     *
-     * @return Считанная коллекция
+     * @return Считанная коллекция или пустая коллекция, если возникла ошибка или файл пуст
      */
     public LinkedList<Product> readCollection() {
         LinkedList<Product> collection = new LinkedList<>();
@@ -133,7 +128,7 @@ public class DumpManager {
         // Проверяем права на чтение
         if (!file.canRead()) {
             console.printError("Нет прав на чтение файла: " + fileName);
-            return collection;
+            return collection;  // Возвращаем пустую коллекцию
         }
 
         if (fileName != null && !fileName.isEmpty()) {
@@ -147,6 +142,9 @@ public class DumpManager {
                 if (loadedCollection != null && !loadedCollection.isEmpty()) {
                     console.println("Коллекция успешно загружена!");
                     return loadedCollection;
+                } else {
+                    console.printError("Коллекция пуста!");
+                    return collection;  // Возвращаем пустую коллекцию
                 }
             } catch (FileNotFoundException exception) {
                 console.printError("Загрузочный файл не найден!");
@@ -157,7 +155,7 @@ public class DumpManager {
         } else {
             console.printError("Аргумент командной строки с загрузочным файлом не найден!");
         }
-        return collection;
+        return collection;  // Возвращаем пустую коллекцию
     }
 
 }

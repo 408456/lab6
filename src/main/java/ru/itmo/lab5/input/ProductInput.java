@@ -162,7 +162,7 @@ public class ProductInput {
                 console.printError("Цена должна быть больше нуля и в диапазоне от -2147483648 до 2147483647!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (NumberFormatException exception) {
-                console.printError("Цена продукта должна быть представлена целым числом от -2147483648 до 2147483647!");
+                console.printError("Цена продукта должна быть представлена целым числом от 0 до 2147483647!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (NullPointerException | IllegalStateException exception) {
                 console.printError("Непредвиденная ошибка!");
@@ -212,6 +212,14 @@ public class ProductInput {
         return new Person(name, passportID, hairColor, nationality, location);
     }
     public Person inputPersonForCountLess(String name) throws IncorrectScriptException {
+        String passportID = inputPassportID();
+        Color hairColor = inputHairColor();
+        Country nationality = inputNationality();
+        Location location = inputLocation();
+        return new Person(name, passportID, hairColor, nationality, location);
+    }
+    public Person inputPersonForCountLess() throws IncorrectScriptException {
+        String name = inputPersonName();
         String passportID = inputPassportID();
         Color hairColor = inputHairColor();
         Country nationality = inputNationality();

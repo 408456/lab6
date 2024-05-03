@@ -215,7 +215,7 @@ public class CollectionManager {
      */
     public long countLessThanOwner(Person owner) {
         return collection.values().stream()
-                .filter(product -> product.getOwner() != null)  // убедиться, что owner не null
+                .filter(product -> product.getOwner() != null)  // owner не null
                 .filter(product -> product.getOwner().compareTo(owner) < 0)
                 .count();
     }

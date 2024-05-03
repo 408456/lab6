@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bce78c0c-56fb-4128-a8da-fb9ab9b08736" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/CountLessThanOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/CountLessThanOwner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/PrintFieldAscendingOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/PrintFieldAscendingOwner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Update.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/data/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/ProductInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/ProductInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/CollectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/DumpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/DumpManager.java" afterDir="false" />
@@ -31,7 +30,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$PROJECT_DIR$/../../../../../Program Files/Java/jdk-20/lib/src.zip!/java.base/java/util/Comparator.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/Program Files/Java/jdk-20/lib/src.zip!/java.base/java/util/Comparator.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -40,12 +39,16 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2fDMf9LauqNGesQ5J6gAqWI3Pv0" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.Products.executor&quot;: &quot;Run&quot;,
     &quot;Application.p.csv.executor&quot;: &quot;Run&quot;,
@@ -56,6 +59,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user1/OneDrive/Рабочий стол/лабы/Программирование/lab5&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -96,12 +100,20 @@
       <workItem from="1713331710150" duration="20547000" />
       <workItem from="1713465746310" duration="5535000" />
       <workItem from="1713521760465" duration="2574000" />
-      <workItem from="1713524750269" duration="303000" />
+      <workItem from="1713524750269" duration="1646000" />
+      <workItem from="1713526797797" duration="82000" />
+      <workItem from="1713527402618" duration="663000" />
+      <workItem from="1714120370722" duration="601000" />
+      <workItem from="1714122299029" duration="9981000" />
+      <workItem from="1714642476057" duration="2786000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

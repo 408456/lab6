@@ -1,6 +1,5 @@
 package ru.itmo.lab5.comands;
 
-import ru.itmo.lab5.comands.Command;
 import ru.itmo.lab5.data.Person;
 import ru.itmo.lab5.exceptions.IncorrectScriptException;
 import ru.itmo.lab5.exceptions.InvalidAmountException;
@@ -27,12 +26,28 @@ public class CountLessThanOwner extends Command {
         this.collectionManager = collectionManager;
     }
 
-    /**
-     * Выполняет команду вывода количества элементов, значение поля owner которых меньше заданного.
-     *
-     * @param args аргументы команды
-     * @return false, так как команда не завершает работу программы
-     */
+//    /**
+//     * Выполняет команду вывода количества элементов, значение поля owner которых меньше заданного.
+//     *
+//     * @param args аргументы команды
+//     * @return false, так как команда не завершает работу программы
+//     */
+//    @Override
+//    public boolean execute(String[] args) {
+//        try {
+//            if (args.length != 1) {
+//                throw new InvalidAmountException();
+//            }
+//            ProductInput productInput = new ProductInput(console);
+//            Person owner = productInput.inputPersonForCountLess();
+//            Long countProduct = collectionManager.countLessThanOwner(owner);
+//        } catch (IncorrectScriptException e) {
+//            throw new RuntimeException(e);
+//        } catch (InvalidAmountException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return false;
+
     @Override
     public boolean execute(String[] args) {
         try {
@@ -49,7 +64,7 @@ public class CountLessThanOwner extends Command {
             }
             ProductInput productInput = new ProductInput(console);
             Person owner = productInput.inputPersonForCountLess(ownerName);
-            Long countProduct = collectionManager.countLessThanOwner(owner);
+            long countProduct = collectionManager.countLessThanOwner(owner);
 
             if (countProduct == 0) {
                 console.println("Продуктов, у которых owner меньше указанного, не найдено!");
@@ -68,5 +83,4 @@ public class CountLessThanOwner extends Command {
         }
         return false;
     }
-
 }
