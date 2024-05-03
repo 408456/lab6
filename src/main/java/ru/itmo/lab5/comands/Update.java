@@ -20,7 +20,7 @@ public class Update extends Command {
     /**
      * Конструктор класса.
      *
-     * @param console            объект класса Console для взаимодействия с пользователем
+     * @param console           объект класса Console для взаимодействия с пользователем
      * @param collectionManager объект класса CollectionManager для управления коллекцией
      */
     public Update(Console console, CollectionManager collectionManager) {
@@ -29,17 +29,19 @@ public class Update extends Command {
         this.collectionManager = collectionManager;
     }
 
-    /**
-     * Выполняет команду обновления значения элемента коллекции по ID.
-     *
-     * @param args аргументы команды
-     * @return true, если команда выполнена успешно, иначе false
-     */
     @Override
     public boolean execute(String[] args) {
         try {
-            if (args[1].isEmpty()) throw new InvalidAmountException();
-            var id = Long.parseLong(args[1]);
+            if (args.length < 2 || args[1].isEmpty()) throw new InvalidAmountException();
+
+            long id;
+            try {
+                id = Long.parseLong(args[1]);
+            } catch (NumberFormatException e) {
+                console.printError("ID продукта должен быть числом!");
+                return false;
+            }
+
             var product = collectionManager.getById(id);
             if (product == null) throw new MustBeNotEmptyException();
 
@@ -56,9 +58,10 @@ public class Update extends Command {
         } catch (InvalidFormException | InvalidValueException e) {
             console.printError("Поля продукта не валидны! Продукт не обновлен!");
         } catch (MustBeNotEmptyException exception) {
-            console.printError("Продукт с таким ID в коллекции нет!");
+            console.printError("Продукта с таким ID в коллекции нет!");
         } catch (IncorrectScriptException ignored) {
         }
         return false;
     }
+
 }

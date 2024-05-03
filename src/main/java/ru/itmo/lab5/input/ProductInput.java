@@ -87,12 +87,16 @@ public class ProductInput {
                 String strX = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strX);
                 x = Integer.parseInt(strX);
+                if (x < Integer.MIN_VALUE || x > Integer.MAX_VALUE) throw new InvalidRangeException();
                 break;
             } catch (NoSuchElementException exception) {
                 console.printError("Координата X не распознана!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (NumberFormatException exception) {
-                console.printError("Координата X должна быть представлена целым числом!");
+                console.printError("Координата X должна быть представлена целым числом! Значение должно быть в диапазоне от -2147483648 до 2147483647!");
+                if (fileMode) throw new IncorrectScriptException();
+            } catch (InvalidRangeException exception) {
+                console.printError("Значение должно быть в диапазоне от -2147483648 до 2147483647!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (IllegalStateException exception) {
                 console.printError("Непредвиденная ошибка!");
@@ -101,7 +105,6 @@ public class ProductInput {
         }
         return x;
     }
-
 
     /**
      * Ввод y координаты
@@ -116,16 +119,16 @@ public class ProductInput {
                 String strY = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strY);
                 y = Double.parseDouble(strY);
-                if (y < -Double.MAX_VALUE || y > Double.MAX_VALUE) throw new InvalidValueException();
+                if (y < -Double.MAX_VALUE || y > Double.MAX_VALUE) throw new InvalidRangeException();
                 break;
             } catch (NoSuchElementException exception) {
                 console.printError("Координата Y не распознана!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (NumberFormatException exception) {
-                console.printError("Координата Y должна быть представлена числом с плавающей точкой!");
+                console.printError("Координата Y должна быть представлена числом с плавающей точкой! Значение должно быть в диапазоне от -1.7976931348623157E308 до 1.7976931348623157E308!");
                 if (fileMode) throw new IncorrectScriptException();
-            } catch (InvalidValueException exception) {
-                console.printError("Координата Y должна быть представлена числом с плавающей точкой от от 4.9e-324 до 1.8e+308!");
+            } catch (InvalidRangeException exception) {
+                console.printError("Значение должно быть в диапазоне от -1.7976931348623157E308 до 1.7976931348623157E308!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (IllegalStateException exception) {
                 console.printError("Непредвиденная ошибка!");
@@ -149,13 +152,14 @@ public class ProductInput {
                 String strPrice = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strPrice);
                 price = Integer.parseInt(strPrice);
-                if (price <= 0) throw new InvalidRangeException();
+                if (price <= 0 || price < Integer.MIN_VALUE || price > Integer.MAX_VALUE)
+                    throw new InvalidRangeException();
                 break;
             } catch (NoSuchElementException exception) {
                 console.printError("Цена продукта не распознана!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (InvalidRangeException exception) {
-                console.printError("Цена должна быть больше нуля!");
+                console.printError("Цена должна быть больше нуля и в диапазоне от -2147483648 до 2147483647!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (NumberFormatException exception) {
                 console.printError("Цена продукта должна быть представлена целым числом от -2147483648 до 2147483647!");
@@ -199,11 +203,20 @@ public class ProductInput {
         return unitOfMeasure;
     }
 
-    /**
-     * Создание покупателя
-     */
-    private Person inputPerson() throws IncorrectScriptException {
-        return new Person(inputPersonName(), inputPassportID(), inputHairColor(), inputNationality(), inputLocation());
+    public Person inputPerson() throws IncorrectScriptException {
+        String name = inputPersonName();
+        String passportID = inputPassportID();
+        Color hairColor = inputHairColor();
+        Country nationality = inputNationality();
+        Location location = inputLocation();
+        return new Person(name, passportID, hairColor, nationality, location);
+    }
+    public Person inputPersonForCountLess(String name) throws IncorrectScriptException {
+        String passportID = inputPassportID();
+        Color hairColor = inputHairColor();
+        Country nationality = inputNationality();
+        Location location = inputLocation();
+        return new Person(name, passportID, hairColor, nationality, location);
     }
 
     /**
@@ -367,13 +380,18 @@ public class ProductInput {
                 console.ps1();
                 String strX = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strX);
-                x = Long.parseLong(strX);
+                double tempX = Double.parseDouble(strX);
+                if (tempX < Long.MIN_VALUE || tempX > Long.MAX_VALUE) throw new InvalidRangeException();
+                x = (long) tempX;
                 break;
             } catch (NoSuchElementException exception) {
                 console.printError("Координата X не распознана!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (NumberFormatException exception) {
-                console.printError("Координата X должна быть представлена числом с плавающей точкой!");
+                console.printError("Координата X должна быть представлена числом с плавающей точкой! Значение должно быть в диапазоне от -9223372036854775808 до 9223372036854775807!");
+                if (fileMode) throw new IncorrectScriptException();
+            } catch (InvalidRangeException exception) {
+                console.printError("Значение должно быть в диапазоне от -9223372036854775808 до 9223372036854775807!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (IllegalStateException exception) {
                 console.printError("Непредвиденная ошибка!");
@@ -396,12 +414,16 @@ public class ProductInput {
                 String strY = InputSteamer.getScanner().nextLine().trim();
                 if (fileMode) console.println(strY);
                 y = Integer.parseInt(strY);
+                if (y < Integer.MIN_VALUE || y > Integer.MAX_VALUE) throw new InvalidRangeException();
                 break;
             } catch (NoSuchElementException exception) {
                 console.printError("Координата Y не распознана!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (NumberFormatException exception) {
-                console.printError("Координата Y должна быть представлена целым числом от от -2147483648 до 2147483647!");
+                console.printError("Координата Y должна быть представлена целым числом! Значение должно быть в диапазоне от -2147483648 до 2147483647!");
+                if (fileMode) throw new IncorrectScriptException();
+            } catch (InvalidRangeException exception) {
+                console.printError("Значение должно быть в диапазоне от -2147483648 до 2147483647!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (IllegalStateException exception) {
                 console.printError("Непредвиденная ошибка!");
@@ -410,6 +432,7 @@ public class ProductInput {
         }
         return y;
     }
+
 
     /**
      * Ввод названия местоположения

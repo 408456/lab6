@@ -63,7 +63,15 @@ public class DumpManager {
      * @param collection Коллекция для записи
      */
     public void writeCollection(Collection<Product> collection) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+        File file = new File(fileName);
+
+        // Проверяем права на запись
+        if (!file.canWrite()) {
+            console.printError("Нет прав на запись в файл: " + fileName);
+            return;
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             String csv = collection2CSV(collection);
             if (csv == null) return;
             writer.write(csv);
@@ -113,10 +121,23 @@ public class DumpManager {
      *
      * @return Считанная коллекция
      */
+    /**
+     * Считывает коллекцию из файла.
+     *
+     * @return Считанная коллекция
+     */
     public LinkedList<Product> readCollection() {
         LinkedList<Product> collection = new LinkedList<>();
+        File file = new File(fileName);
+
+        // Проверяем права на чтение
+        if (!file.canRead()) {
+            console.printError("Нет прав на чтение файла: " + fileName);
+            return collection;
+        }
+
         if (fileName != null && !fileName.isEmpty()) {
-            try (Scanner fileReader = new Scanner(new File(fileName))) {
+            try (Scanner fileReader = new Scanner(file)) {
                 StringBuilder s = new StringBuilder();
                 while (fileReader.hasNextLine()) {
                     s.append(fileReader.nextLine());
@@ -126,8 +147,6 @@ public class DumpManager {
                 if (loadedCollection != null && !loadedCollection.isEmpty()) {
                     console.println("Коллекция успешно загружена!");
                     return loadedCollection;
-                } else {
-                    console.printError("В загрузочном файле не обнаружена необходимая коллекция!");
                 }
             } catch (FileNotFoundException exception) {
                 console.printError("Загрузочный файл не найден!");
@@ -140,4 +159,5 @@ public class DumpManager {
         }
         return collection;
     }
+
 }

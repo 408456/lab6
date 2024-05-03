@@ -79,20 +79,6 @@ public class Person implements Validateable, Comparable<Person> {
                 ", location=" + location +
                 '}';
     }
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append("Person{\n");
-//        sb.append("name='").append(name).append("',\n");
-//        sb.append("passportID='").append(passportID).append("',\n");
-//        sb.append("hairColor=").append(hairColor).append(",\n");
-//        sb.append("nationality=").append(nationality).append(",\n");
-//        sb.append("location=").append(location).append("\n");
-//        sb.append("}");
-//
-//        return sb.toString();
-//    }
 
     /**
      * Переопределение методов equals и hashCode.
@@ -124,6 +110,7 @@ public class Person implements Validateable, Comparable<Person> {
         }
         return this.passportID.compareTo(o.passportID);
     }
+
 
     /**
      * Возвращает имя человека.

@@ -80,23 +80,7 @@ public class Product implements Validateable, Comparable<Product> {
         return this.name.compareTo(o.name);
     }
 
-    //    /**
-//     * Возвращает строковое представление объекта Product.
-//     *
-//     * @return строковое представление объекта Product
-//     */
-//    @Override
-//    public String toString() {
-//        return "Product{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", coordinates=" + coordinates +
-//                ", creationDate=" + creationDate +
-//                ", price=" + price +
-//                ", unitOfMeasure=" + unitOfMeasure +
-//                ", owner=" + owner +
-//                '}';
-//    }
+
     @Override
     public String toString() {
 

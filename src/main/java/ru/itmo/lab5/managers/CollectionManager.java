@@ -149,27 +149,25 @@ public class CollectionManager {
      * @param console Консоль для вывода сообщений об ошибках
      */
     public void validateAll(Console console) {
-        collection.values().stream()
-                .filter(product -> !product.validate())
-                .forEach(product -> console.println("Продукт с id = " + product.getId() + " имеет невалидные поля."));
-        console.println("Загруженные продукты валидны!");
+        if (collection.isEmpty()) {
+            console.printError("Коллекция пуста!");
+            return;
+        }
+
+        boolean allValid = collection.values().stream().allMatch(Product::validate);
+        if (allValid) {
+            console.println("Загруженные продукты валидны!");
+        } else {
+            collection.values().stream()
+                    .filter(product -> !product.validate())
+                    .forEach(product -> console.println("Продукт с id = " + product.getId() + " имеет невалидные поля."));
+        }
     }
 
-    //    @Override
-//    public String toString() {
-//        if (collection.isEmpty()) return "Коллекция пуста!";
-//        Product last = getLast();
-//
-//        StringBuilder info = new StringBuilder();
-//        for (Product product : collection.values()) {
-//            info.append(product);
-//            if (product != last) info.append("\n\n");
-//        }
-//        return info.toString();
-//    }
     @Override
     public String toString() {
         if (collection.isEmpty()) return "Коллекция пуста!";
+
 
         StringBuilder info = new StringBuilder();
 
@@ -177,15 +175,6 @@ public class CollectionManager {
         for (Product product : getProductsSortedByPriceDesc()) {
             info.append(product).append("\n");
         }
-//        info.append("Продукты, отсортированные по возрастанию цены:\n");
-//        for (Product product : getProductsSortedByPriceAsc()) {
-//            info.append(product).append("\n");
-//        }
-//        info.append("\n");
-//        info.append("Продукты, отсортированные по ключу: \n");
-//        for (Long key : getSortedKeys()) {
-//            info.append(collection.get(key)).append("\n");
-//        }
 
         return info.toString();
     }
@@ -208,6 +197,7 @@ public class CollectionManager {
     public void removeGreaterKey(Long id) {
         collection.entrySet().removeIf(entry -> entry.getKey() > id);
     }
+
     /**
      * Удаляет из коллекции все элементы, ключ которых больше, чем у заданного продукта.
      *
@@ -223,8 +213,9 @@ public class CollectionManager {
      * @param owner Владелец, с которым сравнивается владелец каждого продукта
      * @return Количество продуктов, у которых владелец меньше заданного
      */
-    public Integer countLessThanOwner(Person owner) {
-        return (int) collection.values().stream()
+    public long countLessThanOwner(Person owner) {
+        return collection.values().stream()
+                .filter(product -> product.getOwner() != null)  // убедиться, что owner не null
                 .filter(product -> product.getOwner().compareTo(owner) < 0)
                 .count();
     }

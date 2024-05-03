@@ -25,12 +25,17 @@ public class PrintFieldAscendingOwner extends Command {
         try {
             StringBuilder output = new StringBuilder();
 
+            if (collectionManager.getCollection().isEmpty()) {
+                console.printError("Коллекция пуста!");
+                return false;
+            }
+
             collectionManager.getCollection().values().stream()
                     .filter(product -> product.getOwner() != null)  // Фильтрация для null owner
                     .map(Product::getOwner)
                     .sorted(Comparator.comparing(Person::getPassportID)) // Сортировка по passportID
                     .distinct()
-                    .forEach(owner -> output.append(owner.getName()).append(System.lineSeparator()));
+                    .forEach(owner -> output.append(owner.toString()).append(System.lineSeparator()));
 
             console.println(output.toString());
             return true;
@@ -39,4 +44,5 @@ public class PrintFieldAscendingOwner extends Command {
             return false;
         }
     }
+
 }
