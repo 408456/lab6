@@ -38,7 +38,10 @@ public class Insert extends Command {
     public boolean execute(String[] args) {
         try {
             if (args.length != 2) throw new InvalidAmountException();
-
+//            if (!collectionManager.canWriteToFile()) {
+//                console.printError("Нет прав на запись в файл! Выполнить команду " + getName() + " невозможно!");
+//                return false;
+//            }
             long id = Long.parseLong(args[1]);
             if (collectionManager.contains(id)) {
                 console.printError("Элемент с заданным ключом уже существует!");

@@ -37,6 +37,10 @@ public class RemoveGreater extends Command {
     public boolean execute(String[] args) {
         try {
             if (!args[1].isEmpty()) throw new InvalidAmountException();
+//            if (!collectionManager.canWriteToFile()) {
+//                console.printError("Нет прав на запись в файл! Выполнить команду " + getName() + " невозможно!");
+//                return false;
+//            }
             ru.itmo.lab5.data.Product product = ((new ProductInput(console).make()));
             collectionManager.removeGreater(product);
             console.println("Продукты успешно удалены!");

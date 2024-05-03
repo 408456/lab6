@@ -26,6 +26,15 @@ public class DumpManager {
     private final Console console;
 
     /**
+     * Получает имя файла.
+     *
+     * @return Имя файла
+     */
+    public String getFileName() {
+        return fileName;
+    }
+
+    /**
      * Конструктор класса.
      *
      * @param fileName Имя файла для сохранения и загрузки коллекции

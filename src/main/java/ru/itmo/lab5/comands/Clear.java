@@ -34,6 +34,10 @@ public class Clear extends Command {
             console.println("Пожалуйста введите команду в правильном формате!");
             return false;
         }
+//        if (!collectionManager.canWriteToFile()) {
+//            console.printError("Нет прав на запись в файл! Выполнить команду " + getName() + " невозможно!");
+//            return false;
+//        }
         collectionManager.clearCollection();
         console.println("Коллекция продуктов очищена!");
         return true;

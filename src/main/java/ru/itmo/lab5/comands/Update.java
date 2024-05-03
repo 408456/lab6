@@ -33,7 +33,10 @@ public class Update extends Command {
     public boolean execute(String[] args) {
         try {
             if (args.length < 2 || args[1].isEmpty()) throw new InvalidAmountException();
-
+//            if (!collectionManager.canWriteToFile()) {
+//                console.printError("Нет прав на запись в файл! Выполнить команду " + getName() + " невозможно!");
+//                return false;
+//            }
             long id;
             try {
                 id = Long.parseLong(args[1]);

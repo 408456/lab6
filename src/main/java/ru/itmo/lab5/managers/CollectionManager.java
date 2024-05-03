@@ -4,6 +4,7 @@ import ru.itmo.lab5.data.Person;
 import ru.itmo.lab5.data.Product;
 import ru.itmo.lab5.input.Console;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,7 +42,18 @@ public class CollectionManager {
 
         loadCollection();
     }
-
+    /**
+     * Проверяет, есть ли права на чтение файла и запись в файл
+     * @return true, если есть права на запись, иначе false
+     */
+    public boolean canWriteToFile() {
+        File file = new File(dumpManager.getFileName()); // предположим, что у менеджера есть метод для получения имени файла
+        return file.canWrite();
+    }
+    public boolean canReadFromFile() {
+        File file = new File(dumpManager.getFileName());
+        return file.canRead();
+    }
     /**
      * Получает коллекцию продуктов.
      *

@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bce78c0c-56fb-4128-a8da-fb9ab9b08736" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/CountLessThanOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/CountLessThanOwner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Clear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Insert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Insert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveGreater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveGreater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveGreaterKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveGreaterKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveLowerKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/RemoveLowerKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/comands/Update.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/ProductInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/input/ProductInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/CollectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/DumpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/lab5/managers/DumpManager.java" afterDir="false" />
     </list>
@@ -105,7 +106,7 @@
       <workItem from="1713527402618" duration="663000" />
       <workItem from="1714120370722" duration="601000" />
       <workItem from="1714122299029" duration="9981000" />
-      <workItem from="1714642476057" duration="2786000" />
+      <workItem from="1714642476057" duration="4152000" />
     </task>
     <servers />
   </component>
