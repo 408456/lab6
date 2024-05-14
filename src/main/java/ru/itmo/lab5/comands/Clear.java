@@ -2,6 +2,10 @@ package ru.itmo.lab5.comands;
 
 import ru.itmo.lab5.input.Console;
 import ru.itmo.lab5.managers.CollectionManager;
+import java.util.List;
+import java.util.Comparator;
+import java.io.StringWriter;
+import java.util.Comparator;
 
 /**
  * Команда для очистки коллекции.
