@@ -12,6 +12,7 @@ public enum Color implements Serializable {
 
     /**
      * Возвращает строку, содержащую названия всех цветов, разделенных запятыми.
+     *
      * @return строка с названиями цветов
      */
     public static String names() {

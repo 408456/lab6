@@ -17,18 +17,40 @@ import ru.itmo.general.network.Response;
 public class Update extends Command {
     private CollectionManager collectionManager;
     private Console console;
+
+    /**
+     * Конструктор класса.
+     */
     public Update(){
         super("update", " <id> {element} - обновить значение элемента коллекции по ID");
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param console консоль для ввода данных
+     */
     public Update(Console console){
         this();
         this.console = console;
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public Update(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         try {
@@ -55,6 +77,12 @@ public class Update extends Command {
         }
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         try {

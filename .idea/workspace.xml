@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6751af8d-f8f3-40e7-859b-89f0b44119fc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/ClientApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/Executor.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/Executor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/p1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/p1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/general/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Clear.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/CountLessThanOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/CountLessThanOwner.java" afterDir="false" />
@@ -37,37 +30,12 @@
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Update.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Color.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Country.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/UnitOfMeasure.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/UnitOfMeasure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CollectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Request.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Sendable.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Sendable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/DateTimeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/DateTimeHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/Validateable.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/Validateable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/IncorrectScriptException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/IncorrectScriptException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidAmountException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidAmountException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidFormException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidFormException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidRangeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidRangeException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidValueException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidValueException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/MustBeNotEmptyException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/MustBeNotEmptyException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/ScriptRecursionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/ScriptRecursionException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/Console.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/InputSteamer.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/InputSteamer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/ProductInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/ProductInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/ServerApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/DumpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/DumpManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ProductCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ProductCollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

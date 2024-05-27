@@ -8,19 +8,21 @@ import ru.itmo.general.utility.io.InputSteamer;
 import java.util.Scanner;
 
 /**
- * Основной класс программы.
+ * Основной класс клиентского приложения.
  */
-
 public class ClientApp {
-    private static final int PORT = 3333;
-    private static final String SERVER_ADDRESS = "localhost";
+    private static final int PORT = 3333; /**< Порт для подключения к серверу */
+    private static final String SERVER_ADDRESS = "localhost"; /**< Адрес сервера */
+
     /**
      * Точка входа в программу.
+     * Инициализирует сканер для чтения пользовательского ввода,
+     * создает объект Console и CommandManager с набором команд,
+     * и запускает Executor для обработки команд из консоли.
+     *
      * @param args аргументы командной строки
      */
     public static void main(String[] args) {
-
-        // Чтение пользовательского ввода из консоли
         InputSteamer.setScanner(new Scanner(System.in));
         Console console = new Console();
 
@@ -43,6 +45,7 @@ public class ClientApp {
                 commandAdd("update", new Update(console));
             }
         };
+
         new Executor(console, commandManager, PORT, SERVER_ADDRESS).fromConsole();
     }
 }

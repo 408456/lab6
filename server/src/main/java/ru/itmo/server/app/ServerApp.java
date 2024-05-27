@@ -9,10 +9,18 @@ import ru.itmo.server.managers.DumpManager;
 import ru.itmo.server.managers.ProductCollectionManager;
 import ru.itmo.server.network.TCPServer;
 
+/**
+ * Класс для запуска серверного приложения.
+ */
 public class ServerApp {
     private static final Logger logger = LoggerFactory.getLogger(ServerApp.class);
     private static final int PORT = 3333;
 
+    /**
+     * Точка входа в приложение сервера.
+     *
+     * @param args Аргументы командной строки
+     */
     public static void main(String[] args) {
         // Установка кодировки UTF-8 для корректной работы с символами Unicode
         System.setProperty("file.encoding", "UTF-8");

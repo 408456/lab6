@@ -10,9 +10,18 @@ import java.io.ObjectOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
+/**
+ * Класс для отправки ответов по TCP-протоколу.
+ */
 public class TCPWriter {
     private static final Logger logger = LoggerFactory.getLogger(TCPWriter.class);
 
+    /**
+     * Метод для отправки ответа клиенту.
+     *
+     * @param clientSocketChannel канал для соединения с клиентом
+     * @param response            ответ, который будет отправлен клиенту
+     */
     public static void sendResponse(SocketChannel clientSocketChannel, Response response) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
@@ -39,6 +48,12 @@ public class TCPWriter {
         }
     }
 
+    /**
+     * Метод для получения удаленного адреса клиента.
+     *
+     * @param clientSocketChannel канал для соединения с клиентом
+     * @return удаленный адрес клиента в виде строки
+     */
     private static String getRemoteAddress(SocketChannel clientSocketChannel) {
         try {
             return clientSocketChannel.getRemoteAddress().toString();
@@ -48,6 +63,12 @@ public class TCPWriter {
         }
     }
 
+    /**
+     * Метод для обработки IOException при отправке данных клиенту.
+     *
+     * @param clientSocketChannel канал для соединения с клиентом
+     * @param e                   объект IOException, который нужно обработать
+     */
     private static void handleIOException(SocketChannel clientSocketChannel, IOException e) {
         try {
             logger.error("Закрытие соединения с клиентом {} из-за ошибки: {}", getRemoteAddress(clientSocketChannel), e.getMessage());

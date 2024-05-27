@@ -16,16 +16,29 @@ import java.util.stream.Collectors;
 public class PrintFieldAscendingOwner extends Command {
     private CollectionManager collectionManager;
 
+    /**
+     * Конструктор класса.
+     */
     public PrintFieldAscendingOwner() {
         super("print_field_ascending_owner", " - вывести значения поля owner всех элементов в порядке возрастания");
-
     }
 
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public PrintFieldAscendingOwner(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         if (arguments.length != 2) {
@@ -34,6 +47,12 @@ public class PrintFieldAscendingOwner extends Command {
         return new Request(getName(), null);
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         try {

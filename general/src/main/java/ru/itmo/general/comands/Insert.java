@@ -17,18 +17,40 @@ import ru.itmo.general.network.Response;
 public class Insert extends Command {
     private CollectionManager collectionManager;
     private Console console;
+
+    /**
+     * Конструктор класса.
+     */
     public Insert(){
         super("insert", "<id> {element} - добавить новый элемент с заданным ключом");
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public Insert(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param console консоль для ввода
+     */
     public Insert(Console console){
         this();
         this.console = console;
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         try {
@@ -51,6 +73,12 @@ public class Insert extends Command {
         }
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         try {

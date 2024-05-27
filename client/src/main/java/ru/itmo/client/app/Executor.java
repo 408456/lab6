@@ -15,21 +15,13 @@ import java.util.*;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Класс для выполнения программы
+ * Класс для выполнения программы клиента.
  */
 public class Executor {
-    /**
-     * Консоль для вывода информации и сообщений об ошибках
-     */
-    private final Console console;
-    /**
-     * Менеджер команд
-     */
-    private final CommandManager commandManager;
-    /**
-     * Стек скриптов для контроля рекурсии
-     */
-    private final Set<String> scriptStack = new HashSet<>();
+
+    private final Console console; /**< Консоль для вывода информации и сообщений об ошибках */
+    private final CommandManager commandManager; /**< Менеджер команд */
+    private final Set<String> scriptStack = new HashSet<>(); /**< Стек скриптов для контроля рекурсии */
     private final TCPClient tcpClient;
     private Request request;
     private Response response;
@@ -39,15 +31,18 @@ public class Executor {
      *
      * @param console        Консоль для вывода информации и сообщений об ошибках
      * @param commandManager Менеджер команд
+     * @param port           Порт для подключения к серверу
+     * @param serverAddress  Адрес сервера
      */
-    public Executor(Console console, CommandManager commandManager, int port, String server_address) {
+    public Executor(Console console, CommandManager commandManager, int port, String serverAddress) {
         this.console = console;
         this.commandManager = commandManager;
-        this.tcpClient = new TCPClient(server_address, port, console);
+        this.tcpClient = new TCPClient(serverAddress, port, console);
     }
 
     /**
-     * Интерактивный режим
+     * Интерактивный режим работы.
+     * Подключается к серверу и обрабатывает ввод команд с консоли.
      */
     public void fromConsole() {
         try {
@@ -83,8 +78,8 @@ public class Executor {
     /**
      * Режим для запуска скрипта.
      *
-     * @param argument Аргумент скрипта
-     * @return Код завершения.
+     * @param argument Путь к файлу скрипта
+     * @return Код завершения
      */
     public ExitCode fromScript(String argument) {
         String[] inputCommand;
@@ -141,10 +136,10 @@ public class Executor {
     }
 
     /**
-     * Выполняет команду
+     * Выполняет команду.
      *
-     * @param inputCommand Команда для запуска
-     * @return Код завершения.
+     * @param inputCommand Команда для выполнения
+     * @return Код завершения
      */
     private ExitCode apply(String[] inputCommand) {
         request = null;
@@ -166,22 +161,22 @@ public class Executor {
         } else if (request.getCommand().equals("help")) {
             try {
                 Map<String, String> commandsInfo = (Map<String, String>) request.getData();
-                for(Map.Entry<String, String> entry : commandsInfo.entrySet()) {
+                for (Map.Entry<String, String> entry : commandsInfo.entrySet()) {
                     console.printTable(entry, commandsInfo.get(entry.getKey()));
                 }
                 return ExitCode.OK;
-            } catch (Exception e){
+            } catch (Exception e) {
                 console.printError("Ошибка при выполнении команды help");
             }
         } else if (request.getCommand().equals("history")) {
-            try{
+            try {
                 List<String> history = (List<String>) request.getData();
                 console.println("История команд:");
-                for (String x : history){
+                for (String x : history) {
                     console.println(x);
                 }
                 return ExitCode.OK;
-            } catch (Exception e){
+            } catch (Exception e) {
                 console.printError("Не удалось получить историю команд");
                 return ExitCode.ERROR;
             }
@@ -190,25 +185,24 @@ public class Executor {
             return ExitCode.ERROR;
         }
         response = tcpClient.sendCommand(request);
-        if(response != null){
-            if(response.isSuccess()){
+        if (response != null) {
+            if (response.isSuccess()) {
                 console.println(response);
-            } else{
+            } else {
                 console.printError(response);
             }
-        } else{
+        } else {
             console.printError("Ответ от сервера не получен");
         }
         return ExitCode.OK;
     }
 
-
     /**
-     * Перечисление для кодов завершения
+     * Перечисление для кодов завершения.
      */
     public enum ExitCode {
         OK,
         ERROR,
-        EXIT;
+        EXIT
     }
 }

@@ -1,21 +1,21 @@
 package ru.itmo.general.comands;
 
 /**
- * Interface for objects that can be named and described.
+ * Интерфейс для объектов, которые могут иметь имя и описание.
  */
 public interface Describable {
+
     /**
-     * Gets the name of the object.
+     * Получает имя объекта.
      *
-     * @return the name of the object
+     * @return имя объекта
      */
     String getName();
 
     /**
-     * Gets the description of the object.
+     * Получает описание объекта.
      *
-     * @return the description of the object
+     * @return описание объекта
      */
     String getDescription();
 }
-

@@ -91,7 +91,4 @@ public class Coordinates implements Validateable, Serializable {
             throw new IllegalArgumentException("Ошибка преобразования строки в объект Coordinates", e);
         }
     }
-
-
-
 }

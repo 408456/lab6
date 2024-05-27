@@ -16,16 +16,27 @@ import java.nio.channels.SocketChannel;
 
 import static ru.itmo.server.network.TCPWriter.sendResponse;
 
+/**
+ * Класс для чтения данных из сокета.
+ */
 public class TCPReader {
 
     private static final Logger logger = LoggerFactory.getLogger(TCPReader.class);
     private final SelectionKey key;
     private static final int BUFFER_SIZE = 8192; // Размер буфера
 
+    /**
+     * Конструктор с параметрами.
+     *
+     * @param key Ключ выборки
+     */
     public TCPReader(final SelectionKey key) {
         this.key = key;
     }
 
+    /**
+     * Метод для разбора запроса.
+     */
     public void parseRequest() {
         SocketChannel clientSocketChannel = (SocketChannel) key.channel();
         ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE); // Используем прямой буфер
@@ -95,6 +106,7 @@ public class TCPReader {
             sendResponse(clientSocketChannel, response);
         }
     }
+
     private String getRemoteAddress(SocketChannel clientSocketChannel) {
         try {
             return clientSocketChannel.getRemoteAddress().toString();

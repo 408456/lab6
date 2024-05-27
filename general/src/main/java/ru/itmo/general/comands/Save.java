@@ -10,11 +10,22 @@ import ru.itmo.general.network.Response;
 public class Save extends Command {
     private final CollectionManager collectionManager;
 
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public Save(CollectionManager collectionManager) {
         super("save", " - сохранить коллекцию в файл");
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         try {

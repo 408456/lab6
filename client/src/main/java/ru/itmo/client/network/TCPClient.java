@@ -14,18 +14,44 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
+/**
+ * Класс для установления и управления TCP-соединением с сервером.
+ */
 public class TCPClient {
-    private final Console output;
-    private final String serverAddress;
-    private final int serverPort;
-    private SocketChannel socketChannel;
 
+    private final Console output;
+    /**
+     * < Консоль для вывода информации и сообщений об ошибках
+     */
+    private final String serverAddress;
+    /**
+     * < Адрес сервера
+     */
+    private final int serverPort;
+    /**
+     * < Порт сервера
+     */
+    private SocketChannel socketChannel; /**< Канал сокета для TCP-соединения */
+
+    /**
+     * Конструктор класса.
+     *
+     * @param serverAddress Адрес сервера
+     * @param serverPort    Порт сервера
+     * @param output        Консоль для вывода информации и сообщений об ошибках
+     */
     public TCPClient(String serverAddress, int serverPort, Console output) {
         this.serverAddress = serverAddress;
         this.serverPort = serverPort;
         this.output = output;
     }
 
+    /**
+     * Устанавливает соединение с сервером.
+     *
+     * @return true, если соединение установлено успешно, в противном случае - false
+     * @throws TimeoutException если истекло время ожидания подключения
+     */
     public boolean connect() throws TimeoutException {
         Selector selector = null;
         boolean connectFlag = false;
@@ -71,6 +97,11 @@ public class TCPClient {
         }
     }
 
+    /**
+     * Проверяет текущее соединение с сервером.
+     *
+     * @return true, если есть активное соединение, в противном случае - false
+     */
     public boolean ensureConnection() {
         if (!isConnected()) {
             output.println("Нет подключения к серверу.");
@@ -85,12 +116,23 @@ public class TCPClient {
         return true;
     }
 
+    /**
+     * Разрывает соединение с сервером.
+     *
+     * @throws IOException если возникает ошибка при разрыве соединения
+     */
     public void disconnect() throws IOException {
         if (socketChannel != null) {
             socketChannel.close();
         }
     }
 
+    /**
+     * Отправляет запрос на сервер.
+     *
+     * @param request объект запроса
+     * @throws IOException если произошла ошибка ввода-вывода
+     */
     public void sendRequest(Request request) throws IOException {
         if (!ensureConnection()) throw new IOException("Соединение не установлено");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -103,6 +145,13 @@ public class TCPClient {
         socketChannel.write(buffer);
     }
 
+    /**
+     * Получает ответ от сервера.
+     *
+     * @return объект ответа от сервера
+     * @throws IOException            если возникает ошибка ввода-вывода
+     * @throws ClassNotFoundException если класс не найден при десериализации
+     */
     public Response receiveResponse() throws IOException, ClassNotFoundException {
         if (!ensureConnection()) throw new IOException("Соединение не установлено");
         Selector selector = Selector.open();
@@ -146,6 +195,12 @@ public class TCPClient {
         throw new IOException("Не удалось получить ответ от сервера в течение 10 секунд");
     }
 
+    /**
+     * Отправляет команду на сервер и получает ответ.
+     *
+     * @param request объект запроса
+     * @return объект ответа от сервера
+     */
     public Response sendCommand(Request request) {
         try {
             sendRequest(request);
@@ -162,10 +217,21 @@ public class TCPClient {
         return new Response(false, "Команда не выполнена!", null);
     }
 
+    /**
+     * Проверяет, установлено ли соединение с сервером.
+     *
+     * @return true, если соединение установлено, в противном случае - false
+     */
     public boolean isConnected() {
         return socketChannel != null && socketChannel.isConnected();
     }
 
+    /**
+     * Закрывает ресурсы канала сокета и селектора.
+     *
+     * @param socketChannel канал сокета
+     * @param selector      селектор
+     */
     private void closeResources(SocketChannel socketChannel, Selector selector) {
         try {
             if (socketChannel != null) {

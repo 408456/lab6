@@ -9,11 +9,22 @@ import ru.itmo.general.network.Request;
 public class History extends Command {
     private final CommandManager commandManager;
 
+    /**
+     * Конструктор класса.
+     *
+     * @param commandManager менеджер команд
+     */
     public History(CommandManager commandManager) {
         super("history", " - вывести последние 8 команд");
         this.commandManager = commandManager;
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         if (arguments.length != 2) {

@@ -17,18 +17,40 @@ import ru.itmo.general.network.Response;
 public class RemoveGreater extends Command {
     private CollectionManager collectionManager;
     private Console console;
+
+    /**
+     * Конструктор класса.
+     */
     public RemoveGreater() {
         super("remove_greater", " {element} - удалить из коллекции все элементы, превышающие заданный");
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param console объект для ввода данных пользователя
+     */
     public RemoveGreater(Console console) {
         this();
         this.console = console;
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public RemoveGreater(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         try {
@@ -45,6 +67,12 @@ public class RemoveGreater extends Command {
         }
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         try {

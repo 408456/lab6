@@ -4,28 +4,27 @@ import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 
 /**
- * Interface for all executable commands.
+ * Интерфейс для всех исполняемых команд.
  */
 public interface Executable {
+
     /**
-     * Executes the command with the specified arguments.
+     * Выполняет команду с указанными аргументами.
      *
-     * @param arguments the command arguments
-     * @return the response indicating the result of the command execution
+     * @param arguments аргументы команды
+     * @return ответ, указывающий результат выполнения команды
      */
     default Response execute(Request arguments) {
         return null;
     }
 
     /**
-     * Executes the command with the specified arguments.
+     * Выполняет команду с указанными аргументами.
      *
-     * @param arguments the command arguments as an array of strings
-     * @return the request indicating the result of the command execution
-     * and contains necessary data for server
+     * @param arguments аргументы команды в виде массива строк
+     * @return запрос, указывающий результат выполнения команды и содержащий необходимые данные для сервера
      */
     default Request execute(String[] arguments) {
         return null;
     }
 }
-

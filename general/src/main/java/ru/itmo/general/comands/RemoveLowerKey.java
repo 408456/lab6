@@ -11,15 +11,29 @@ import ru.itmo.general.network.Response;
 public class RemoveLowerKey extends Command {
     private CollectionManager collectionManager;
 
-    public RemoveLowerKey(){
+    /**
+     * Конструктор класса.
+     */
+    public RemoveLowerKey() {
         super("remove_lower_key", " <id> - удалить из коллекции все элементы, ключ которых меньше, чем заданный");
-
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public RemoveLowerKey(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         try {
@@ -35,6 +49,12 @@ public class RemoveLowerKey extends Command {
         }
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         try {

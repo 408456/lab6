@@ -9,20 +9,44 @@ import ru.itmo.general.network.Response;
  */
 public class Exit extends Command {
     private CollectionManager collectionManager;
+
+    /**
+     * Конструктор класса.
+     */
     public Exit() {
         super("exit", " - завершить программу (без сохранения в файл)");
     }
-    public Exit(CollectionManager collectionManager){
+
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
+    public Exit(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
-                @Override
+
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
+    @Override
     public Request execute(String[] arguments) {
         if (arguments.length != 2) {
             return new Request(false, getName(), "Пожалуйста введите команду в правильном формате");
         }
         return new Request(getName(), null);
     }
+
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         collectionManager.saveCollection();

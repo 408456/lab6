@@ -9,24 +9,42 @@ import ru.itmo.server.network.TCPServer;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * Класс для запуска серверного приложения.
+ */
 public class Runner extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(Runner.class);
-    private final TCPServer server;
-    private final ThreadGroup requestReaders;
-    private final ThreadGroup requestHandlers;
+    private final TCPServer server; /**< Сервер TCP */
+    private final ThreadGroup requestReaders; /**< Группа потоков для чтения запросов */
+    private final ThreadGroup requestHandlers; /**< Группа потоков для обработки запросов */
 
+    /**
+     * Конструктор без параметров.
+     * Создает новые группы потоков для чтения и обработки запросов.
+     */
     public Runner() {
         server = null;
         requestReaders = new ThreadGroup("RequestReaders");
         requestHandlers = new ThreadGroup("RequestHandlers");
     }
 
-    public Runner(TCPServer server, ThreadGroup RequestReaders, ThreadGroup RequestHandlers) {
+    /**
+     * Конструктор с параметрами.
+     *
+     * @param server          Сервер TCP
+     * @param requestReaders  Группа потоков для чтения запросов
+     * @param requestHandlers Группа потоков для обработки запросов
+     */
+    public Runner(TCPServer server, ThreadGroup requestReaders, ThreadGroup requestHandlers) {
         this.server = server;
-        this.requestReaders = RequestReaders;
-        this.requestHandlers = RequestHandlers;
+        this.requestReaders = requestReaders;
+        this.requestHandlers = requestHandlers;
     }
 
+    /**
+     * Метод запуска потока.
+     * Ожидает ввода команд с консоли и выполняет их обработку.
+     */
     @Override
     public void run() {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

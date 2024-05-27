@@ -11,14 +11,25 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 
+/**
+ * Класс для запуска TCP-сервера.
+ */
 public class TCPServer {
     private final int port;
     private static final Logger logger = LoggerFactory.getLogger(TCPServer.class);
 
+    /**
+     * Конструктор с параметрами.
+     *
+     * @param port порт для прослушивания подключений
+     */
     public TCPServer(int port) {
         this.port = port;
     }
 
+    /**
+     * Метод для запуска сервера.
+     */
     public void start() {
         try (Selector selector = Selector.open();
              ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {

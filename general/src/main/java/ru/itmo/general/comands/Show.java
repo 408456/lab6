@@ -10,14 +10,29 @@ import ru.itmo.general.network.Response;
 public class Show extends Command {
     private CollectionManager collectionManager;
 
+    /**
+     * Конструктор класса.
+     */
     public Show(){
         super("show", " - вывести в стандартный поток вывода все элементы коллекции в строковом представлении");
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public Show(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         if (arguments.length != 2) {
@@ -26,6 +41,12 @@ public class Show extends Command {
         return new Request(getName(), null);
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         try {

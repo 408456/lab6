@@ -12,14 +12,29 @@ import java.time.LocalDateTime;
 public class Info extends Command {
     private CollectionManager collectionManager;
 
+    /**
+     * Конструктор класса.
+     */
     public Info(){
         super("info", " - вывести информацию о коллекции");
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public Info(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         if (arguments.length != 2) {
@@ -28,6 +43,12 @@ public class Info extends Command {
         return new Request(getName(), null);
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         LocalDateTime lastInitTime = collectionManager.getLastInitTime();

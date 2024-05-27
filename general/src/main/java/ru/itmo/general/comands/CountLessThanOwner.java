@@ -13,20 +13,43 @@ import ru.itmo.general.network.Response;
  * Команда для вывода количества элементов, значение поля owner которых меньше заданного.
  */
 public class CountLessThanOwner extends Command {
-    private CollectionManager collectionManager;
-    private Console console;
+
+    private CollectionManager collectionManager; /**< Менеджер коллекции */
+    private Console console; /**< Консоль */
+
+    /**
+     * Конструктор класса.
+     */
     public CountLessThanOwner() {
         super("count_less_than_owner", " <owner> вывести количество элементов, значение поля owner которых меньше заданного");
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param console консоль
+     */
     public CountLessThanOwner(Console console){
         this();
         this.console = console;
     }
+
+    /**
+     * Конструктор класса.
+     *
+     * @param collectionManager менеджер коллекции
+     */
     public CountLessThanOwner(CollectionManager collectionManager) {
         this();
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Выполняет команду на сервере.
+     *
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
+     */
     @Override
     public Response execute(Request request) {
         try {
@@ -42,19 +65,18 @@ public class CountLessThanOwner extends Command {
         }
     }
 
+    /**
+     * Выполняет команду на клиенте.
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
     @Override
     public Request execute(String[] arguments) {
         try {
-//            if (arguments.length != 3 || arguments[1].isEmpty()) {
-//                throw new InvalidAmountException();
-//            }
-
             ProductInput productInput = new ProductInput(console); // Необходимо обновить класс ProductInput, чтобы он мог работать без консоли
             Person owner = productInput.inputPersonForCountLess();
-
             return new Request(getName(), owner);
-//        } catch (InvalidAmountException e) {
-//            return new Request(false, getName(), "Неправильное количество аргументов!");
         } catch (IllegalArgumentException | IncorrectScriptException e) {
             return new Request(false, getName(), e.getMessage());
         }

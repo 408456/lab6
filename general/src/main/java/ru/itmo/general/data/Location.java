@@ -120,6 +120,4 @@ public class Location implements Validateable, Serializable {
             throw new IllegalArgumentException("Ошибка преобразования строки в объект Location", e);
         }
     }
-
-
 }

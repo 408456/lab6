@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Управляет командами.
+ * Класс управления командами
  */
 public class CommandManager {
 
