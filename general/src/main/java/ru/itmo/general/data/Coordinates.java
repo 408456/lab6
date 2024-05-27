@@ -1,14 +1,15 @@
-package ru.itmo.lab5.data;
+package ru.itmo.general.data;
 
-import ru.itmo.lab5.utility.Validateable;
+import ru.itmo.general.utility.Validateable;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
 /**
  * Класс, представляющий координаты.
  */
-public class Coordinates implements Validateable {
+public class Coordinates implements Validateable, Serializable {
     private Integer x; // Значение поля должно быть больше -454, Поле не может быть null
     private Double y; // Поле не может быть null
 

@@ -1,8 +1,9 @@
-package ru.itmo.general.managers;
+package ru.itmo.server.managers;
 
 import ru.itmo.general.data.Person;
 import ru.itmo.general.data.Product;
-import ru.itmo.general.input.Console;
+import ru.itmo.general.utility.io.Console;
+import ru.itmo.general.managers.CollectionManager;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Класс для управления коллекцией продуктов
  */
-public class CollectionManager {
+public class ProductCollectionManager implements CollectionManager {
     /**
      * Коллекция продуктов
      */
@@ -35,7 +36,7 @@ public class CollectionManager {
      *
      * @param dumpManager Менеджер для сохранения/загрузки коллекции
      */
-    public CollectionManager(DumpManager dumpManager) {
+    public ProductCollectionManager(DumpManager dumpManager) {
         this.lastInitTime = null;
         this.lastSaveTime = null;
         this.dumpManager = dumpManager;

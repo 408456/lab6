@@ -1,9 +1,11 @@
-package ru.itmo.lab5.data;
+package ru.itmo.general.data;
+
+import java.io.Serializable;
 
 /**
  * Перечисление, представляющее возможные цвета.
  */
-public enum Color {
+public enum Color implements Serializable {
     YELLOW, // Жёлтый
     ORANGE, // Оранжевый
     BROWN;  // Коричневый

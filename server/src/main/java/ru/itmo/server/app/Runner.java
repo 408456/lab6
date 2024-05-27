@@ -1,4 +1,4 @@
-package ru.itmo.server.main;
+package ru.itmo.server.app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

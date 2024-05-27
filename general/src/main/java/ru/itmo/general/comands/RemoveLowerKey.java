@@ -1,40 +1,48 @@
-package ru.itmo.lab5.comands;
+package ru.itmo.general.comands;
 
-import ru.itmo.lab5.exceptions.InvalidAmountException;
-import ru.itmo.lab5.input.Console;
-import ru.itmo.lab5.managers.CollectionManager;
+import ru.itmo.general.utility.exceptions.InvalidAmountException;
+import ru.itmo.general.managers.CollectionManager;
+import ru.itmo.general.network.Request;
+import ru.itmo.general.network.Response;
 
 /**
- * Команда для удаления всех элементов коллекции, ключ которых меньше, чем заданный
+ * Команда для удаления всех элементов коллекции, ключ которых меньше, чем заданный.
  */
 public class RemoveLowerKey extends Command {
-    private final Console console;
-    private final CollectionManager collectionManager;
+    private CollectionManager collectionManager;
 
-    public RemoveLowerKey(Console console, CollectionManager collectionManager) {
-        super("remove_lower_key <id>", "удалить из коллекции все элементы, ключ которых меньше, чем заданный");
-        this.console = console;
+    public RemoveLowerKey(){
+        super("remove_lower_key", " <id> - удалить из коллекции все элементы, ключ которых меньше, чем заданный");
+
+    }
+    public RemoveLowerKey(CollectionManager collectionManager) {
+        this();
         this.collectionManager = collectionManager;
     }
 
     @Override
-    public boolean execute(String[] args) {
+    public Request execute(String[] arguments) {
         try {
-            if (args.length != 2) throw new InvalidAmountException();
-//            if (!collectionManager.canWriteToFile()) {
-//                console.printError("Нет прав на запись в файл! Выполнить команду " + getName() + " невозможно!");
-//                return false;
-//            }
-            Long id = Long.parseLong(args[1]);
-            collectionManager.removeLowerKey(id);
-            console.println("Продукты успешно удалены!");
-            return true;
-
+            if (arguments.length != 2 || arguments[1].isEmpty()) {
+                throw new InvalidAmountException();
+            }
+            Long id = Long.parseLong(arguments[1]);
+            return new Request(getName(), id);
+        } catch (InvalidAmountException e) {
+            return new Request(false, getName(), "Неправильное количество аргументов!");
         } catch (NumberFormatException e) {
-            console.printError("Неверный формат id! Введите целое число.");
-        } catch (InvalidAmountException exception) {
-            console.printError("Неправильное количество аргументов!");
+            return new Request(false, getName(), "Неверный формат id! Введите целое число.");
         }
-        return false;
+    }
+
+    @Override
+    public Response execute(Request request) {
+        try {
+            Long id = (Long) request.getData();
+            collectionManager.removeLowerKey(id);
+            return new Response(true, "Продукты успешно удалены!");
+        } catch (Exception e) {
+            return new Response(false, "Произошла ошибка при выполнении команды: " + e.getMessage());
+        }
     }
 }

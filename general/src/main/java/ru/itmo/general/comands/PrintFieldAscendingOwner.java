@@ -1,48 +1,57 @@
-package ru.itmo.lab5.comands;
+package ru.itmo.general.comands;
 
-import ru.itmo.lab5.data.Product;
-import ru.itmo.lab5.data.Person; // Добавлен импорт для Person
-import ru.itmo.lab5.input.Console;
-import ru.itmo.lab5.managers.CollectionManager;
+import ru.itmo.general.data.Person;
+import ru.itmo.general.data.Product;
+import ru.itmo.general.managers.CollectionManager;
+import ru.itmo.general.network.Request;
+import ru.itmo.general.network.Response;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Команда для вывода полей owner всех элементов в порядке возрастания.
  */
 public class PrintFieldAscendingOwner extends Command {
-    private final Console console;          // Консоль для взаимодействия с пользователем
-    private final CollectionManager collectionManager; // Менеджер коллекции
+    private CollectionManager collectionManager;
 
-    public PrintFieldAscendingOwner(Console console, CollectionManager collectionManager) {
-        super("print_field_ascending_owner", "вывести значения поля owner всех элементов в порядке возрастания");
-        this.console = console;
+    public PrintFieldAscendingOwner() {
+        super("print_field_ascending_owner", " - вывести значения поля owner всех элементов в порядке возрастания");
+
+    }
+
+    public PrintFieldAscendingOwner(CollectionManager collectionManager) {
+        this();
         this.collectionManager = collectionManager;
     }
 
     @Override
-    public boolean execute(String[] args) {
-        try {
-            StringBuilder output = new StringBuilder();
-
-            if (collectionManager.getCollection().isEmpty()) {
-                console.printError("Коллекция пуста!");
-                return false;
-            }
-
-            collectionManager.getCollection().values().stream()
-                    .filter(product -> product.getOwner() != null)  // Фильтрация для null owner
-                    .map(Product::getOwner)
-                    .sorted(Comparator.comparing(Person::getPassportID)) // Сортировка по passportID
-                    .distinct()
-                    .forEach(owner -> output.append(owner.toString()).append(System.lineSeparator()));
-
-            console.println(output.toString());
-            return true;
-        } catch (Exception e) {
-            console.printError("Произошла ошибка при выполнении команды: " + e.getMessage());
-            return false;
+    public Request execute(String[] arguments) {
+        if (arguments.length != 2) {
+            return new Request(false, getName(), "Пожалуйста введите команду в правильном формате");
         }
+        return new Request(getName(), null);
     }
 
+    @Override
+    public Response execute(Request request) {
+        try {
+            if (collectionManager.getCollection().isEmpty()) {
+                return new Response(false, getName(), "Коллекция пуста!");
+            }
+            List<Person> owners = collectionManager.getCollection().values().stream()
+                    .filter(product -> product.getOwner() != null)
+                    .map(Product::getOwner)
+                    .sorted(Comparator.comparing(Person::getPassportID))
+                    .distinct()
+                    .collect(Collectors.toList());
+            StringBuilder output = new StringBuilder();
+            owners.forEach(owner -> output.append(owner.toString()).append(System.lineSeparator()));
+
+            return new Response(true, output.toString());
+        } catch (Exception e) {
+            return new Response(false, "Произошла ошибка при выполнении команды: " + e.getMessage());
+        }
+    }
 }

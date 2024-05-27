@@ -1,57 +1,58 @@
-package ru.itmo.lab5.comands;
+package ru.itmo.general.comands;
 
-import ru.itmo.lab5.exceptions.IncorrectScriptException;
-import ru.itmo.lab5.exceptions.InvalidAmountException;
-import ru.itmo.lab5.exceptions.InvalidFormException;
-import ru.itmo.lab5.exceptions.InvalidValueException;
-import ru.itmo.lab5.input.Console;
-import ru.itmo.lab5.input.ProductInput;
-import ru.itmo.lab5.managers.CollectionManager;
+import ru.itmo.general.data.Product;
+import ru.itmo.general.utility.exceptions.IncorrectScriptException;
+import ru.itmo.general.utility.exceptions.InvalidAmountException;
+import ru.itmo.general.utility.exceptions.InvalidFormException;
+import ru.itmo.general.utility.exceptions.InvalidValueException;
+import ru.itmo.general.utility.io.Console;
+import ru.itmo.general.utility.io.ProductInput;
+import ru.itmo.general.managers.CollectionManager;
+import ru.itmo.general.network.Request;
+import ru.itmo.general.network.Response;
 
 /**
- * Команда для удаления из коллекции элементов, превышающих заданный(сортировка по цени и по имени).
+ * Команда для удаления из коллекции элементов, превышающих заданный.
  */
 public class RemoveGreater extends Command {
-    private final Console console;          // Консоль для взаимодействия с пользователем
-    private final CollectionManager collectionManager; // Менеджер коллекции
-
-    /**
-     * Конструктор класса.
-     *
-     * @param console            объект класса Console для взаимодействия с пользователем
-     * @param collectionManager объект класса CollectionManager для управления коллекцией
-     */
-    public RemoveGreater(Console console, CollectionManager collectionManager) {
-        super("remove_greater {element}", "удалить из коллекции все элементы, превышающие заданный");
+    private CollectionManager collectionManager;
+    private Console console;
+    public RemoveGreater() {
+        super("remove_greater", " {element} - удалить из коллекции все элементы, превышающие заданный");
+    }
+    public RemoveGreater(Console console) {
+        this();
         this.console = console;
+    }
+    public RemoveGreater(CollectionManager collectionManager) {
+        this();
         this.collectionManager = collectionManager;
     }
 
-    /**
-     * Выполняет команду удаления из коллекции элементов, превышающих заданный.
-     *
-     * @param args аргументы команды (в данном случае не используются)
-     * @return true, если команда выполнена успешно, иначе false
-     */
     @Override
-    public boolean execute(String[] args) {
+    public Request execute(String[] arguments) {
         try {
-            if (!args[1].isEmpty()) throw new InvalidAmountException();
-//            if (!collectionManager.canWriteToFile()) {
-//                console.printError("Нет прав на запись в файл! Выполнить команду " + getName() + " невозможно!");
-//                return false;
-//            }
-            ru.itmo.lab5.data.Product product = ((new ProductInput(console).make()));
-            collectionManager.removeGreater(product);
-            console.println("Продукты успешно удалены!");
-            return true;
-        } catch (InvalidAmountException exception) {
-            console.printError("Неправильное количество аргументов!");
+            if (arguments.length != 2) throw new InvalidAmountException();
+
+            Product product = new ProductInput(console).make();
+            return new Request(getName(), product);
+        } catch (InvalidAmountException e) {
+            return new Request(false, getName(), "Неправильное количество аргументов!");
         } catch (InvalidFormException | InvalidValueException e) {
-            console.printError("Поля продукта не валидны! Продукт не создан!");
-        } catch (IncorrectScriptException ignored) {
+            return new Request(false, getName(), "Поля продукта не валидны! Продукт не создан!");
+        } catch (IncorrectScriptException e) {
+            return new Request(false, getName(), "Ошибка выполнения скрипта: " + e.getMessage());
         }
-        return false;
     }
 
+    @Override
+    public Response execute(Request request) {
+        try {
+            Product product = (Product) request.getData();
+            collectionManager.removeGreater(product);
+            return new Response(true, "Продукты успешно удалены!");
+        } catch (Exception e) {
+            return new Response(false, "Произошла ошибка при выполнении команды: " + e.getMessage());
+        }
+    }
 }

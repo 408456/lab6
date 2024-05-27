@@ -1,14 +1,15 @@
-package ru.itmo.lab5.data;
+package ru.itmo.general.data;
 
-import ru.itmo.lab5.utility.Validateable;
+import ru.itmo.general.utility.Validateable;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 
 /**
  * Класс, представляющий человека.
  */
-public class Person implements Validateable, Comparable<Person> {
+public class Person implements Validateable, Comparable<Person>, Serializable {
     private String name;           // Имя; Поле не может быть null, Строка не может быть пустой
     private String passportID;     // Идентификационный номер паспорта; Строка не может быть пустой, Значение этого поля должно быть уникальным, Длина строки не должна быть больше 42, Поле может быть null
     private Color hairColor;      // Цвет волос; Поле может быть null

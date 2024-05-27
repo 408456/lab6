@@ -1,4 +1,4 @@
-package ru.itmo.lab5.utility;
+package ru.itmo.general.utility;
 
 /**
  * Интерфейс для проверки значений

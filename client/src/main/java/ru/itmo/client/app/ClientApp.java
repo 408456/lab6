@@ -1,10 +1,9 @@
-package ru.itmo.client.main;
+package ru.itmo.client.app;
 
 import ru.itmo.general.comands.*;
 import ru.itmo.general.managers.CommandManager;
-import ru.itmo.general.io.Console;
-import ru.itmo.general.io.InputSteamer;
-import ru.itmo.client.utility.Executor;
+import ru.itmo.general.utility.io.Console;
+import ru.itmo.general.utility.io.InputSteamer;
 
 import java.util.Scanner;
 
@@ -12,7 +11,7 @@ import java.util.Scanner;
  * Основной класс программы.
  */
 
-public class Main {
+public class ClientApp {
     private static final int PORT = 3333;
     private static final String SERVER_ADDRESS = "localhost";
     /**
@@ -24,8 +23,6 @@ public class Main {
         // Чтение пользовательского ввода из консоли
         InputSteamer.setScanner(new Scanner(System.in));
         Console console = new Console();
-
-
 
         CommandManager commandManager = new CommandManager() {
             {

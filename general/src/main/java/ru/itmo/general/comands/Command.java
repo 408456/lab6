@@ -1,45 +1,33 @@
-package ru.itmo.lab5.comands;
+package ru.itmo.general.comands;
 
-/**
- * Класс-родитель для команд с именем и описанием.
- */
-public abstract class Command {
-    private String name, description; // Имя и описание команды
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-    /**
-     * Конструктор класса.
-     *
-     * @param name        имя команды
-     * @param description описание команды
-     */
-    public Command(String name, String description) {
-        this.name = name;
-        this.description = description;
+import java.util.Objects;
+
+@Getter
+@AllArgsConstructor
+public abstract class Command implements Describable, Executable {
+    private final String name;
+    private final String description;
+
+    public String getUsingError() {
+        return "Incorrect number of arguments!\nUsage: '" + getName() + getDescription() + "'";
     }
 
-    /**
-     * Возвращает имя команды.
-     *
-     * @return имя команды
-     */
-    public String getName() {
-        return name;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Command command = (Command) o;
+        return Objects.equals(name, command.name) && Objects.equals(description, command.description);
     }
 
-    /**
-     * Возвращает описание команды.
-     *
-     * @return описание команды
-     */
-    public String getDescription() {
-        return description;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description);
     }
 
-    /**
-     * Переопределение метода toString.
-     *
-     * @return строковое представление объекта Command
-     */
     @Override
     public String toString() {
         return "Command{" +
@@ -47,12 +35,5 @@ public abstract class Command {
                 ", description='" + description + '\'' +
                 '}';
     }
-
-    /**
-     * Абстрактный метод для выполнения команды.
-     *
-     * @param args аргументы команды
-     * @return true, если команда выполнена успешно, иначе false
-     */
-    public abstract boolean execute(String[] args);
 }
+

@@ -1,4 +1,4 @@
-package ru.itmo.general.exceptions;
+package ru.itmo.general.utility.exceptions;
 
 /**
  * Выбрасывается, если количество не соответствует требованиям

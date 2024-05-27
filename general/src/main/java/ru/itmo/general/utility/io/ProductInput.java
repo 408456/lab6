@@ -1,4 +1,4 @@
-package ru.itmo.general.io;
+package ru.itmo.general.utility.io;
 
 import ru.itmo.general.data.Product;
 import ru.itmo.general.data.Color;
@@ -7,11 +7,11 @@ import ru.itmo.general.data.Country;
 import ru.itmo.general.data.Location;
 import ru.itmo.general.data.Person;
 import ru.itmo.general.data.UnitOfMeasure;
-import ru.itmo.general.exceptions.IncorrectScriptException;
-import ru.itmo.general.exceptions.InvalidFormException;
-import ru.itmo.general.exceptions.InvalidRangeException;
-import ru.itmo.general.exceptions.InvalidValueException;
-import ru.itmo.general.exceptions.MustBeNotEmptyException;
+import ru.itmo.general.utility.exceptions.IncorrectScriptException;
+import ru.itmo.general.utility.exceptions.InvalidFormException;
+import ru.itmo.general.utility.exceptions.InvalidRangeException;
+import ru.itmo.general.utility.exceptions.InvalidValueException;
+import ru.itmo.general.utility.exceptions.MustBeNotEmptyException;
 
 import java.util.regex.*;
 
@@ -205,13 +205,6 @@ public class ProductInput {
 
     public Person inputPerson() throws IncorrectScriptException {
         String name = inputPersonName();
-        String passportID = inputPassportID();
-        Color hairColor = inputHairColor();
-        Country nationality = inputNationality();
-        Location location = inputLocation();
-        return new Person(name, passportID, hairColor, nationality, location);
-    }
-    public Person inputPersonForCountLess(String name) throws IncorrectScriptException {
         String passportID = inputPassportID();
         Color hairColor = inputHairColor();
         Country nationality = inputNationality();

@@ -1,12 +1,13 @@
-package ru.itmo.lab5.data;
+package ru.itmo.general.data;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
  * Перечисление, представляющее единицы измерения.
  */
-public enum UnitOfMeasure {
+public enum UnitOfMeasure implements Serializable {
     METERS,         // Метры
     CENTIMETERS,    // Сантиметры
     LITERS;         // Литры

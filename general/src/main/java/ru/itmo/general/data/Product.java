@@ -1,7 +1,8 @@
-package ru.itmo.lab5.data;
+package ru.itmo.general.data;
 
-import ru.itmo.lab5.utility.Validateable;
+import ru.itmo.general.utility.Validateable;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +12,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-public class Product implements Validateable, Comparable<Product> {
+public class Product implements Validateable, Comparable<Product>, Serializable {
     private Long id; // Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; // Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; // Поле не может быть null

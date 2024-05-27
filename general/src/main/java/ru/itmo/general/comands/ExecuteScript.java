@@ -1,36 +1,20 @@
-package ru.itmo.lab5.comands;
+package ru.itmo.general.comands;
 
-import ru.itmo.lab5.input.Console;
+import ru.itmo.general.network.Request;
 
 /**
  * Команда для исполнения скрипта.
  */
 public class ExecuteScript extends Command {
-    private final Console console; // Консоль для взаимодействия с пользователем
-
-    /**
-     * Конструктор класса.
-     *
-     * @param console объект класса Console для взаимодействия с пользователем
-     */
-    public ExecuteScript(Console console) {
-        super("execute_script <file_name>", "исполнить скрипт из указанного файла");
-        this.console = console;
+    public ExecuteScript() {
+        super("execute_script", "<file_name> исполнить скрипт из указанного файла");
     }
 
-    /**
-     * Выполняет команду исполнения скрипта.
-     *
-     * @param args аргументы команды
-     * @return true, если команда выполнена успешно, иначе false
-     */
     @Override
-    public boolean execute(String[] args) {
-        if (args[1].isEmpty()) {
-            console.println("Пожалуйста введите команду в правильном формате!");
-            return false;
+    public Request execute(String[] arguments) {
+        if (arguments.length != 2 || arguments[1].isEmpty()) {
+            return new Request(false, getName(), getUsingError());
         }
-        console.println("Выполнение скрипта '" + args[1] + "':");
-        return true;
+        return new Request(getName(), arguments[1]);
     }
 }

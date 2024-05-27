@@ -1,16 +1,16 @@
-package ru.itmo.server.main;
+package ru.itmo.server.app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.itmo.general.comands.*;
-import ru.itmo.general.io.Console;
+import ru.itmo.general.utility.io.Console;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.server.managers.DumpManager;
 import ru.itmo.server.managers.ProductCollectionManager;
 import ru.itmo.server.network.TCPServer;
 
-public class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+public class ServerApp {
+    private static final Logger logger = LoggerFactory.getLogger(ServerApp.class);
     private static final int PORT = 3333;
 
     public static void main(String[] args) {

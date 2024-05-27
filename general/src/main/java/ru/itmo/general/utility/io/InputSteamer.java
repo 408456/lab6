@@ -1,4 +1,4 @@
-package ru.itmo.general.io;
+package ru.itmo.general.utility.io;
 
 import java.util.Scanner;
 /**

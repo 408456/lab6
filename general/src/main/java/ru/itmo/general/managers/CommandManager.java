@@ -1,6 +1,9 @@
-package ru.itmo.lab5.managers;
+package ru.itmo.general.managers;
 
-import ru.itmo.lab5.comands.Command;
+import lombok.Getter;
+import ru.itmo.general.comands.*;
+import ru.itmo.general.network.Request;
+import ru.itmo.general.network.Response;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,11 +12,21 @@ import java.util.Map;
 
 /**
  * Управляет командами.
- *
  */
 public class CommandManager {
-    private final Map<String, Command> commands = new HashMap<>();
-    private final List<String> commandHistory = new ArrayList<>();
+
+    @Getter
+    private static final Map<String, Command> commands = new HashMap<>();
+    private static final List<String> commandHistory = new ArrayList<>();
+
+    public static Response handle(Request request) {
+        var command = commands.get(request.getCommand());
+        if (command == null) return new Response(false, request.getCommand(), "Команда не найдена!");
+        if (!"exit".equals(request.getCommand()) && !"save".equals(request.getCommand())) {
+            return command.execute(request);
+        }
+        return new Response(false, "Неизвестная команда");
+    }
 
     /**
      * Добавляет команду.
@@ -21,21 +34,20 @@ public class CommandManager {
      * @param commandName Название команды.
      * @param command     Команда.
      */
-    public void commandAdd(String commandName, Command command) {
+    public static void commandAdd(String commandName, Command command) {
         commands.put(commandName, command);
     }
 
-    /**
-     * @return Словарь команд.
-     */
-    public Map<String, Command> getCommands() {
-        return commands;
+    public static void handleServer(Request request) {
+        var command = commands.get(request.getCommand());
+        if (command == null) return;
+        command.execute(request);
     }
 
     /**
      * @return История команд.
      */
-    public List<String> get8CommandHistory() {
+    public List<String> getCommandHistory() {
         if (commandHistory.size() >= 8) return commandHistory.subList(commandHistory.size() - 8, commandHistory.size());
         else return commandHistory;
     }

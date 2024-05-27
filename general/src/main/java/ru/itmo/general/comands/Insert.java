@@ -1,67 +1,67 @@
-package ru.itmo.lab5.comands;
+package ru.itmo.general.comands;
 
-import ru.itmo.lab5.exceptions.IncorrectScriptException;
-import ru.itmo.lab5.exceptions.InvalidAmountException;
-import ru.itmo.lab5.exceptions.InvalidFormException;
-import ru.itmo.lab5.exceptions.InvalidValueException;
-import ru.itmo.lab5.input.Console;
-import ru.itmo.lab5.input.ProductInput;
-import ru.itmo.lab5.managers.CollectionManager;
-import ru.itmo.lab5.data.Product;
+import ru.itmo.general.data.Product;
+import ru.itmo.general.utility.exceptions.IncorrectScriptException;
+import ru.itmo.general.utility.exceptions.InvalidAmountException;
+import ru.itmo.general.utility.exceptions.InvalidFormException;
+import ru.itmo.general.utility.exceptions.InvalidValueException;
+import ru.itmo.general.utility.io.Console;
+import ru.itmo.general.utility.io.ProductInput;
+import ru.itmo.general.managers.CollectionManager;
+import ru.itmo.general.network.Request;
+import ru.itmo.general.network.Response;
 
 /**
  * Команда для добавления элемента в коллекцию с заданным ключем.
  */
 public class Insert extends Command {
-    private final Console console;          // Консоль для взаимодействия с пользователем
-    private final CollectionManager collectionManager; // Менеджер коллекции
-
-    /**
-     * Конструктор класса.
-     *
-     * @param console            объект класса Console для взаимодействия с пользователем
-     * @param collectionManager объект класса CollectionManager для управления коллекцией
-     */
-    public Insert(Console console, CollectionManager collectionManager) {
-        super("insert <id> {element}", "добавить новый элемент с заданным ключом");
-        this.console = console;
+    private CollectionManager collectionManager;
+    private Console console;
+    public Insert(){
+        super("insert", "<id> {element} - добавить новый элемент с заданным ключом");
+    }
+    public Insert(CollectionManager collectionManager) {
+        this();
         this.collectionManager = collectionManager;
     }
+    public Insert(Console console){
+        this();
+        this.console = console;
+    }
 
-    /**
-     * Выполняет команду добавления элемента в коллекцию с заданным ключем.
-     *
-     * @param args аргументы команды
-     * @return true, если команда выполнена успешно, иначе false
-     */
     @Override
-    public boolean execute(String[] args) {
+    public Request execute(String[] arguments) {
         try {
-            if (args.length != 2) throw new InvalidAmountException();
-//            if (!collectionManager.canWriteToFile()) {
-//                console.printError("Нет прав на запись в файл! Выполнить команду " + getName() + " невозможно!");
-//                return false;
-//            }
-            long id = Long.parseLong(args[1]);
-            if (collectionManager.contains(id)) {
-                console.printError("Элемент с заданным ключом уже существует!");
-                return false;
-            }
+            if (arguments.length != 2 || arguments[1].isEmpty()) throw new InvalidAmountException();
+
+            long id = Long.parseLong(arguments[1]);
 
             Product product = new ProductInput(console).make();
             product.setId(id);
-            collectionManager.addToCollection(product);
-            console.println("Продукт с ключом " + id + " успешно добавлен!");
-            return true;
+
+            return new Request(getName(), product);
         } catch (InvalidAmountException e) {
-            console.printError("Неправильное количество аргументов!");
+            return new Request(false, getName(), "Неправильное количество аргументов!");
         } catch (NumberFormatException e) {
-            console.printError("Некорректный формат ключа! Ожидается целое число.");
+            return new Request(false, getName(), "Некорректный формат ключа! Ожидается целое число.");
         } catch (InvalidFormException | InvalidValueException e) {
-            console.printError("Поля продукта не валидны! Продукт не создан.");
+            return new Request(false, getName(), "Поля продукта не валидны! Продукт не создан.");
         } catch (IncorrectScriptException e) {
-            console.printError("Ошибка выполнения скрипта: " + e.getMessage());
+            return new Request(false, getName(), "Ошибка выполнения скрипта: " + e.getMessage());
         }
-        return false;
+    }
+
+    @Override
+    public Response execute(Request request) {
+        try {
+            Product product = (Product) request.getData();
+            if (collectionManager.contains(product.getId())) {
+                return new Response(false, "Элемент с заданным ключом уже существует!");
+            }
+            collectionManager.addToCollection(product);
+            return new Response(true, "Продукт с ключом " + product.getId() + " успешно добавлен!");
+        } catch (Exception e) {
+            return new Response(false, e.getMessage());
+        }
     }
 }

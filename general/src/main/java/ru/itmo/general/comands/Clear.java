@@ -1,49 +1,52 @@
-package ru.itmo.lab5.comands;
+package ru.itmo.general.comands;
 
-import ru.itmo.lab5.input.Console;
-import ru.itmo.lab5.managers.CollectionManager;
-import java.util.List;
-import java.util.Comparator;
-import java.io.StringWriter;
-import java.util.Comparator;
+import ru.itmo.general.managers.CollectionManager;
+import ru.itmo.general.network.Request;
+import ru.itmo.general.network.Response;
 
 /**
- * Команда для очистки коллекции.
+ * Команда 'clear'. Очищает коллекцию.
  */
 public class Clear extends Command {
-    private final Console console;          // Консоль для взаимодействия с пользователем
-    private final CollectionManager collectionManager; // Менеджер коллекции
+    private CollectionManager collectionManager;
 
-    /**
-     * Конструктор класса.
-     *
-     * @param console          объект класса Console для взаимодействия с пользователем
-     * @param collectionManager объект класса CollectionManager для управления коллекцией
-     */
-    public Clear(Console console, CollectionManager collectionManager) {
-        super("clear", "очистить коллекцию");
-        this.console = console;
+    public Clear() {
+        super("clear", " - очистить коллекцию");
+    }
+
+    public Clear(CollectionManager collectionManager) {
+        this();
         this.collectionManager = collectionManager;
     }
 
     /**
-     * Выполняет команду очистки коллекции.
+     * Выполняет команду на сервере
      *
-     * @param args аргументы команды (в данном случае не используются)
-     * @return true, если команда выполнена успешно, иначе false
+     * @param request запрос, содержащий данные для выполнения команды
+     * @return ответ с результатом выполнения команды
      */
     @Override
-    public boolean execute(String[] args) {
-        if (!args[1].isEmpty()) {
-            console.println("Пожалуйста введите команду в правильном формате!");
-            return false;
+    public Response execute(Request request) {
+        try {
+            collectionManager.clearCollection();
+            return new Response(true, "Коллекция очищена от билетов.");
+            //return new Response(true, "Коллекция очищена от билетов текущего пользователя.");
+        } catch (Exception e) {
+            return new Response(false, e.getMessage());
         }
-//        if (!collectionManager.canWriteToFile()) {
-//            console.printError("Нет прав на запись в файл! Выполнить команду " + getName() + " невозможно!");
-//            return false;
-//        }
-        collectionManager.clearCollection();
-        console.println("Коллекция продуктов очищена!");
-        return true;
+    }
+
+    /**
+     * Выполняет команду на клиенте
+     *
+     * @param arguments аргументы команды
+     * @return запрос для выполнения на сервере
+     */
+    @Override
+    public Request execute(String[] arguments) {
+        if (arguments.length != 2 || arguments[0].isEmpty()) {
+            return new Request(false, getName(), getUsingError());
+        }
+        return new Request(getName(), null);
     }
 }

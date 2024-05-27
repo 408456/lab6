@@ -1,4 +1,4 @@
-package ru.itmo.lab5.utility;
+package ru.itmo.general.utility;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

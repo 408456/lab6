@@ -1,10 +1,10 @@
-package ru.itmo.client.utility;
+package ru.itmo.client.app;
 
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.general.comands.Command;
-import ru.itmo.general.exceptions.ScriptRecursionException;
-import ru.itmo.general.io.Console;
-import ru.itmo.general.io.InputSteamer;
+import ru.itmo.general.utility.exceptions.ScriptRecursionException;
+import ru.itmo.general.utility.io.Console;
+import ru.itmo.general.utility.io.InputSteamer;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;

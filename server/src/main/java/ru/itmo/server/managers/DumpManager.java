@@ -1,4 +1,4 @@
-package ru.itmo.general.managers;
+package ru.itmo.server.managers;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 
-import ru.itmo.general.input.Console;
+import ru.itmo.general.utility.io.Console;
 
 /**
  * Использует файл для сохранения и загрузки коллекции.
