@@ -58,11 +58,12 @@ public class Info extends Command {
         String lastSaveTimeStr = (lastSaveTime == null) ? "Сохранения в данной сессии еще не происходило" :
                 lastSaveTime.toLocalDate().toString() + " " + lastSaveTime.toLocalTime().toString();
 
-        String info = "Информация о коллекции:\n" +
+        String info =
+//                "Информация о коллекции:\n" +
                 "Тип коллекции: " + collectionManager.getType() + "\n" +
                 "Размер коллекции (количество элементов в коллекции): " + collectionManager.getSize() + "\n" +
-                "Дата и время последней инициализации: " + lastInitTimeStr + "\n" +
-                "Дата и время последнего сохранения: " + lastSaveTimeStr;
+                "Дата и время последней инициализации: " + lastInitTimeStr + "\n";
+//                "Дата и время последнего сохранения: " + lastSaveTimeStr;
         return new Response(true, "Информация о коллекции:", info);
     }
 }

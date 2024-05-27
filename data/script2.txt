@@ -1,4 +1,0 @@
-info
-history
-save
-execute_script data/script1.txt
