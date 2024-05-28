@@ -43,18 +43,18 @@ public class ProductCollectionManager implements CollectionManager {
 
         loadCollection();
     }
-    /**
-     * Проверяет, есть ли права на чтение файла и запись в файл
-     * @return true, если есть права на запись, иначе false
-     */
-    public boolean canWriteToFile() {
-        File file = new File(dumpManager.getFileName()); // предположим, что у менеджера есть метод для получения имени файла
-        return file.canWrite();
-    }
-    public boolean canReadFromFile() {
-        File file = new File(dumpManager.getFileName());
-        return file.canRead();
-    }
+//    /**
+//     * Проверяет, есть ли права на чтение файла и запись в файл
+//     * @return true, если есть права на запись, иначе false
+//     */
+//    public boolean canWriteToFile() {
+//        File file = new File(dumpManager.getFileName()); // предположим, что у менеджера есть метод для получения имени файла
+//        return file.canWrite();
+//    }
+//    public boolean canReadFromFile() {
+//        File file = new File(dumpManager.getFileName());
+//        return file.canRead();
+//    }
     /**
      * Получает коллекцию продуктов.
      *

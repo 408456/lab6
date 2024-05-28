@@ -73,7 +73,7 @@ public class TCPReader {
     private void handleClientDisconnect(SocketChannel clientSocketChannel) throws IOException {
         key.cancel();
         clientSocketChannel.close();
-//        CommandManager.handleServer(new Request(true, "save", null));
+        CommandManager.handleServer(new Request(true, "save", null));
         logger.info("Client {} disconnected. Collection saved", clientSocketChannel.getRemoteAddress());
     }
 

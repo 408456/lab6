@@ -35,9 +35,9 @@ public class Exit extends Command {
      */
     @Override
     public Request execute(String[] arguments) {
-        if (arguments.length != 2) {
-            return new Request(false, getName(), "Пожалуйста введите команду в правильном формате");
-        }
+//        if (arguments.length != 2) {
+//            return new Request(false, getName(), "Пожалуйста введите команду в правильном формате");
+//        }
         return new Request(getName(), null);
     }
 

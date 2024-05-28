@@ -126,7 +126,7 @@ public class TCPClient {
     public void disconnect() throws IOException {
         if (socketChannel != null) {
             socketChannel.close();
-            output.println("Соединение с сервером разорвано.");
+            output.println("Вы отключились от сервера!");
         }
     }
 
@@ -199,7 +199,7 @@ public class TCPClient {
                 }
             }
         }
-        throw new IOException("Не удалось получить ответ от сервера в течение 10 секунд");
+        throw new IOException();
     }
 
     /**

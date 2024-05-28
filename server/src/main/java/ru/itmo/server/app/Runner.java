@@ -14,8 +14,14 @@ import java.io.InputStreamReader;
  */
 public class Runner extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(Runner.class);
-    private final TCPServer server; /**< Сервер TCP */
-    private final ThreadGroup requestReaders; /**< Группа потоков для чтения запросов */
+    private final TCPServer server;
+    /**
+     * Сервер TCP
+     */
+    private final ThreadGroup requestReaders;
+    /**
+     * < Группа потоков для чтения запросов
+     */
     private final ThreadGroup requestHandlers; /**< Группа потоков для обработки запросов */
 
     /**
@@ -53,12 +59,15 @@ public class Runner extends Thread {
             try {
                 input = in.readLine();
                 if (input.equals("exit")) {
+                    logger.info("Коллекция автоматически сохранена! Завершение работы сервера...");
+                    CommandManager.handleServer(new Request(true, "save", null));
                     CommandManager.handleServer(new Request(true, input, null));
                     System.exit(0);
                     break;
                 } else if (input.equals("save")) {
+                    logger.info("Сохранение продуктов в файл...");
                     CommandManager.handleServer(new Request(true, input, null));
-                    logger.info("Продукты сохранены в файл");
+                    logger.info("Коллекция продуктов успешно сохранена!");
                 }
             } catch (Exception e) {
                 logger.error("Ошибка чтения с консоли");

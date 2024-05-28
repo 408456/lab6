@@ -41,7 +41,7 @@ public class TCPServer {
 
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-                    selector.select(500); // Таймаут в миллисекундах
+                    selector.select(500); // Тайм-аут в миллисекундах
                     processSelectedKeys(selector);
                 } catch (IOException e) {
                     logger.error("Ошибка в процессе выбора ключей: ", e);

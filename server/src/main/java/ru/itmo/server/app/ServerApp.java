@@ -36,6 +36,7 @@ public class ServerApp {
         CommandManager commandManager = new CommandManager() {
             {
                 commandAdd("clear", new Clear(productCollectionManager));
+                commandAdd("save", new Save(productCollectionManager));
                 commandAdd("count_less_than_owner", new CountLessThanOwner(productCollectionManager));
                 commandAdd("exit", new Exit(productCollectionManager));
                 commandAdd("info", new Info(productCollectionManager));

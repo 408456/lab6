@@ -84,7 +84,7 @@ public class DumpManager {
             String csv = collection2CSV(collection);
             if (csv == null) return;
             writer.write(csv);
-            console.println("Коллекция успешно сохранена в файл!");
+//            console.println("Коллекция успешно сохранена в файл!");
         } catch (IOException e) {
             console.printError("Неожиданная ошибка сохранения");
         }
