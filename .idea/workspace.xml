@@ -5,23 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6751af8d-f8f3-40e7-859b-89f0b44119fc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/p1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/p1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/p2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/p2.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Exit.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Exit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/ServerApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/DumpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/DumpManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ProductCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ProductCollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
