@@ -42,7 +42,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>your.main.class.Here</mainClass>
+                            <mainClass>ru.itmo.server.app.ServerApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
