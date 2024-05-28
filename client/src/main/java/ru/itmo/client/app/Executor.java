@@ -48,7 +48,7 @@ public class Executor {
         try {
             tcpClient.connect();
         } catch (TimeoutException e) {
-            console.printError("Timeout while waiting for TCP connection");
+            console.printError("Тайм-аут ожидания TCP соединения");
         }
         Scanner userScanner = InputSteamer.getScanner();
         try {
@@ -160,11 +160,12 @@ public class Executor {
             else return ExitCode.ERROR;
         } else if (request.getCommand().equals("help")) {
             try {
+
+                console.printItalic("Справка по командам:");
                 Map<String, String> commandsInfo = (Map<String, String>) request.getData();
-                for (Map.Entry<String, String> entry : commandsInfo.entrySet()) {
-                    console.printTable(entry, commandsInfo.get(entry.getKey()));
-                }
+                commandsInfo.forEach((name, description) -> console.printTable(name, description));
                 return ExitCode.OK;
+
             } catch (Exception e) {
                 console.printError("Ошибка при выполнении команды help");
             }

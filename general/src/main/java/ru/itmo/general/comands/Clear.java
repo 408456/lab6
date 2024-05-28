@@ -15,7 +15,7 @@ public class Clear extends Command {
      * Конструктор класса.
      */
     public Clear() {
-        super("clear", " - очистить коллекцию");
+        super("clear", "очистить коллекцию");
     }
 
     /**
@@ -38,7 +38,7 @@ public class Clear extends Command {
     public Response execute(Request request) {
         try {
             collectionManager.clearCollection();
-            return new Response(true, "Коллекция очищена от билетов.");
+            return new Response(true, "Коллекция очищена от продуктов.");
         } catch (Exception e) {
             return new Response(false, e.getMessage());
         }

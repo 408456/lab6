@@ -20,7 +20,7 @@ public class PrintFieldAscendingOwner extends Command {
      * Конструктор класса.
      */
     public PrintFieldAscendingOwner() {
-        super("print_field_ascending_owner", " - вывести значения поля owner всех элементов в порядке возрастания");
+        super("print_field_ascending_owner", "вывести значения поля owner всех элементов в порядке возрастания");
     }
 
     /**

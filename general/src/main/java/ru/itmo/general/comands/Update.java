@@ -22,7 +22,7 @@ public class Update extends Command {
      * Конструктор класса.
      */
     public Update(){
-        super("update", " <id> {element} - обновить значение элемента коллекции по ID");
+        super("update", "<id> {element} обновить значение элемента коллекции по ID");
     }
 
     /**

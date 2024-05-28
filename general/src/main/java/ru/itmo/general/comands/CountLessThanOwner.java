@@ -21,7 +21,7 @@ public class CountLessThanOwner extends Command {
      * Конструктор класса.
      */
     public CountLessThanOwner() {
-        super("count_less_than_owner", " <owner> вывести количество элементов, значение поля owner которых меньше заданного");
+        super("count_less_than_owner", "<owner> вывести количество элементов, значение поля owner которых меньше заданного");
     }
 
     /**

@@ -18,7 +18,7 @@ public class Help extends Command {
      * @param commandManager менеджер команд
      */
     public Help(CommandManager commandManager) {
-        super("help", " - вывести справку по доступным командам");
+        super("help", "вывести справку по доступным командам");
         this.commandManager = commandManager;
     }
 

@@ -16,7 +16,7 @@ public class Save extends Command {
      * @param collectionManager менеджер коллекции
      */
     public Save(CollectionManager collectionManager) {
-        super("save", " - сохранить коллекцию в файл");
+        super("save", "сохранить коллекцию в файл");
         this.collectionManager = collectionManager;
     }
 

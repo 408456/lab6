@@ -16,7 +16,7 @@ public class Info extends Command {
      * Конструктор класса.
      */
     public Info(){
-        super("info", " - вывести информацию о коллекции");
+        super("info", "вывести информацию о коллекции");
     }
 
     /**
@@ -59,11 +59,11 @@ public class Info extends Command {
                 lastSaveTime.toLocalDate().toString() + " " + lastSaveTime.toLocalTime().toString();
 
         String info =
-//                "Информация о коллекции:\n" +
+                "Информация о коллекции:\n" +
                 "Тип коллекции: " + collectionManager.getType() + "\n" +
                 "Размер коллекции (количество элементов в коллекции): " + collectionManager.getSize() + "\n" +
-                "Дата и время последней инициализации: " + lastInitTimeStr + "\n";
-//                "Дата и время последнего сохранения: " + lastSaveTimeStr;
-        return new Response(true, "Информация о коллекции:", info);
+                "Дата и время последней инициализации: " + lastInitTimeStr + "\n" +
+                "Дата и время последнего сохранения: " + lastSaveTimeStr;
+        return new Response(true, "", info);
     }
 }

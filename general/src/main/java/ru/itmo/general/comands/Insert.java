@@ -22,7 +22,7 @@ public class Insert extends Command {
      * Конструктор класса.
      */
     public Insert(){
-        super("insert", "<id> {element} - добавить новый элемент с заданным ключом");
+        super("insert", "<id> {element} добавить новый элемент с заданным ключом");
     }
 
     /**

@@ -39,7 +39,7 @@ public class TCPReader {
      */
     public void parseRequest() {
         SocketChannel clientSocketChannel = (SocketChannel) key.channel();
-        ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE); // Используем прямой буфер
+        ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         int bytesRead;
 
@@ -73,7 +73,8 @@ public class TCPReader {
     private void handleClientDisconnect(SocketChannel clientSocketChannel) throws IOException {
         key.cancel();
         clientSocketChannel.close();
-        logger.info("Client {} disconnected", clientSocketChannel.getRemoteAddress());
+//        CommandManager.handleServer(new Request(true, "save", null));
+        logger.info("Client {} disconnected. Collection saved", clientSocketChannel.getRemoteAddress());
     }
 
     private void handleReadError(SocketChannel clientSocketChannel, IOException e) {

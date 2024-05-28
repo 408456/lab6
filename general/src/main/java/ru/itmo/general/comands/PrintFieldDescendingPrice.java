@@ -18,7 +18,7 @@ public class PrintFieldDescendingPrice extends Command {
      * Конструктор класса.
      */
     public PrintFieldDescendingPrice() {
-        super("print_field_descending_price", " - вывести значения поля price всех элементов в порядке убывания");
+        super("print_field_descending_price", "вывести значения поля price всех элементов в порядке убывания");
     }
 
     /**

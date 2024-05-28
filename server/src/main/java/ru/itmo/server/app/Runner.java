@@ -58,7 +58,7 @@ public class Runner extends Thread {
                     break;
                 } else if (input.equals("save")) {
                     CommandManager.handleServer(new Request(true, input, null));
-                    logger.info("Билеты сохранены в файл");
+                    logger.info("Продукты сохранены в файл");
                 }
             } catch (Exception e) {
                 logger.error("Ошибка чтения с консоли");

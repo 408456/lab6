@@ -15,7 +15,7 @@ public class RemoveLowerKey extends Command {
      * Конструктор класса.
      */
     public RemoveLowerKey() {
-        super("remove_lower_key", " <id> - удалить из коллекции все элементы, ключ которых меньше, чем заданный");
+        super("remove_lower_key", "<id> удалить из коллекции все элементы, ключ которых меньше, чем заданный");
     }
 
     /**

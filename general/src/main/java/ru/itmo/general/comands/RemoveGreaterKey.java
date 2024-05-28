@@ -15,7 +15,7 @@ public class RemoveGreaterKey extends Command {
      * Конструктор класса.
      */
     public RemoveGreaterKey() {
-        super("remove_greater_key", "<id> - удалить из коллекции все элементы, ключ которых больше, чем заданный");
+        super("remove_greater_key", "<id> удалить из коллекции все элементы, ключ которых больше, чем заданный");
     }
 
     /**

@@ -8,6 +8,7 @@ public class Console {
 
     /**
      * Выводит obj.toString() в консоль
+     *
      * @param obj Объект для печати
      */
     public void print(Object obj) {
@@ -16,12 +17,14 @@ public class Console {
 
     /**
      * Выводит obj.toString() + \n в консоль
+     *
      * @param obj Объект для печати
      */
     public void println(Object obj) {
         System.out.println(obj);
     }
-    public void println(Object ... obj) {
+
+    public void println(Object... obj) {
         System.out.println(obj);
     }
 
@@ -41,8 +44,15 @@ public class Console {
      * @param elementRight Правый элемент колонки.
      */
     public void printTable(Object elementLeft, Object elementRight) {
-        System.out.printf(" %-40s%-1s%n", elementLeft, elementRight);
+        System.out.printf(" %-30s%-1s%n", elementLeft, elementRight);
     }
+
+    public void printItalic(Object obj) {
+        System.out.println(ANSI_ITALIC + obj + ANSI_RESET);
+    }
+
+    String ANSI_RESET = "\u001B[0m";
+    String ANSI_ITALIC = "\033[3m";
 
     public void ps1() {
         print(PS1);

@@ -15,7 +15,7 @@ public class History extends Command {
      * @param commandManager менеджер команд
      */
     public History(CommandManager commandManager) {
-        super("history", " - вывести последние 8 команд");
+        super("history", "вывести последние 8 команд");
         this.commandManager = commandManager;
     }
 

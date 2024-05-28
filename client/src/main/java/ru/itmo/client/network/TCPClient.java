@@ -56,6 +56,7 @@ public class TCPClient {
         Selector selector = null;
         boolean connectFlag = false;
         try {
+            output.println("Попытка подключения к серверу " + serverAddress + ":" + serverPort + "...");
             socketChannel = SocketChannel.open();
             socketChannel.configureBlocking(false);
             InetSocketAddress address = new InetSocketAddress(serverAddress, serverPort);
@@ -92,6 +93,7 @@ public class TCPClient {
             return false;
         } finally {
             if (!connectFlag) {
+                output.println("Не удалось подключиться к серверу в течение 10 секунд.");
                 closeResources(socketChannel, selector);
             }
         }
@@ -124,6 +126,7 @@ public class TCPClient {
     public void disconnect() throws IOException {
         if (socketChannel != null) {
             socketChannel.close();
+            output.println("Соединение с сервером разорвано.");
         }
     }
 
@@ -143,6 +146,7 @@ public class TCPClient {
         byte[] requestBytes = byteArrayOutputStream.toByteArray();
         ByteBuffer buffer = ByteBuffer.wrap(requestBytes);
         socketChannel.write(buffer);
+//        output.println("Запрос отправлен на сервер.");
     }
 
     /**
@@ -160,6 +164,8 @@ public class TCPClient {
         ByteBuffer buffer = ByteBuffer.allocate(16384);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         long startTime = System.currentTimeMillis();
+
+//        output.println("Ожидание ответа от сервера...");
 
         while (System.currentTimeMillis() - startTime < 10000) {
             if (selector.select(10000) == 0) {
@@ -188,6 +194,7 @@ public class TCPClient {
             byte[] responseBytes = byteArrayOutputStream.toByteArray();
             if (responseBytes.length > 0) {
                 try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(responseBytes))) {
+//                    output.println("Ответ от сервера получен.");
                     return (Response) objectInputStream.readObject();
                 }
             }
@@ -240,6 +247,7 @@ public class TCPClient {
             if (selector != null) {
                 selector.close();
             }
+            output.println("Ресурсы успешно закрыты.");
         } catch (IOException e) {
             output.println("Ошибка при закрытии ресурсов: " + e.getMessage());
         }
