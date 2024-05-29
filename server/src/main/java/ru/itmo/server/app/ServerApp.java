@@ -14,7 +14,7 @@ import ru.itmo.server.network.TCPServer;
  */
 public class ServerApp {
     private static final Logger logger = LoggerFactory.getLogger(ServerApp.class);
-    private static final int PORT = 3333;
+    private static final int PORT = 8001;
 
     /**
      * Точка входа в приложение сервера.

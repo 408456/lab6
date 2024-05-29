@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Основной класс клиентского приложения.
  */
 public class ClientApp {
-    private static final int PORT = 3333; /**< Порт для подключения к серверу */
+    private static final int PORT = 8001; /**< Порт для подключения к серверу */
     private static final String SERVER_ADDRESS = "localhost"; /**< Адрес сервера */
 
     /**
