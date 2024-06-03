@@ -86,6 +86,8 @@ public class Update extends Command {
     @Override
     public Response execute(Request request) {
         try {
+//            Product newProduct = new ProductInput(console).make();
+//            newProduct.setId(id);
             Product newProduct = (Product) request.getData();
             var product = collectionManager.getById(newProduct.getId());
 

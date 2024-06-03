@@ -2,7 +2,6 @@ package ru.itmo.server.app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.itmo.general.comands.*;
 import ru.itmo.general.utility.io.Console;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.server.managers.DumpManager;
@@ -33,23 +32,10 @@ public class ServerApp {
         Console console = new Console();
         DumpManager dumpManager = new DumpManager(args[0], console);
         ProductCollectionManager productCollectionManager = new ProductCollectionManager(dumpManager);
-        CommandManager commandManager = new CommandManager() {
-            {
-                commandAdd("clear", new Clear(productCollectionManager));
-                commandAdd("save", new Save(productCollectionManager));
-                commandAdd("count_less_than_owner", new CountLessThanOwner(productCollectionManager));
-                commandAdd("exit", new Exit(productCollectionManager));
-                commandAdd("info", new Info(productCollectionManager));
-                commandAdd("insert", new Insert(productCollectionManager));
-                commandAdd("print_field_ascending_owner", new PrintFieldAscendingOwner(productCollectionManager));
-                commandAdd("print_field_descending_price", new PrintFieldDescendingPrice(productCollectionManager));
-                commandAdd("remove_greater", new RemoveGreater(productCollectionManager));
-                commandAdd("remove_greater_key", new RemoveGreaterKey(productCollectionManager));
-                commandAdd("remove_lower_key", new RemoveLowerKey(productCollectionManager));
-                commandAdd("show", new Show(productCollectionManager));
-                commandAdd("update", new Update(productCollectionManager));
-            }
-        };
+
+        CommandManager commandManager = new CommandManager();
+        CommandManager.initServerCommands(productCollectionManager);
+
         // Добавляем shutdown hook для корректного завершения работы
         Runtime.getRuntime().addShutdownHook(new Thread(productCollectionManager::saveCollection));
         new Runner().start();

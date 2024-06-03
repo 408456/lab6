@@ -11,6 +11,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
@@ -31,7 +32,15 @@ public class TCPClient {
     /**
      * < Порт сервера
      */
-    private SocketChannel socketChannel; /**< Канал сокета для TCP-соединения */
+    private SocketChannel socketChannel;
+    /**
+     * < Канал сокета для TCP-соединения
+     */
+    private boolean firstConnect;
+
+    public boolean isFirstConnect() {
+        return firstConnect;
+    }
 
     /**
      * Конструктор класса.
@@ -44,6 +53,7 @@ public class TCPClient {
         this.serverAddress = serverAddress;
         this.serverPort = serverPort;
         this.output = output;
+        this.firstConnect = true;
     }
 
     /**
@@ -55,6 +65,7 @@ public class TCPClient {
     public boolean connect() throws TimeoutException {
         Selector selector = null;
         boolean connectFlag = false;
+        firstConnect = true;
         try {
             output.println("Попытка подключения к серверу " + serverAddress + ":" + serverPort + "...");
             socketChannel = SocketChannel.open();
@@ -82,7 +93,10 @@ public class TCPClient {
                         }
                         if (connectFlag) {
                             output.println("Подключено к серверу: " + serverAddress + ":" + serverPort);
+//                            output.printItalic("Доступные команды: ");
+//                            sendHelpRequest();
                             return true;
+
                         }
                     }
                 }
@@ -100,10 +114,60 @@ public class TCPClient {
     }
 
     /**
-     * Проверяет текущее соединение с сервером.
-     *
-     * @return true, если есть активное соединение, в противном случае - false
+     * Отправляет запрос на получение списка доступных команд и выводит их в консоль.
      */
+//    private void sendHelpRequest() {
+//        try {
+//            Request helpRequest = new Request("help", null); // Create a help request
+//            sendRequest(helpRequest); // Send the help request
+//            Response helpResponse = receiveResponse(); // Receive the response
+//
+//            if (helpResponse != null && helpResponse.isSuccess()) {
+//                Map<String, String> commandsInfo = (Map<String, String>) helpResponse.getData();
+//                commandsInfo.forEach((name, description) -> output.printTable(name, description));
+//            } else {
+//                output.printError("Не удалось получить список команд.");
+//            }
+//        } catch (IOException | ClassNotFoundException e) {
+//            output.printError("Ошибка при получении списка команд: " + e.getMessage());
+//        }
+//    }
+
+    private void closeResources(SocketChannel socketChannel, Selector selector) {
+        try {
+            if (socketChannel != null) {
+                socketChannel.close();
+            }
+            if (selector != null) {
+                selector.close();
+            }
+            output.println("Ресурсы успешно закрыты.");
+        } catch (IOException e) {
+            output.println("Ошибка при закрытии ресурсов: " + e.getMessage());
+        }
+    }
+
+    public Response sendCommand(Request request) {
+
+        try {
+            sendRequest(request);
+            return receiveResponse();
+        } catch (IOException | ClassNotFoundException e) {
+            output.printError("Ошибка при отправке команды: " + e.getMessage());
+        }
+        output.printError("Запрос не отправлен. Повторите попытку позже.");
+        try {
+            disconnect();
+        } catch (IOException e) {
+            output.printError("Не удалось закрыть соединение");
+        }
+        return new Response(false, "Команда не выполнена!", null);
+    }
+
+    public boolean isConnected() {
+        return socketChannel != null && socketChannel.isConnected();
+    }
+
     public boolean ensureConnection() {
         if (!isConnected()) {
             output.println("Нет подключения к серверу.");
@@ -167,8 +231,8 @@ public class TCPClient {
 
 //        output.println("Ожидание ответа от сервера...");
 
-        while (System.currentTimeMillis() - startTime < 10000) {
-            if (selector.select(10000) == 0) {
+        while (System.currentTimeMillis() - startTime < 1000) {
+            if (selector.select(1000) == 0) {
                 continue;
             }
 
@@ -202,54 +266,7 @@ public class TCPClient {
         throw new IOException();
     }
 
-    /**
-     * Отправляет команду на сервер и получает ответ.
-     *
-     * @param request объект запроса
-     * @return объект ответа от сервера
-     */
-    public Response sendCommand(Request request) {
-        try {
-            sendRequest(request);
-            return receiveResponse();
-        } catch (IOException | ClassNotFoundException e) {
-            output.printError("Ошибка при отправке команды: " + e.getMessage());
-        }
-        output.printError("Запрос не отправлен. Повторите попытку позже.");
-        try {
-            disconnect();
-        } catch (IOException e) {
-            output.printError("Не удалось закрыть соединение");
-        }
-        return new Response(false, "Команда не выполнена!", null);
-    }
-
-    /**
-     * Проверяет, установлено ли соединение с сервером.
-     *
-     * @return true, если соединение установлено, в противном случае - false
-     */
-    public boolean isConnected() {
-        return socketChannel != null && socketChannel.isConnected();
-    }
-
-    /**
-     * Закрывает ресурсы канала сокета и селектора.
-     *
-     * @param socketChannel канал сокета
-     * @param selector      селектор
-     */
-    private void closeResources(SocketChannel socketChannel, Selector selector) {
-        try {
-            if (socketChannel != null) {
-                socketChannel.close();
-            }
-            if (selector != null) {
-                selector.close();
-            }
-            output.println("Ресурсы успешно закрыты.");
-        } catch (IOException e) {
-            output.println("Ошибка при закрытии ресурсов: " + e.getMessage());
-        }
+    public void setFirstConnect(boolean firstConnect) {
+        this.firstConnect = firstConnect;
     }
 }

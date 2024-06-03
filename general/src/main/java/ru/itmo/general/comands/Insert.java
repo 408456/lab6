@@ -82,6 +82,14 @@ public class Insert extends Command {
     @Override
     public Response execute(Request request) {
         try {
+//            if (arguments.length != 2 || arguments[1].isEmpty()) throw new InvalidAmountException();
+//
+//            long id = Long.parseLong(arguments[1]);
+//
+//            Product product = new ProductInput(console).make();
+//            product.setId(id);
+//
+//            return new Request(getName(), product);
             Product product = (Product) request.getData();
             if (collectionManager.contains(product.getId())) {
                 return new Response(false, "Элемент с заданным ключом уже существует!");

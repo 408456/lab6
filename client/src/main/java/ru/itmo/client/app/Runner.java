@@ -11,21 +11,31 @@ import ru.itmo.general.network.Response;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeoutException;
 
 /**
  * Класс для выполнения программы клиента.
  */
-public class Executor {
+public class Runner {
 
-    private final Console console; /**< Консоль для вывода информации и сообщений об ошибках */
-    private final CommandManager commandManager; /**< Менеджер команд */
-    private final Set<String> scriptStack = new HashSet<>(); /**< Стек скриптов для контроля рекурсии */
+    private final Console console;
+    /**
+     * < Консоль для вывода информации и сообщений об ошибках
+     */
+    private final CommandManager commandManager;
+    /**
+     * < Менеджер команд
+     */
+    private final Set<String> scriptStack = new HashSet<>();
+    /**
+     * < Стек скриптов для контроля рекурсии
+     */
     private final TCPClient tcpClient;
     private Request request;
     private Response response;
-
+    private boolean helpCommand = false;
     /**
      * Конструктор класса.
      *
@@ -34,7 +44,7 @@ public class Executor {
      * @param port           Порт для подключения к серверу
      * @param serverAddress  Адрес сервера
      */
-    public Executor(Console console, CommandManager commandManager, int port, String serverAddress) {
+    public Runner(Console console, CommandManager commandManager, int port, String serverAddress) {
         this.console = console;
         this.commandManager = commandManager;
         this.tcpClient = new TCPClient(serverAddress, port, console);
@@ -54,24 +64,34 @@ public class Executor {
         try {
             ExitCode exitCode = ExitCode.OK;
             String[] inputCommand;
-
             while (exitCode != ExitCode.EXIT) {
+                if (tcpClient.isFirstConnect() && !helpCommand) {
+                    inputCommand = new String[]{"help", ""};
+                    console.printItalic("* первое подключение");
+                    send(inputCommand);
+                    helpCommand = true;
+                    continue;
+                }
                 console.ps1();
                 try {
                     inputCommand = (userScanner.nextLine().trim() + " ").split(" ", 2);
                     inputCommand[1] = inputCommand[1].trim();
                 } catch (NoSuchElementException e) {
-                    console.println("Ввод принудительно завершен. Сохранение данных в файл...");
-                    String[] errorCommand = {"save", ""};
-                    commandManager.getCommands().get("save").execute(errorCommand);
+//                    console.println("Ввод принудительно завершен. Сохранение данных в файл...");
+//                    String[] errorCommand = {"save", ""};
+//                    commandManager.getCommands().get("save").execute(errorCommand);
                     break;
                 }
 
                 commandManager.addToHistory(inputCommand[0]);
-                exitCode = apply(inputCommand);
+                exitCode = send(inputCommand);
             }
         } catch (IllegalStateException exception) {
             console.printError("Непредвиденная ошибка!");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            tcpClient.setFirstConnect(false);
         }
     }
 
@@ -109,7 +129,7 @@ public class Executor {
                 if (inputCommand[0].equals("execute_script")) {
                     if (!scriptStack.add(inputCommand[1])) throw new ScriptRecursionException();
                 }
-                exitCode = apply(inputCommand);
+                exitCode = send(inputCommand);
             } while (exitCode == ExitCode.OK && scriptScanner.hasNextLine());
 
             InputSteamer.setScanner(tmpScanner);
@@ -129,6 +149,8 @@ public class Executor {
         } catch (IllegalStateException exception) {
             console.printError("Непредвиденная ошибка!");
             System.exit(0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } finally {
             scriptStack.remove(argument);
         }
@@ -141,31 +163,34 @@ public class Executor {
      * @param inputCommand Команда для выполнения
      * @return Код завершения
      */
-    private ExitCode apply(String[] inputCommand) {
+    private ExitCode send(String[] inputCommand) throws IOException {
         request = null;
         response = null;
         if (inputCommand[0].equals("")) return ExitCode.OK;
         Command command = commandManager.getCommands().get(inputCommand[0]);
 
+
         if (command == null) {
             console.printError("Команда '" + inputCommand[0] + "' не найдена. Наберите 'help' для справки");
             return ExitCode.ERROR;
         }
+        tcpClient.isConnected();
         request = command.execute(inputCommand);
         if (request.getCommand().equals("exit")) {
-            response = tcpClient.sendCommand(request);
+            console.printItalic("* отключение от сервера...");
+            tcpClient.disconnect();
+
+
             return ExitCode.EXIT;
         } else if (request.getCommand().equals("execute_script")) {
             if (request.isSuccess()) return fromScript(inputCommand[1]);
             else return ExitCode.ERROR;
         } else if (request.getCommand().equals("help")) {
             try {
-
                 console.printItalic("Справка по командам:");
                 Map<String, String> commandsInfo = (Map<String, String>) request.getData();
                 commandsInfo.forEach((name, description) -> console.printTable(name, description));
                 return ExitCode.OK;
-
             } catch (Exception e) {
                 console.printError("Ошибка при выполнении команды help");
             }

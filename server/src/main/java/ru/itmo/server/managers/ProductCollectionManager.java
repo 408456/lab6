@@ -2,10 +2,9 @@ package ru.itmo.server.managers;
 
 import ru.itmo.general.data.Person;
 import ru.itmo.general.data.Product;
-import ru.itmo.general.utility.io.Console;
 import ru.itmo.general.managers.CollectionManager;
+import ru.itmo.general.utility.io.Console;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
