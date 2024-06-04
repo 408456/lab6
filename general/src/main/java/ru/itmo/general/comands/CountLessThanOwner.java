@@ -74,7 +74,7 @@ public class CountLessThanOwner extends Command {
     @Override
     public Request execute(String[] arguments) {
         try {
-            ProductInput productInput = new ProductInput(console); // Необходимо обновить класс ProductInput, чтобы он мог работать без консоли
+            ProductInput productInput = new ProductInput(console);
             Person owner = productInput.inputPersonForCountLess();
             return new Request(getName(), owner);
         } catch (IllegalArgumentException | IncorrectScriptException e) {

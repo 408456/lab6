@@ -1,9 +1,9 @@
-package ru.itmo.general.utility.io;
+package ru.itmo.client.app.input;
 
 /**
  * Класс для чтения и вывода в консоль
  */
-public class Console {
+public class ClientConsole {
     private static final String PS1 = " > ";
 
     /**
