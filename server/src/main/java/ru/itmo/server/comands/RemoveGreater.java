@@ -1,6 +1,7 @@
 package ru.itmo.server.comands;
 
 import ru.itmo.general.data.Product;
+import ru.itmo.general.data.User;
 import ru.itmo.general.utility.exceptions.IncorrectScriptException;
 import ru.itmo.general.utility.exceptions.InvalidAmountException;
 import ru.itmo.general.utility.exceptions.InvalidFormException;
@@ -17,7 +18,6 @@ import ru.itmo.general.network.Response;
  */
 public class RemoveGreater extends Command {
     private CollectionManager collectionManager;
-    private Console console;
     private UserDAO userDAO;
     /**
      * Конструктор класса.
@@ -29,22 +29,12 @@ public class RemoveGreater extends Command {
     /**
      * Конструктор класса.
      *
-     * @param console объект для ввода данных пользователя
-     */
-    public RemoveGreater(Console console, UserDAO userDAO) {
-        this();
-        this.console = console;
-        this.userDAO = userDAO;
-    }
-
-    /**
-     * Конструктор класса.
-     *
      * @param collectionManager менеджер коллекции
      */
-    public RemoveGreater(CollectionManager collectionManager) {
+    public RemoveGreater(CollectionManager collectionManager, UserDAO userDAO) {
         this();
         this.collectionManager = collectionManager;
+        this.userDAO = userDAO;
     }
 
     /**

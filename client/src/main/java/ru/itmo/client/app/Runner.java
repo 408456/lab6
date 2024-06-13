@@ -1,13 +1,16 @@
 package ru.itmo.client.app;
 
-import ru.itmo.client.app.input.ProductInput;
 import ru.itmo.client.network.TCPClient;
+import ru.itmo.general.data.Person;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.utility.exceptions.*;
+import ru.itmo.general.utility.exceptions.IncorrectScriptException;
+import ru.itmo.general.utility.exceptions.InvalidAmountException;
+import ru.itmo.general.utility.exceptions.InvalidFormException;
+import ru.itmo.general.utility.exceptions.ScriptRecursionException;
 import ru.itmo.general.utility.io.Console;
 import ru.itmo.general.utility.io.InputSteamer;
-//import ru.itmo.general.utility.io.ProductInput;
+import ru.itmo.general.utility.io.ProductInput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -150,7 +153,7 @@ public class Runner {
     }
 
     /**
-     * Отправляет команду.
+     * Выполняет команду.
      *
      * @param userCommand Команда для выполнения
      * @return Код завершения
@@ -183,9 +186,19 @@ public class Runner {
                     return fromScript(userCommand[1]);
                 }
                 case "insert" -> handleInsert(userCommand);
-                case "remove_greater", "remove_lower" -> handleRemove(userCommand);
+                case "remove_greater" -> handleRemove(userCommand);
+                case "count_less_than_owner" -> {
+                    try {
+                        ProductInput productInput = new ProductInput(console);
+                        Person owner = productInput.inputPersonForCountLess();
+                        response = tcpClient.sendCommand(new Request(userCommand[0], owner));
+                    } catch (IllegalArgumentException | IncorrectScriptException e) {
+                        console.printError("Ошибка ввода!");
+                    }
+                }
                 case "update" -> handleUpdate(userCommand);
-                case "remove_by_id" -> handleRemoveById(userCommand);
+                case "remove_greater_key", "remove_lower_key" -> handleRemoveById(userCommand);
+//                case "remove_by_id", "remove_greater_key", "remove_lower_key" -> handleRemoveById(userCommand);
                 case "history" -> {
                     console.println("История команд:");
                     for (String com : commandHistory) {
@@ -253,8 +266,6 @@ public class Runner {
         } catch (InvalidFormException exception) {
             console.printError("Поля продукта не валидны! Продукт не создан.");
         } catch (IncorrectScriptException ignored) {
-        } catch (InvalidValueException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -271,8 +282,6 @@ public class Runner {
         } catch (InvalidFormException exception) {
             console.printError("Поля продукта не валидны! Продукт не создан.");
         } catch (IncorrectScriptException ignored) {
-        } catch (InvalidValueException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -291,8 +300,6 @@ public class Runner {
         } catch (InvalidFormException exception) {
             console.printError("Поля продукта не валидны! Продукт не создан.");
         } catch (IncorrectScriptException ignored) {
-        } catch (InvalidValueException e) {
-            throw new RuntimeException(e);
         }
     }
 

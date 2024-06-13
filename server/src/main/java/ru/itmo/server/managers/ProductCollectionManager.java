@@ -148,7 +148,7 @@ public class ProductCollectionManager implements CollectionManager {
 
     public void updateProduct(Product product, int userId) {
         if (checkOwnership(product.getId(), userId) && productDAO.updateProduct(product)) {
-            collection.put(product.getId(), product);
+            getById(product.getId()).update(product);
             lastSaveTime = LocalDateTime.now();
         }
     }

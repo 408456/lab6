@@ -66,8 +66,7 @@ public class Update extends Command {
             if (request.getUserId() != product.getUserId()) {
                 return new Response(false, "Продукт вам не принадлежит!");
             }
-            collectionManager.removeById(product.getId(), product.getUserId());
-
+            collectionManager.updateProduct(newProduct, newProduct.getUserId());
             return new Response(true, "Продукт успешно обновлен!");
         } catch (Exception e) {
             return new Response(false, "Произошла ошибка при выполнении команды: " + e.getMessage());

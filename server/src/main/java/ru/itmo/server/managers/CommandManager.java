@@ -93,7 +93,7 @@ public class CommandManager {
         commandAdd("insert", new Insert(productCollectionManager));
         commandAdd("print_field_ascending_owner", new PrintFieldAscendingOwner(productCollectionManager));
         commandAdd("print_field_descending_price", new PrintFieldDescendingPrice(productCollectionManager));
-        commandAdd("remove_greater", new RemoveGreater(productCollectionManager));
+        commandAdd("remove_greater", new RemoveGreater(productCollectionManager, userDAO));
         commandAdd("remove_greater_key", new RemoveGreaterKey(productCollectionManager, userDAO));
         commandAdd("remove_lower_key", new RemoveLowerKey(productCollectionManager, userDAO));
         commandAdd("show", new Show(productCollectionManager));
