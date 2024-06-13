@@ -24,10 +24,6 @@ public class Console {
         System.out.println(obj);
     }
 
-    public void println(Object... obj) {
-        System.out.println(obj);
-    }
-
     /**
      * Выводит error: obj.toString() в консоль
      *
@@ -35,16 +31,6 @@ public class Console {
      */
     public void printError(Object obj) {
         System.out.println("error: " + obj);
-    }
-
-    /**
-     * Выводит таблицу из 2 колонок
-     *
-     * @param elementLeft  Левый элемент колонки.
-     * @param elementRight Правый элемент колонки.
-     */
-    public void printTable(Object elementLeft, Object elementRight) {
-        System.out.printf(" %-30s%-1s%n", elementLeft, elementRight);
     }
 
     public void printItalic(Object obj) {
@@ -64,5 +50,20 @@ public class Console {
     public String getPS1() {
         return PS1;
     }
+//
+//    /**
+//     * Выводит таблицу из 2 колонок
+//     *
+//     * @param elementLeft  Левый элемент колонки.
+//     * @param elementRight Правый элемент колонки.
+//     */
+//    public void printTable(Object elementLeft, Object elementRight) {
+//        System.out.printf(" %-30s%-1s%n", elementLeft, elementRight);
+//    }
+//
+//    public void println(Object... obj) {
+//        System.out.println(obj);
+//    }
+
 
 }

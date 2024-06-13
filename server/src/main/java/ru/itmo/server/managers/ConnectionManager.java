@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.Properties;
 
 /**
- * Manages database connections and statements.
+ * Управляет подключениями к базе данных и операциями с ними.
  */
 public class ConnectionManager {
     private static final Logger LOGGER = LoggerFactory.getLogger("ConnectionManager");
@@ -42,30 +42,30 @@ public class ConnectionManager {
     }
 
     /**
-     * Retrieves a database connection.
+     * Извлекает подключение к базе данных.
      *
-     * @return A database connection.
+     * @return Подключение к базе данных.
      */
     public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(DB_URL + DB_NAME, DB_USER, DB_PASSWORD);
+            return DriverManager.getConnection(DB_URL + DB_NAME);
         } catch (SQLException e) {
-            logError("Connection failed", e);
+            logError("Не удалось установить соединение", e);
             return null;
         }
     }
 
     /**
-     * Closes a database connection.
+     * Закрывает подключение к базе данных.
      *
-     * @param connection The database connection to close.
+     * @param connection Подключение к базе данных для закрытия.
      */
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {
-                logError("Error closing connection", e);
+                logError("Ошибка при закрытии подключения", e);
             }
         }
     }
@@ -80,40 +80,40 @@ public class ConnectionManager {
 
     private static Statement createStatement(Connection connection) {
         if (connection == null) {
-            logError("Connection is null", null);
+            logError("Подключение равно null", null);
             return null;
         }
         try {
             return connection.createStatement();
         } catch (SQLException e) {
-            logError("Error creating statement", e);
+            logError("Ошибка при создании оператора", e);
             return null;
         }
     }
 
     /**
-     * Executes an SQL update statement using a given statement.
+     * Выполняет SQL-запрос на обновление с использованием заданного оператора.
      *
-     * @param statement The statement to execute.
-     * @param sql       The SQL statement to execute.
+     * @param statement Оператор для выполнения запроса.
+     * @param sql       SQL-запрос для выполнения.
      */
     public static void executeUpdate(Statement statement, String sql) {
         if (statement == null) {
-            logError("Statement is null", null);
+            logError("Оператор равен null", null);
             return;
         }
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
-            logError("Error executing update", e);
+            logError("Ошибка при выполнении обновления", e);
         }
     }
 
     /**
-     * Executes an SQL update statement using a given connection.
+     * Выполняет SQL-запрос на обновление с использованием заданного подключения.
      *
-     * @param connection The database connection.
-     * @param sql        The SQL statement to execute.
+     * @param connection Подключение к базе данных.
+     * @param sql        SQL-запрос для выполнения.
      */
     public static void executeUpdate(Connection connection, String sql) {
         Statement statement = createStatement(connection);
@@ -121,20 +121,20 @@ public class ConnectionManager {
     }
 
     /**
-     * Executes a prepared SQL update statement.
+     * Выполняет подготовленный SQL-запрос на обновление.
      *
-     * @param statement The prepared statement to execute.
-     * @return The result of executing the statement.
+     * @param statement Подготовленный оператор для выполнения.
+     * @return Результат выполнения оператора.
      */
     public static int executePrepareUpdate(PreparedStatement statement) {
         if (statement == null) {
-            logError("Statement is null", null);
+            logError("Оператор равен null", null);
             return -1;
         } else {
             try {
                 return statement.executeUpdate();
             } catch (SQLException e) {
-                logError("Error executing update", e);
+                logError("Ошибка при выполнении обновления", e);
                 return -1;
             }
         }

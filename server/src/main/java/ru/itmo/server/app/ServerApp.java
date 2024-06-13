@@ -44,14 +44,7 @@ public class ServerApp {
      * @param args Аргументы командной строки
      */
     public static void main(String[] args) {
-        // Установка кодировки UTF-8 для корректной работы с символами Unicode
         System.setProperty("file.encoding", "UTF-8");
-
-        // Проверка наличия аргумента командной строки (пути к файлу)
-        if (args.length == 0) {
-            logger.error("Необходимо ввести имя загружаемого файла как аргумент командной строки");
-            System.exit(1);
-        }
         Console console = new Console();
         DatabaseManager.createDatabaseIfNotExists();
         UserDAO userDAO = new UserDAO();

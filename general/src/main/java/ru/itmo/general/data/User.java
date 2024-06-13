@@ -6,27 +6,26 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 /**
- * The {@code User} class represents a user in the system.
- * It encapsulates information about the user, including their ID, username, password hash, salt, and registration date.
- * This class is used for managing user authentication and registration.
+ * Класс {@code User} пользователя
+ * Используется для управления аутентификацией и регистрацией пользователей.
  *
  */
 @Getter
 public class User {
-    private final String username;
-    private final String passwordHash;
-    private final String salt;
-    private final LocalDateTime registrationDate;
+    private final String username; // Имя пользователя
+    private final String passwordHash; // Хеш пароля пользователя
+    private final String salt; // Для хеширования
+    private final LocalDateTime registrationDate; // Дата регистрации пользователя
     @Setter
-    private Integer id;
+    private Integer id; // Идентификатор пользователя
 
     /**
-     * Constructs a new user object with the specified parameters.
+     * Создает новый объект пользователя с указанными параметрами.
      *
-     * @param username         the username of the user
-     * @param passwordHash     the hashed password of the user
-     * @param salt             the salt used for password hashing
-     * @param registrationDate the registration date of the user
+     * @param username         имя пользователя
+     * @param passwordHash     хеш пароля пользователя
+     * @param salt             СОЛЬ
+     * @param registrationDate дата регистрации пользователя
      */
     public User(String username, String passwordHash, String salt, LocalDateTime registrationDate) {
         this.username = username;
@@ -36,13 +35,13 @@ public class User {
     }
 
     /**
-     * Constructs a new user object with the specified parameters.
+     * Создает новый объект пользователя с указанными параметрами.
      *
-     * @param id               the ID of the user
-     * @param username         the username of the user
-     * @param passwordHash     the hashed password of the user
-     * @param salt             the salt used for password hashing
-     * @param registrationDate the registration date of the user
+     * @param id               идентификатор пользователя
+     * @param username         имя пользователя
+     * @param passwordHash     хеш пароля пользователя
+     * @param salt             СОЛЬ
+     * @param registrationDate дата регистрации пользователя
      */
     public User(Integer id, String username, String passwordHash, String salt, LocalDateTime registrationDate) {
         this(username, passwordHash, salt, registrationDate);
@@ -50,9 +49,9 @@ public class User {
     }
 
     /**
-     * Returns a string representation of the user.
+     * Возвращает строковое представление объекта пользователя.
      *
-     * @return a string representation of the user
+     * @return строковое представление объекта пользователя
      */
     @Override
     public String toString() {
@@ -66,11 +65,11 @@ public class User {
     }
 
     /**
-     * Validates whether the user object is valid.
-     * It checks if the password hash and salt are not null and have a minimum length of 8 characters,
-     * and if the registration date is not null.
+     * Проверяет, является ли объект пользователя допустимым.
+     * Проверяет, что хеш пароля и соль не являются null и имеют минимальную длину 8 символов,
+     * а также что дата регистрации не является null.
      *
-     * @return true if the user object is valid, false otherwise
+     * @return true, если объект пользователя допустим, false в противном случае
      */
     public boolean validate() {
         if (passwordHash == null || passwordHash.length() < 8) {

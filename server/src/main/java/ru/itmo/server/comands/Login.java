@@ -3,17 +3,17 @@ package ru.itmo.server.comands;
 import ru.itmo.general.data.User;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
+import ru.itmo.server.comands.Command;
 import ru.itmo.server.dao.UserDAO;
 
 /**
- * Command 'login'. Logs in a user to the system.
- *
+ * Команда 'login'. Авторизует пользователя в системе.
  */
 public class Login extends Command {
     private UserDAO userDAO;
 
     public Login() {
-        super("login", "{username} log in to the system");
+        super("login", "{username} вход в систему");
     }
 
     public Login(UserDAO userDAO) {
@@ -28,22 +28,22 @@ public class Login extends Command {
             String password = request.getPassword();
 
             if (!userDAO.verifyUserPassword(username, password)) {
-                return new Response(false, "Invalid username or password", null);
+                return new Response(false, "Неверное имя пользователя или пароль", null);
             }
 
             User user = userDAO.getUserByUsername(username);
 
             if (user == null) {
-                return new Response(false, "User not found", null);
+                return new Response(false, "Пользователь не найден", null);
             }
-
             if (user.getId() == null) {
-                return new Response(false, "User ID is null", null);
+                return new Response(false, "ID пользователя пуст", null);
             }
 
-            return new Response(true, "You have successfully logged in\nYour id:", user.getId());
+            // Успешный вход
+            return new Response(true, "Вы успешно вошли в систему\nВаш id:", user.getId());
         } catch (Exception e) {
-            System.out.println("Exception during login: " + e); // Debug message
+            System.out.println("Ошибка во время входа: " + e);
             return new Response(false, e.toString(), null);
         }
     }

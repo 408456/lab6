@@ -4,101 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b13c9ebc-dada-4615-8f1e-0e55e7d74e54" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/checker-qual-3.42.0-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/checker-qual-3.42.0-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/checker-qual-3.42.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/error_prone_annotations-2.26.1-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/error_prone_annotations-2.26.1-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/error_prone_annotations-2.26.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/error_prone_annotations-2.27.0-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/error_prone_annotations-2.27.0-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/error_prone_annotations-2.27.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/failureaccess-1.0.2-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/failureaccess-1.0.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/failureaccess-1.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/gson-2.11.0-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/gson-2.11.0-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/gson-2.11.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/guava-33.2.0-jre-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/guava-33.2.0-jre-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/guava-33.2.0-jre.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/j2objc-annotations-3.0.0-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/j2objc-annotations-3.0.0-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/j2objc-annotations-3.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jsr305-3.0.2-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jsr305-3.0.2-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jsr305-3.0.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/postgresql-42.7.3-javadoc.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/postgresql-42.7.3-sources.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/postgresql-42.7.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Register.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/ProductDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/UserDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ConnectionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/DatabaseManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/utility/PasswordHashing.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/resources/database.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/resources/server.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+    <list default="true" id="b13c9ebc-dada-4615-8f1e-0e55e7d74e54" name="Changes" comment="last">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/test/Client1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/test/Client2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/test/Client3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/ClientApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/input/ProductInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/input/ProductInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/general/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Clear.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/CountLessThanOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/CountLessThanOwner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Describable.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Describable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Executable.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Executable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/ExecuteScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/ExecuteScript.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Exit.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Exit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Help.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Help.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Insert.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Insert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/PrintFieldAscendingOwner.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/PrintFieldAscendingOwner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/PrintFieldDescendingPrice.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/PrintFieldDescendingPrice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/RemoveGreater.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/RemoveGreater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/RemoveGreaterKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/RemoveGreaterKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/RemoveLowerKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/RemoveLowerKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Save.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Show.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/comands/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Update.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Coordinates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/CollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Request.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidAmountException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/exceptions/InvalidAmountException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/ProductInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/ProductInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/input/ClientConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/app/input/ClientConsole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/data/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/io/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/data/s1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server/data/s1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/Runner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/app/ServerApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/DumpManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ProductCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ProductCollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Help.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Help.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/ProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/utility/PasswordHashing.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/utility/PasswordHashing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/database.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/database.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://C:/Program Files/Java/jdk-20/lib/src.zip!/java.base/java/lang/Object.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -117,6 +61,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Client1.executor": "Run",
+    "Application.Client2.executor": "Run",
+    "Application.Client3.executor": "Run",
     "Application.ClientApp.executor": "Run",
     "Application.ServerApp.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -141,7 +88,46 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Application.ServerApp">
+  <component name="RunManager" selected="Application.Client3">
+    <configuration name="Client1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.itmo.client.app.test.Client1" />
+      <module name="client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.itmo.client.app.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.itmo.client.app.test.Client2" />
+      <module name="client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.itmo.client.app.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Client3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.itmo.client.app.test.Client3" />
+      <module name="client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.itmo.client.app.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ClientApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.client.app.ClientApp" />
       <module name="client" />
@@ -170,13 +156,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Client1" />
+      <item itemvalue="Application.Client2" />
+      <item itemvalue="Application.Client3" />
       <item itemvalue="Application.ClientApp" />
       <item itemvalue="Application.ServerApp" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerApp" />
+        <item itemvalue="Application.Client3" />
+        <item itemvalue="Application.Client2" />
+        <item itemvalue="Application.Client1" />
         <item itemvalue="Application.ClientApp" />
+        <item itemvalue="Application.ServerApp" />
       </list>
     </recent_temporary>
   </component>
@@ -205,7 +197,17 @@
       <option name="presentableId" value="Default" />
       <updated>1718227273945</updated>
       <workItem from="1718277033286" duration="2753000" />
+      <workItem from="1718288214218" duration="8799000" />
     </task>
+    <task id="LOCAL-00001" summary="last">
+      <option name="closed" value="true" />
+      <created>1718288445273</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718288445273</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,5 +215,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="last" />
+    <option name="LAST_COMMIT_MESSAGE" value="last" />
   </component>
 </project>

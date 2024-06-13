@@ -19,11 +19,9 @@ import static ru.itmo.server.managers.ConnectionManager.*;
 import static ru.itmo.server.utility.PasswordHashing.generateSalt;
 import static ru.itmo.server.utility.PasswordHashing.hashPassword;
 
-
 /**
- * The UserDAO class provides methods for interacting with the users table in the database.
- * It handles user creation, retrieval, updating, and password verification.
- *
+ * Класс UserDAO предоставляет методы для взаимодействия с таблицей пользователей в базе данных.
+ * Он обрабатывает создание, извлечение, обновление пользователей и проверку паролей.
  */
 public class UserDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger("UserDAO");
@@ -32,12 +30,12 @@ public class UserDAO {
     static {
         try (InputStream input = UserDAO.class.getClassLoader().getResourceAsStream("database.properties")) {
             if (input == null) {
-                LOGGER.error("Sorry, unable to find database.properties");
-                throw new IOException("Unable to find database.properties");
+                LOGGER.error("Извините, не удалось найти database.properties");
+                throw new IOException("Не удалось найти database.properties");
             }
             properties.load(new InputStreamReader(input, StandardCharsets.UTF_8));
         } catch (IOException ex) {
-            LOGGER.error("Error loading properties file", ex);
+            LOGGER.error("Ошибка загрузки файла свойств", ex);
         }
     }
 
@@ -51,24 +49,24 @@ public class UserDAO {
     private static final String SELECT_SALT_BY_USERNAME_SQL = properties.getProperty("select_salt_by_username");
 
     /**
-     * Inserts a new user into the database.
+     * Вставляет нового пользователя в базу данных.
      *
-     * @param username The username of the new user.
-     * @param password The password of the new user.
-     * @return The created User object if successful, otherwise null.
+     * @param username Имя пользователя нового пользователя.
+     * @param password Пароль нового пользователя.
+     * @return Созданный объект User в случае успеха, в противном случае null.
      */
     public User insertUser(String username, String password) {
-        // Generate a random salt
+        // Генерируем случайную соль
         String salt = generateSalt(16);
 
-        // Hash the password with the salt
+        // Хешируем пароль с солью
         String hashedPassword = hashPassword(password, salt);
 
-        // Create a new user with the provided details
+        // Создаем нового пользователя с предоставленными данными
         LocalDateTime registrationDate = LocalDateTime.now();
         User user = new User(username, hashedPassword, salt, registrationDate);
 
-        // Insert the user into the database
+        // Вставляем пользователя в базу данных
         if (insertUser(user.getUsername(), user.getPasswordHash(),
                 user.getSalt(), registrationDate, registrationDate)) {
             return user;
@@ -78,14 +76,14 @@ public class UserDAO {
     }
 
     /**
-     * Inserts a new user into the database with specified details.
+     * Вставляет нового пользователя в базу данных с указанными данными.
      *
-     * @param username         The username of the new user.
-     * @param passwordHash     The hashed password of the new user.
-     * @param salt             The salt used for hashing the password.
-     * @param registrationDate The registration date of the new user.
-     * @param lastLoginDate    The last login date of the new user.
-     * @return true if the user was successfully inserted, otherwise false.
+     * @param username         Имя пользователя нового пользователя.
+     * @param passwordHash     Хешированный пароль нового пользователя.
+     * @param salt             Соль, использованная для хеширования пароля.
+     * @param registrationDate Дата регистрации нового пользователя.
+     * @param lastLoginDate    Дата последнего входа нового пользователя.
+     * @return true, если пользователь был успешно вставлен, в противном случае false.
      */
     public boolean insertUser(String username, String passwordHash,
                               String salt, LocalDateTime registrationDate,
@@ -99,16 +97,16 @@ public class UserDAO {
             statement.setObject(5, lastLoginDate);
             return executePrepareUpdate(statement) > 0;
         } catch (SQLException e) {
-            LOGGER.error("Error while inserting user: {}", e.getMessage());
+            LOGGER.error("Ошибка при вставке пользователя: {}", e.getMessage());
             return false;
         }
     }
 
     /**
-     * Retrieves a user from the database by their username.
+     * Извлекает пользователя из базы данных по его имени пользователя.
      *
-     * @param username The username of the user to retrieve.
-     * @return The User object if found, otherwise null.
+     * @param username Имя пользователя для извлечения.
+     * @return Объект User, если найден, в противном случае null.
      */
     public User getUserByUsername(String username) {
         try (Connection connection = getConnection();
@@ -124,23 +122,23 @@ public class UserDAO {
 
                     return new User(id, storedUsername, passwordHash, salt, registrationDate);
                 } else {
-                    return null; // User not found
+                    return null; // Пользователь не найден
                 }
             }
         } catch (SQLException e) {
-            LOGGER.error("Error while retrieving user by username: {}", e.getMessage());
+            LOGGER.error("Ошибка при извлечении пользователя по имени пользователя: {}", e.getMessage());
             return null;
         }
     }
 
     /**
-     * Updates a user in the database with new details.
+     * Обновляет данные пользователя в базе данных.
      *
-     * @param userId           The ID of the user to update.
-     * @param newUsername      The new username of the user.
-     * @param newPasswordHash  The new hashed password of the user.
-     * @param newLastLoginDate The new last login date of the user.
-     * @return true if the user was successfully updated, otherwise false.
+     * @param userId           ID пользователя для обновления.
+     * @param newUsername      Новое имя пользователя.
+     * @param newPasswordHash  Новый хешированный пароль пользователя.
+     * @param newLastLoginDate Новая дата последнего входа пользователя.
+     * @return true, если пользователь был успешно обновлен, в противном случае false.
      */
     public boolean updateUser(int userId, String newUsername, String newPasswordHash, LocalDateTime newLastLoginDate) {
         try (Connection connection = getConnection();
@@ -151,59 +149,59 @@ public class UserDAO {
             statement.setInt(4, userId);
             return executePrepareUpdate(statement) > 0;
         } catch (SQLException e) {
-            LOGGER.error("Error while updating user: {}", e.getMessage());
+            LOGGER.error("Ошибка при обновлении пользователя: {}", e.getMessage());
             return false;
         }
     }
 
+//    /**
+//     * Обновляет пароль пользователя в базе данных.
+//     *
+//     * @param username    Имя пользователя.
+//     * @param newPassword Новый пароль для пользователя.
+//     * @return true, если пароль был успешно обновлен, в противном случае false.
+//     */
+//    public boolean updateUser(String username, String newPassword) {
+//
+//        try {
+//            // Извлекаем соль из базы данных
+//            String salt = null;
+//            try (Connection connection = getConnection();
+//                 PreparedStatement selectStatement = connection.prepareStatement(SELECT_SALT_BY_USERNAME_SQL)) {
+//                selectStatement.setString(1, username);
+//                try (ResultSet resultSet = selectStatement.executeQuery()) {
+//                    if (resultSet.next()) {
+//                        salt = resultSet.getString("salt");
+//                    } else {
+//                        LOGGER.error("Пользователь с именем пользователя {} не найден.", username);
+//                        return false; // Пользователь не найден
+//                    }
+//                }
+//            } catch (NullPointerException exception) {
+//                LOGGER.error("Ошибка Null pointer при извлечении пользователя по имени пользователя: {}", exception.getMessage());
+//            }
+//
+//            // Хешируем новый пароль, используя извлеченную соль
+//            String newPasswordHash = hashPassword(newPassword, salt);
+//
+//            // Обновляем пароль пользователя в базе данных
+//            try (Connection connection = getConnection();
+//                 PreparedStatement updateStatement =
+//                         connection.prepareStatement(UPDATE_USER_BY_USERNAME_AND_PASSWORD_SQL)) {
+//                updateStatement.setString(1, newPasswordHash);
+//                updateStatement.setObject(2, LocalDateTime.now());
+//                updateStatement.setString(3, username);
+//
+//                return executePrepareUpdate(updateStatement) > 0;
+//            }
+//        } catch (SQLException e) {
+//            LOGGER.error("Ошибка при обновлении пользователя: {}", e.getMessage());
+//            return false;
+//        }
+//    }
+
     /**
-     * Updates the password of a user in the database.
-     *
-     * @param username    The username of the user.
-     * @param newPassword The new password to set for the user.
-     * @return true if the password was successfully updated, otherwise false.
-     */
-    public boolean updateUser(String username, String newPassword) {
-
-        try {
-            // Retrieve salt from the database
-            String salt = null;
-            try (Connection connection = getConnection();
-                 PreparedStatement selectStatement = connection.prepareStatement(SELECT_SALT_BY_USERNAME_SQL)) {
-                selectStatement.setString(1, username);
-                try (ResultSet resultSet = selectStatement.executeQuery()) {
-                    if (resultSet.next()) {
-                        salt = resultSet.getString("salt");
-                    } else {
-                        LOGGER.error("User with username {} not found.", username);
-                        return false; // User not found
-                    }
-                }
-            } catch (NullPointerException exception) {
-                LOGGER.error("Null pointer exception while fetching user by username: {}", exception.getMessage());
-            }
-
-            // Hash the new password using the retrieved salt
-            String newPasswordHash = hashPassword(newPassword, salt);
-
-            // Update the user's password in the database
-            try (Connection connection = getConnection();
-                 PreparedStatement updateStatement =
-                         connection.prepareStatement(UPDATE_USER_BY_USERNAME_AND_PASSWORD_SQL)) {
-                updateStatement.setString(1, newPasswordHash);
-                updateStatement.setObject(2, LocalDateTime.now());
-                updateStatement.setString(3, username);
-
-                return executePrepareUpdate(updateStatement) > 0;
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Error while updating user: {}", e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Creates the users table in the database if it doesn't exist.
+     * Создает таблицу пользователей в базе данных, если она не существует.
      */
     public void createTablesIfNotExist() {
         Connection connection = getConnection();
@@ -211,16 +209,17 @@ public class UserDAO {
     }
 
     /**
-     * Verifies the password of a user by their username.
+     * Проверяет пароль пользователя по его имени пользователя.
      *
-     * @param username The username of the user.
-     * @param password The password to verify.
-     * @return true if the password is correct, otherwise false.
+     * @param username Имя пользователя.
+     * @param password Пароль для проверки.
+     * @return true, если пароль верен, в противном случае false.
      */
     public boolean verifyUserPassword(String username, String password) {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_ID_SQL)) {
-            statement.setString(1, username);
+            statement.setString(1, username
+            );
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     String storedPasswordHash = resultSet.getString("password_hash");
@@ -228,21 +227,21 @@ public class UserDAO {
                     String enteredPasswordHash = hashPassword(password, storedSalt);
                     return storedPasswordHash.equals(enteredPasswordHash);
                 } else {
-                    return false; // User not found
+                    return false; // Пользователь не найден
                 }
             }
         } catch (SQLException e) {
-            LOGGER.error("Error while verifying user password: {}", e.getMessage());
+            LOGGER.error("Ошибка при проверке пароля пользователя: {}", e.getMessage());
             return false;
         }
     }
 
     /**
-     * Verifies the password of a user.
+     * Проверяет пароль пользователя.
      *
-     * @param user     The User object representing the user.
-     * @param password The password to verify.
-     * @return true if the password is correct, otherwise false.
+     * @param user     Объект User, представляющий пользователя.
+     * @param password Пароль для проверки.
+     * @return true, если пароль верен, в противном случае false.
      */
     public boolean verifyUserPassword(User user, String password) {
         String storedPasswordHash = user.getPasswordHash();

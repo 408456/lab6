@@ -11,8 +11,7 @@ import java.sql.SQLException;
 import static ru.itmo.server.managers.ConnectionManager.*;
 
 /**
- * Manages the database operations, including database creation, table creation, and user management.
- *
+ * Управляет операциями с базой данных, включая создание базы данных, создание таблиц и управление пользователями.
  */
 public class DatabaseManager {
     private static final UserDAO userDAO = new UserDAO();
@@ -20,7 +19,7 @@ public class DatabaseManager {
     private static final Logger logger = LoggerFactory.getLogger("DatabaseManager");
 
     /**
-     * Creates the database if it does not already exist and initializes tables.
+     * Создает базу данных, если она еще не существует, и инициализирует таблицы.
      */
     public static void createDatabaseIfNotExists() {
         try (Connection connection = getConnection()) {
@@ -28,43 +27,43 @@ public class DatabaseManager {
                 boolean databaseExists = checkDatabaseExists(connection);
                 if (!databaseExists) {
                     executeUpdate(connection, "CREATE DATABASE " + DB_NAME);
-                    logger.info("Database and tables created successfully.");
+                    logger.info("База данных и таблицы успешно созданы.");
                 } else {
-                    logger.info("Database already exists.");
+                    logger.info("База данных уже существует.");
                 }
                 createTablesIfNotExist(connection);
             } else {
-                logger.error("Failed to establish connection to the database.");
+                logger.error("Не удалось установить соединение с базой данных.");
             }
         } catch (SQLException e) {
-            logger.error("Error while creating database: {}", e.getMessage());
+            logger.error("Ошибка при создании базы данных: {}", e.getMessage());
         }
     }
 
     /**
-     * Checks if the database already exists.
+     * Проверяет существование базы данных.
      *
-     * @param connection The database connection.
-     * @return True if the database exists, false otherwise.
-     * @throws SQLException If an SQL error occurs.
+     * @param connection Соединение с базой данных.
+     * @return true, если база данных существует, в противном случае false.
+     * @throws SQLException Если происходит ошибка SQL.
      */
     private static boolean checkDatabaseExists(Connection connection) throws SQLException {
         return connection.getMetaData().getCatalogs()
-                .next(); // Check if the database exists by attempting to move to the first entry
+                .next(); // Проверяем существование базы данных, пытаясь перейти к первой записи
     }
 
     /**
-     * Creates necessary tables if they do not already exist.
+     * Создает необходимые таблицы, если они еще не существуют.
      *
-     * @param connection The database connection.
+     * @param connection Соединение с базой данных.
      */
     public static void createTablesIfNotExist(Connection connection) {
         if (connection != null) {
             userDAO.createTablesIfNotExist();
             productDAO.createTablesIfNotExist();
-            logger.info("Tables created successfully (if not existed).");
+            logger.info("Таблицы успешно созданы (если не существовали).");
         } else {
-            logger.error("Connection is null.");
+            logger.error("Соединение null.");
         }
     }
 

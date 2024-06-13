@@ -1,30 +1,34 @@
 package ru.itmo.server.comands;
 
-
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.exceptions.InvalidAmountException;
 import ru.itmo.server.dao.UserDAO;
 
 import javax.management.InstanceAlreadyExistsException;
+import java.util.regex.Pattern;
 
 /**
- * Command 'register'. Registers a new user in the system.
- *
+ * Команда 'register'. Регистрирует нового пользователя в системе.
  */
 public class Register extends Command {
     public static final int MIN_PASSWORD_LENGTH = 8;
+    public static final int MAX_PASSWORD_LENGTH = 100;
+    private static final int MIN_USERNAME_LENGTH = 3;
     private static final int MAX_USERNAME_LENGTH = 50;
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9]{3,50}$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,100}$");
+
     private UserDAO userDAO;
 
     public Register() {
-        super("register", "{username} register a new user");
+        super("register", "{username} {password} регистрирует нового пользователя");
     }
 
     /**
-     * Constructor for creating an instance of the Register command.
+     * Конструктор для создания команды Register.
      *
-     * @param userDAO the user manager
+     * @param userDAO менеджер пользователей
      */
     public Register(UserDAO userDAO) {
         this();
@@ -32,33 +36,51 @@ public class Register extends Command {
     }
 
     /**
-     * Executes the command.
+     * Выполняет команду.
      *
-     * @param request the request to register a user
-     * @return the response indicating the success or failure of the command execution
+     * @param request запрос на регистрацию пользователя
+     * @return ответ с результатом выполнения команды
      */
     @Override
     public Response execute(Request request) {
         try {
-            if (request.getLogin().length() >= MAX_USERNAME_LENGTH)
-                throw new InvalidAmountException("Username length must be less than " + MAX_USERNAME_LENGTH);
+            String username = request.getLogin();
+            String password = request.getPassword();
 
-            if (request.getPassword().length() < MIN_PASSWORD_LENGTH)
-                throw new InvalidAmountException("Password length must be at least " + MIN_PASSWORD_LENGTH);
+            if (username.length() < MIN_USERNAME_LENGTH || username.length() > MAX_USERNAME_LENGTH) {
+                throw new InvalidAmountException("Длина имени пользователя должна быть от " + MIN_USERNAME_LENGTH + " до " + MAX_USERNAME_LENGTH + " символов.");
+            }
 
-            if (request.getUserId() != null) throw new InstanceAlreadyExistsException("User already exists");
+            if (!USERNAME_PATTERN.matcher(username).matches()) {
+                throw new InvalidAmountException("Имя пользователя не должно содержать специальных символов!");
+            }
 
-            var user = userDAO.insertUser(request.getLogin(), request.getPassword());
+            if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH) {
+                throw new InvalidAmountException("Длина пароля должна быть от " + MIN_PASSWORD_LENGTH + " до " + MAX_PASSWORD_LENGTH + " символов.");
+            }
 
-            if (user == null) throw new InstanceAlreadyExistsException("User already exists");
+            if (!PASSWORD_PATTERN.matcher(password).matches()) {
+                throw new InvalidAmountException("Пароль должен содержать строчную букву, заглавную букву, цифру и один специальный символ.");
+            }
 
-            return new Response(true, "User successfully registered", user.getId());
+            if (request.getUserId() != null) {
+                throw new InstanceAlreadyExistsException("Пользователь уже существует.");
+            }
+
+            var user = userDAO.insertUser(username, password);
+
+            if (user == null) {
+                throw new InstanceAlreadyExistsException("Пользователь уже существует.");
+            }
+
+            return new Response(true, "Пользователь успешно зарегистрирован.", user.getId());
+
         } catch (InstanceAlreadyExistsException ex) {
-            return new Response(false, ex.getMessage(), null);
+            return new Response(false, "Ошибка: " + ex.getMessage(), null);
         } catch (InvalidAmountException invalid) {
-            return new Response(false, invalid.getMessage());
+            return new Response(false, "Ошибка: " + invalid.getMessage());
         } catch (Exception e) {
-            return new Response(false, e.toString(), -1);
+            return new Response(false, "Непредвиденная ошибка: " + e.toString(), -1);
         }
     }
 }

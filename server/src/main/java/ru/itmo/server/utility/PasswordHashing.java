@@ -6,16 +6,16 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 /**
- * A utility class for hashing passwords using MD2 algorithm with salt.
+ * Утилитарный класс для хеширования паролей с использованием алгоритма MD2 и случайной строки.
  *
  */
 public class PasswordHashing {
 
     /**
-     * Hashes the given password using MD2 algorithm with a randomly generated salt.
+     * Хеширует указанный пароль с использованием алгоритма MD2 и случайно сгенерированной строки.
      *
-     * @param password The password to hash.
-     * @return An array containing the hashed password and the salt used for hashing.
+     * @param password Пароль для хеширования.
+     * @return Массив, содержащий хешированный пароль и использованную для хеширования строку.
      */
     public static String[] hashPassword(String password) {
         String salt = generateSalt(16);
@@ -24,11 +24,11 @@ public class PasswordHashing {
     }
 
     /**
-     * Hashes the given password using MD2 algorithm with the provided salt.
+     * Хеширует указанный пароль с использованием алгоритма MD2 и предоставленной соли.
      *
-     * @param password The password to hash.
-     * @param salt     The salt used for hashing.
-     * @return The hashed password.
+     * @param password Пароль для хеширования.
+     * @param salt     Случайная строка, используемая для хеширования.
+     * @return Хешированный пароль.
      */
     public static String hashPassword(String password, String salt) {
         try {
@@ -37,18 +37,18 @@ public class PasswordHashing {
             byte[] hashedBytes = md.digest();
             return Base64.getEncoder().encodeToString(hashedBytes);
         } catch (NoSuchAlgorithmException e) {
-            System.err.println("Algorithm MD2 not found");
+            System.err.println("Алгоритм MD2 не найден");
             return null;
         }
     }
 
     /**
-     * Verifies the given input password against the hashed password using the provided salt.
+     * Проверяет введенный пароль по отношению к хешированному паролю с использованием предоставленной случайной строки.
      *
-     * @param inputPassword  The input password to verify.
-     * @param salt           The salt used for hashing.
-     * @param hashedPassword The hashed password to compare against.
-     * @return true if the input password matches the hashed password, false otherwise.
+     * @param inputPassword  Пароль для проверки.
+     * @param salt           Случайная строка, использованная для хеширования.
+     * @param hashedPassword Хешированный пароль для сравнения.
+     * @return true, если введенный пароль совпадает с хешированным паролем, иначе false.
      */
     public static boolean verifyPassword(String inputPassword, String salt, String hashedPassword) {
         String hashedInputPassword = hashPassword(inputPassword, salt);
@@ -56,10 +56,10 @@ public class PasswordHashing {
     }
 
     /**
-     * Generates a random salt string of the specified length.
+     * Генерирует случайную строку случайной длины.
      *
-     * @param length The length of the salt string to generate.
-     * @return A randomly generated salt string.
+     * @param length Длина строки для генерации.
+     * @return Случайно сгенерированная строка.
      */
     public static String generateSalt(int length) {
         SecureRandom random = new SecureRandom();

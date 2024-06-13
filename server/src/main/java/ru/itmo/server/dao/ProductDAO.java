@@ -16,8 +16,8 @@ import java.util.Properties;
 import static ru.itmo.server.managers.ConnectionManager.*;
 
 /**
- * The ProductDAO class provides methods for interacting with the products table in the database.
- * It handles product creation, retrieval, updating, and removal.
+ * Класс ProductDAO предоставляет методы для взаимодействия с таблицей продуктов в базе данных.
+ * Он обрабатывает создание, получение, обновление и удаление продуктов.
  */
 public class ProductDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger("ProductDAO");
@@ -35,7 +35,6 @@ public class ProductDAO {
         }
     }
 
-
     private static final String SELECT_ALL_PRODUCTS_SQL = properties.getProperty("select_all_products");
     private static final String CREATE_PRODUCTS_TABLE_SQL = properties.getProperty("create_products_table");
     private static final String INSERT_PRODUCT_SQL = properties.getProperty("insert_product");
@@ -45,11 +44,11 @@ public class ProductDAO {
     private static final String UPDATE_PRODUCT_SQL = properties.getProperty("update_product");
 
     /**
-     * Adds a new product to the database.
+     * Добавляет новый продукт в базу данных.
      *
-     * @param product The product to be added.
-     * @param userId The ID of the user adding the product.
-     * @return The ID of the newly added product if successful, otherwise -1.
+     * @param product Продукт для добавления.
+     * @param userId ID пользователя, добавляющего продукт.
+     * @return ID добавленного продукта в случае успеха, иначе -1.
      */
     public boolean insertProduct(Product product, int userId) {
         String insertProductWithIdSql = properties.getProperty("insert_product_with_id");
@@ -71,12 +70,11 @@ public class ProductDAO {
         }
     }
 
-
     /**
-     * Adds a collection of products to the database.
+     * Добавляет коллекцию продуктов в базу данных.
      *
-     * @param products The collection of products to be added.
-     * @param userId  The ID of the user adding the products.
+     * @param products Коллекция продуктов для добавления.
+     * @param userId ID пользователя, добавляющего продукты.
      */
     public void addProducts(List<Product> products, int userId) {
         try (Connection connection = getConnection();
@@ -93,6 +91,13 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Устанавливает параметры PreparedStatement на основе данных продукта.
+     *
+     * @param statement PreparedStatement для установки параметров.
+     * @param product Продукт, данные которого используются для установки параметров.
+     * @throws SQLException в случае ошибки при установке параметров.
+     */
     private void set(PreparedStatement statement, Product product) throws SQLException {
         statement.setString(2, product.getName());
         statement.setInt(3, product.getCoordinates().getX());
@@ -123,78 +128,13 @@ public class ProductDAO {
         statement.setInt(15, product.getUserId());
     }
 
-
     /**
-     * Retrieves all products from the database.
+     * Извлекает продукт из ResultSet.
      *
-     * @return A list of all products retrieved from the database.
+     * @param resultSet ResultSet для извлечения данных продукта.
+     * @return Извлеченный продукт.
+     * @throws SQLException в случае ошибки при извлечении данных.
      */
-    public List<Product> getAllProducts() {
-        List<Product> products = new ArrayList<>();
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCTS_SQL);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                Product product = extractProductFromResultSet(resultSet);
-                products.add(product);
-            }
-        } catch (NullPointerException exception) {
-            LOGGER.error("Null pointer exception while getting all products, continuing without getting all products");
-        } catch (SQLException e) {
-            LOGGER.error("Error while retrieving products from the database: {}", e.getMessage());
-        }
-        return products;
-    }
-
-    /**
-     * Removes a product from the database by its ID.
-     *
-     * @param productId The ID of the product to be removed.
-     * @return true if the product was successfully removed, false otherwise.
-     */
-    public boolean removeProductById(long productId) {
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(REMOVE_PRODUCT_SQL)) {
-            statement.setLong(1, productId);
-            return statement.executeUpdate() > 0;
-        } catch (NullPointerException exception) {
-            LOGGER.error("Null pointer exception while removing product, continuing without removing product");
-            return false;
-        } catch (SQLException e) {
-            LOGGER.error("Error while deleting product with ID {}: {}", productId, e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Updates a product in the database.
-     *
-     * @param product The product with updated information.
-     * @return true if the product was successfully updated, false otherwise.
-     */
-    public boolean updateProduct(Product product) {
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT_SQL)) {
-
-            set(statement, product);
-            return statement.executeUpdate() > 0;
-        } catch (NullPointerException exception) {
-            LOGGER.error("Null pointer exception while updating product, continuing without updating product");
-            return false;
-        } catch (SQLException e) {
-            LOGGER.error("Error while updating product {}: {}", product.getId(), e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * Creates the products table in the database if it does not already exist.
-     */
-    public void createTablesIfNotExist() {
-        Connection connection = getConnection();
-        executeUpdate(connection, CREATE_PRODUCTS_TABLE_SQL);
-    }
-
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
         Long id = resultSet.getLong("id");
         String name = resultSet.getString("name");
@@ -229,11 +169,82 @@ public class ProductDAO {
     }
 
     /**
-     * Checks if a product belongs to a specific user.
+     * Получает все продукты из базы данных.
      *
-     * @param productId The ID of the product.
-     * @param userId   The ID of the user.
-     * @return true if the product belongs to the user, false otherwise.
+     * @return Список всех продуктов, извлеченных из базы данных.
+     */
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_PRODUCTS_SQL);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                Product product = extractProductFromResultSet(resultSet);
+                products.add(product);
+            }
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while getting all products, continuing without getting all products");
+        } catch (SQLException e) {
+            LOGGER.error("Error while retrieving products from the database: {}", e.getMessage());
+        }
+        return products;
+    }
+
+    /**
+     * Удаляет продукт из базы данных по его ID.
+     *
+     * @param productId ID продукта для удаления.
+     * @return true, если продукт успешно удален, иначе false.
+     */
+    public boolean removeProductById(long productId) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(REMOVE_PRODUCT_SQL)) {
+            statement.setLong(1, productId);
+            return statement.executeUpdate() > 0;
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while removing product, continuing without removing product");
+            return false;
+        } catch (SQLException e) {
+            LOGGER.error("Error while deleting product with ID {}: {}", productId, e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Обновляет продукт в базе данных.
+     *
+     * @param product Продукт с обновленной информацией.
+     * @return true, если продукт успешно обновлен, иначе false.
+     */
+    public boolean updateProduct(Product product) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT_SQL)) {
+
+            set(statement, product);
+            return statement.executeUpdate() > 0;
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while updating product, continuing without updating product");
+            return false;
+        } catch (SQLException e) {
+            LOGGER.error("Error while updating product {}: {}", product.getId(), e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Создает таблицу продуктов в базе данных, если она еще не существует.
+     */
+    public void createTablesIfNotExist() {
+        Connection connection = getConnection();
+        executeUpdate(connection, CREATE_PRODUCTS_TABLE_SQL);
+    }
+
+    /**
+     * Проверяет, принадлежит ли продукт определенному пользователю.
+     *
+     * @param productId ID продукта.
+     * @param userId ID пользователя.
+     * @return true, если продукт принадлежит пользователю, иначе false.
      */
     public boolean checkOwnership(long productId, int userId) {
         try (Connection connection = getConnection();
@@ -257,6 +268,12 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Удаляет все продукты, принадлежащие определенному пользователю, из базы данных.
+     *
+     * @param userId ID пользователя.
+     * @return true, если продукты успешно удалены, иначе false.
+     */
     public boolean removeProductsByUserId(int userId) {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(REMOVE_PRODUCTS_BY_USER_ID_SQL)) {

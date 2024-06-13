@@ -1,15 +1,13 @@
 package ru.itmo.client.app;
 
+import ru.itmo.client.app.input.ProductInput;
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.utility.exceptions.IncorrectScriptException;
-import ru.itmo.general.utility.exceptions.InvalidAmountException;
-import ru.itmo.general.utility.exceptions.InvalidFormException;
-import ru.itmo.general.utility.exceptions.ScriptRecursionException;
+import ru.itmo.general.utility.exceptions.*;
 import ru.itmo.general.utility.io.Console;
 import ru.itmo.general.utility.io.InputSteamer;
-import ru.itmo.general.utility.io.ProductInput;
+//import ru.itmo.general.utility.io.ProductInput;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -60,9 +58,9 @@ public class Runner {
         try {
             ExitCode exitCode = ExitCode.OK;
             String[] inputCommand;
-            inputCommand = new String[]{"help", ""};
+//            inputCommand = new String[]{"help", ""};
             console.printItalic("* первое подключение");
-            send(inputCommand);
+//            send(inputCommand);
             while (exitCode != ExitCode.EXIT) {
                 console.ps1();
                 try {
@@ -255,6 +253,8 @@ public class Runner {
         } catch (InvalidFormException exception) {
             console.printError("Поля продукта не валидны! Продукт не создан.");
         } catch (IncorrectScriptException ignored) {
+        } catch (InvalidValueException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -271,6 +271,8 @@ public class Runner {
         } catch (InvalidFormException exception) {
             console.printError("Поля продукта не валидны! Продукт не создан.");
         } catch (IncorrectScriptException ignored) {
+        } catch (InvalidValueException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -289,6 +291,8 @@ public class Runner {
         } catch (InvalidFormException exception) {
             console.printError("Поля продукта не валидны! Продукт не создан.");
         } catch (IncorrectScriptException ignored) {
+        } catch (InvalidValueException e) {
+            throw new RuntimeException(e);
         }
     }
 

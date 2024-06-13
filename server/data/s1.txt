@@ -1,7 +1,3 @@
 info
 help
-history
-print_field_ascending_owner
-print_field_descending_price
-show
 execute_script data/s2.txt
