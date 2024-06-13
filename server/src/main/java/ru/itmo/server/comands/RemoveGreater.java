@@ -23,7 +23,7 @@ public class RemoveGreater extends Command {
      * Конструктор класса.
      */
     public RemoveGreater() {
-        super("remove_greater", "{element} удалить из коллекции все элементы, превышающие заданный");
+        super("remove_greater", "<id> {element} удалить из коллекции все элементы, превышающие заданный");
     }
 
     /**

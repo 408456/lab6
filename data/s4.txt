@@ -1,3 +1,0 @@
-history
-print_field_ascending_owner
-execute_script data/s1.txt

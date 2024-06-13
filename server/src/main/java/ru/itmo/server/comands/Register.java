@@ -13,11 +13,11 @@ import java.util.regex.Pattern;
  */
 public class Register extends Command {
     public static final int MIN_PASSWORD_LENGTH = 8;
-    public static final int MAX_PASSWORD_LENGTH = 100;
+    public static final int MAX_PASSWORD_LENGTH = 50;
     private static final int MIN_USERNAME_LENGTH = 3;
     private static final int MAX_USERNAME_LENGTH = 50;
     private static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9]{3,50}$");
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,100}$");
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^.{8,50}$");
 
     private UserDAO userDAO;
 
@@ -52,7 +52,7 @@ public class Register extends Command {
             }
 
             if (!USERNAME_PATTERN.matcher(username).matches()) {
-                throw new InvalidAmountException("Имя пользователя не должно содержать специальных символов!");
+                throw new InvalidAmountException("Имя пользователя не должно содержать знаков препинания и специальных символов!");
             }
 
             if (password.length() < MIN_PASSWORD_LENGTH || password.length() > MAX_PASSWORD_LENGTH) {
@@ -60,7 +60,7 @@ public class Register extends Command {
             }
 
             if (!PASSWORD_PATTERN.matcher(password).matches()) {
-                throw new InvalidAmountException("Пароль должен содержать строчную букву, заглавную букву, цифру и один специальный символ.");
+                throw new InvalidAmountException("Пароль должен содержать от 8 до 50 символов и может включать любые знаки.");
             }
 
             if (request.getUserId() != null) {

@@ -1,0 +1,12 @@
+print_field_ascending_owner
+
+print_field_descending_price
+
+count_less_than_owner
+KKKKKKKKK
+203842093204230OOOOO
+ORANGE
+ITALY
+90.09
+90
+place

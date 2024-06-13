@@ -1,0 +1,21 @@
+info
+
+remove_greater_key 9089
+info
+
+remove_greater 9999
+KKK
+1000
+-1000
+80808080
+LITERS
+EVA
+XXXOOOPPP8888222
+ORANGE
+ITALY
+90.09
+90
+placeplaceplaceplaceplaceplaceplaceplaceplace
+info
+
+remove_lower_key 200

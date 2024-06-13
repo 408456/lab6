@@ -26,7 +26,7 @@ public class CommandManager {
 
     public static Response handle(Request request) {
         var command = commands.get(request.getCommand());
-        if (command == null) return new Response(false, request.getCommand(), "Команда не найдена!");
+        if (command == null) return new Response(false, request.getCommand(), "Команда не найдена! Введите 'help'");
         if (!"exit".equals(request.getCommand()) && !"save".equals(request.getCommand())) {
             return command.execute(request);
         }

@@ -41,7 +41,7 @@ public class Login extends Command {
             }
 
             // Успешный вход
-            return new Response(true, "Вы успешно вошли в систему\nВаш id:", user.getId());
+            return new Response(true, "Вы успешно вошли в систему id:", user.getId());
         } catch (Exception e) {
             System.out.println("Ошибка во время входа: " + e);
             return new Response(false, e.toString(), null);

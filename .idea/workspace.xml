@@ -5,8 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b13c9ebc-dada-4615-8f1e-0e55e7d74e54" name="Changes" comment="last">
+      <change afterPath="$PROJECT_DIR$/data/commands/insert.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/commands/print.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/commands/remove.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/commands/update.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Update.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/p2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/s2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/s3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/s4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/RemoveGreater.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/RemoveGreater.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +83,12 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Application.ServerApp">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Q:\JavaProjects\lab7\data\commands" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ClientApp">
     <configuration name="ClientApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.client.app.ClientApp" />
       <module name="client" />
@@ -108,8 +122,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerApp" />
         <item itemvalue="Application.ClientApp" />
+        <item itemvalue="Application.ServerApp" />
       </list>
     </recent_temporary>
   </component>
@@ -139,7 +153,7 @@
       <updated>1718227273945</updated>
       <workItem from="1718277033286" duration="2753000" />
       <workItem from="1718288214218" duration="10934000" />
-      <workItem from="1718315524505" duration="3713000" />
+      <workItem from="1718315524505" duration="7230000" />
     </task>
     <task id="LOCAL-00001" summary="last">
       <option name="closed" value="true" />
