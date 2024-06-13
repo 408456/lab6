@@ -220,7 +220,7 @@ public class ProductDAO {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_PRODUCT_SQL)) {
 
-            set(statement, product);
+            setUpdate(statement, product);
             return statement.executeUpdate() > 0;
         } catch (NullPointerException exception) {
             LOGGER.error("Null pointer exception while updating product, continuing without updating product");
@@ -289,4 +289,42 @@ public class ProductDAO {
             return false;
         }
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Устанавливает параметры PreparedStatement для обновления продукта.
+     *
+     * @param statement PreparedStatement для установки параметров.
+     * @param product Продукт с обновленными данными.
+     * @throws SQLException в случае ошибки при установке параметров.
+     */
+    private void setUpdate(PreparedStatement statement, Product product) throws SQLException {
+        statement.setString(1, product.getName());
+        statement.setInt(2, product.getCoordinates().getX());
+        statement.setDouble(3, product.getCoordinates().getY());
+        statement.setTimestamp(4, new Timestamp(product.getCreationDate().getTime()));
+        if (product.getPrice() != null) {
+            statement.setInt(5, product.getPrice());
+        } else {
+            statement.setNull(5, Types.INTEGER);
+        }
+        if (product.getUnitOfMeasure() != null) {
+            statement.setString(6, product.getUnitOfMeasure().toString());
+        } else {
+            statement.setNull(6, Types.VARCHAR);
+        }
+        Person owner = product.getOwner();
+        statement.setString(7, owner.getName());
+        statement.setString(8, owner.getPassportID());
+        if (owner.getHairColor() != null) {
+            statement.setString(9, owner.getHairColor().toString());
+        } else {
+            statement.setNull(9, Types.VARCHAR);
+        }
+        statement.setString(10, owner.getNationality().toString());
+        statement.setLong(11, owner.getLocation().getX());
+        statement.setInt(12, owner.getLocation().getY());
+        statement.setString(13, owner.getLocation().getName());
+        statement.setLong(14, product.getId()); // Установка ID продукта для условия WHERE
+    }
+
 }

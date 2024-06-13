@@ -56,6 +56,13 @@ public class Update extends Command {
         try {
 //            Product newProduct = new ProductInput(console).make();
 //            newProduct.setId(id);
+//            Product product = (Product) request.getData();
+//            product.setUserId(request.getUserId());
+//            if (collectionManager.contains(product.getId())) {
+//                return new Response(false, "Элемент с заданным ключом уже существует!");
+//            }
+//            collectionManager.insertToCollection(product);
+//            return new Response(true, "Продукт с ключом " + product.getId() + " успешно добавлен!");
             Product newProduct = (Product) request.getData();
             newProduct.setUserId(request.getUserId());
             var product = collectionManager.getById(newProduct.getId());

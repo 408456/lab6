@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b13c9ebc-dada-4615-8f1e-0e55e7d74e54" name="Changes" comment="last">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/general/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/comands/Update.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +65,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "ssh.settings",
+    "settings.editor.selected.configurable": "preferences.editor",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -139,7 +139,7 @@
       <updated>1718227273945</updated>
       <workItem from="1718277033286" duration="2753000" />
       <workItem from="1718288214218" duration="10934000" />
-      <workItem from="1718315524505" duration="1944000" />
+      <workItem from="1718315524505" duration="3713000" />
     </task>
     <task id="LOCAL-00001" summary="last">
       <option name="closed" value="true" />
