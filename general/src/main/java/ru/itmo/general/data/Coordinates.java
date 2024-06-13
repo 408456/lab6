@@ -1,5 +1,6 @@
 package ru.itmo.general.data;
 
+import lombok.Getter;
 import ru.itmo.general.utility.Validateable;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.Objects;
 /**
  * Класс, представляющий координаты.
  */
+@Getter
 public class Coordinates implements Validateable, Serializable {
     private Integer x; // Значение поля должно быть больше -454, Поле не может быть null
     private Double y; // Поле не может быть null

@@ -10,6 +10,8 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Класс для запуска TCP-сервера.
@@ -17,6 +19,8 @@ import java.util.Iterator;
 public class TCPServer {
     private final int port;
     private static final Logger logger = LoggerFactory.getLogger(TCPServer.class);
+    private ExecutorService readPool;
+    private ExecutorService handlePool;
 
     /**
      * Конструктор с параметрами.
@@ -25,8 +29,10 @@ public class TCPServer {
      */
     public TCPServer(int port) {
         this.port = port;
+        readPool = Executors.newCachedThreadPool(); // Кэшированный пул потоков для чтения
+        handlePool = Executors.newFixedThreadPool(10); // Фиксированный пул потоков для обработки запросов (10 потоков)
+        TCPReader.setHandlePool(handlePool);
     }
-
     /**
      * Метод для запуска сервера.
      */
@@ -41,8 +47,7 @@ public class TCPServer {
 
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-                    selector.select(500); // Тайм-аут в миллисекундах
-                    processSelectedKeys(selector);
+                    if (selector.select() > 0) processSelectedKeys(selector);
                 } catch (IOException e) {
                     logger.error("Ошибка в процессе выбора ключей: ", e);
                 }
@@ -62,7 +67,16 @@ public class TCPServer {
                 if (key.isAcceptable()) {
                     acceptConnection(key);
                 } else if (key.isReadable()) {
-                    new TCPReader(key).parseRequest();
+                    key.interestOps(key.interestOps() & ~SelectionKey.OP_READ);
+                    logger.info("Starting read thread from selection key: {}", ((SocketChannel) key.channel()).getRemoteAddress());
+                    readPool.submit(() -> {
+                        try {
+                            new TCPReader(key).parseRequest(); // Обработка запроса
+                        } finally {
+                            key.interestOps(key.interestOps() | SelectionKey.OP_READ);
+                            selector.wakeup(); // Пробуждение селектора
+                        }
+                    });
                 }
             } catch (IOException e) {
                 logger.error("Ошибка при обработке ключа: ", e);

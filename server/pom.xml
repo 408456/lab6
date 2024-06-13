@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.itmo</groupId>
-        <artifactId>lab6</artifactId>
+        <artifactId>lab7</artifactId>
         <version>1.0</version>
     </parent>
 
@@ -11,10 +11,12 @@
     <packaging>jar</packaging>
 
     <name>server</name>
-    <url>http://maven.apache.org</url>
+    <url>https://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
     <dependencies>
@@ -31,9 +33,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>5.8</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.3</version> <!-- Replace with the latest version available -->
         </dependency>
     </dependencies>
 

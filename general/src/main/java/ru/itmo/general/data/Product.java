@@ -1,5 +1,7 @@
 package ru.itmo.general.data;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.itmo.general.utility.Validateable;
 
 import java.io.Serializable;
@@ -12,7 +14,10 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+@Getter
+@Setter
 public class Product implements Validateable, Comparable<Product>, Serializable {
+    @Setter
     private Long id; // Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; // Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; // Поле не может быть null
@@ -20,7 +25,7 @@ public class Product implements Validateable, Comparable<Product>, Serializable 
     private Integer price; // Поле может быть null, Значение поля должно быть больше 0
     private UnitOfMeasure unitOfMeasure; // Поле может быть null
     private Person owner; // Поле может быть null
-    public static long nextId = 1; // Статическое поле для генерации уникальных идентификаторов продуктов
+    private int userId;
 
     /**
      * Конструктор для создания объекта класса Product.
@@ -38,7 +43,6 @@ public class Product implements Validateable, Comparable<Product>, Serializable 
         this.price = price;
         this.unitOfMeasure = unitOfMeasure;
         this.owner = owner;
-        this.id = nextId++; // Генерация уникального идентификатора для продукта
     }
 
     public Product(Long id, String name, Coordinates coordinates, Instant creationDate, Integer price, UnitOfMeasure unitOfMeasure, Person owner) {
@@ -49,6 +53,17 @@ public class Product implements Validateable, Comparable<Product>, Serializable 
         this.price = price;
         this.unitOfMeasure = unitOfMeasure;
         this.owner = owner;
+    }
+
+    public Product(Long id, String name, Coordinates coordinates, Date creationDate, Integer price, UnitOfMeasure unitOfMeasure, Person owner, int userId) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.price = price;
+        this.unitOfMeasure = unitOfMeasure;
+        this.owner = owner;
+        this.userId = userId;
     }
 
     /**
@@ -172,15 +187,6 @@ public class Product implements Validateable, Comparable<Product>, Serializable 
 
 
     /**
-     * Возвращает идентификатор данного объекта Product.
-     *
-     * @return идентификатор объекта Product
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
      * Обновляет данные текущего объекта Product данными из другого объекта Product.
      *
      * @param product объект Product, данные которого будут использованы для обновления текущего объекта
@@ -192,34 +198,6 @@ public class Product implements Validateable, Comparable<Product>, Serializable 
         this.price = product.price;
         this.unitOfMeasure = product.unitOfMeasure;
         this.owner = product.owner;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public UnitOfMeasure getUnitOfMeasure() {
-        return unitOfMeasure;
-    }
-
-    public Person getOwner() {
-        return owner;
     }
 
 }

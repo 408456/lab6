@@ -13,16 +13,25 @@ import java.nio.channels.SocketChannel;
 /**
  * Класс для отправки ответов по TCP-протоколу.
  */
-public class TCPWriter {
+public class TCPWriter extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(TCPWriter.class);
+    private final SocketChannel clientSocketChannel;
+    private final Response response;
+
+    public TCPWriter(SocketChannel clientSocketChannel, Response response) {
+        this.clientSocketChannel = clientSocketChannel;
+        this.response = response;
+    }
+
+    @Override
+    public void run() {
+        sendResponse();
+    }
 
     /**
      * Метод для отправки ответа клиенту.
-     *
-     * @param clientSocketChannel канал для соединения с клиентом
-     * @param response            ответ, который будет отправлен клиенту
      */
-    public static void sendResponse(SocketChannel clientSocketChannel, Response response) {
+    public void sendResponse() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {

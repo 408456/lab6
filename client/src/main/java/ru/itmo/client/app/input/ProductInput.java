@@ -2,6 +2,7 @@ package ru.itmo.client.app.input;
 
 import ru.itmo.general.data.*;
 import ru.itmo.general.utility.exceptions.*;
+import ru.itmo.general.utility.io.Console;
 import ru.itmo.general.utility.io.InputSteamer;
 
 import java.util.NoSuchElementException;
@@ -9,9 +10,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProductInput {
-    private final ClientConsole console;
+    private final Console console;
 
-    public ProductInput(ClientConsole console) {
+    public ProductInput(Console console) {
         this.console = console;
     }
 
@@ -431,7 +432,7 @@ public class ProductInput {
     private String inputLocationName() throws IncorrectScriptException {
         String name;
         boolean fileMode = InputSteamer.getFileMode();
-        Pattern pattern = Pattern.compile("^[^\\p{P}\\d]+$");
+        Pattern pattern = Pattern.compile("^[^\\p{P}\\d\\s].*");
         while (true) {
             try {
                 console.println("Введите название местоположения покупателя:");
@@ -449,7 +450,7 @@ public class ProductInput {
                 console.printError("Название местоположения не может быть пустым!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (InvalidValueException exception) {
-                console.printError("Название не может содержать знаки препинания, числа или специальные символы!");
+                console.printError("Название не может содержать знаки препинания, специальные символы!");
                 if (fileMode) throw new IncorrectScriptException();
             } catch (IllegalStateException exception) {
                 console.printError("Непредвиденная ошибка!");

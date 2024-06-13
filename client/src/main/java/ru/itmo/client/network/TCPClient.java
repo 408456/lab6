@@ -1,5 +1,6 @@
 package ru.itmo.client.network;
 
+import lombok.Setter;
 import ru.itmo.general.utility.io.Console;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
@@ -33,15 +34,10 @@ public class TCPClient {
      * < Порт сервера
      */
     private SocketChannel socketChannel;
-    /**
-     * < Канал сокета для TCP-соединения
-     */
-    private boolean firstConnect;
-
-    public boolean isFirstConnect() {
-        return firstConnect;
-    }
-
+    @Setter
+    private String login;
+    @Setter
+    private String password;
     /**
      * Конструктор класса.
      *
@@ -53,7 +49,6 @@ public class TCPClient {
         this.serverAddress = serverAddress;
         this.serverPort = serverPort;
         this.output = output;
-        this.firstConnect = true;
     }
 
     /**
@@ -65,7 +60,6 @@ public class TCPClient {
     public boolean connect() throws TimeoutException {
         Selector selector = null;
         boolean connectFlag = false;
-        firstConnect = true;
         try {
             output.println("Попытка подключения к серверу " + serverAddress + ":" + serverPort + "...");
             socketChannel = SocketChannel.open();
@@ -148,7 +142,6 @@ public class TCPClient {
     }
 
     public Response sendCommand(Request request) {
-
         try {
             sendRequest(request);
             return receiveResponse();
@@ -202,6 +195,8 @@ public class TCPClient {
      */
     public void sendRequest(Request request) throws IOException {
         if (!ensureConnection()) throw new IOException("Соединение не установлено");
+        request.setLogin(login);
+        request.setPassword(password);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream)) {
             objectOutputStream.writeObject(request);
@@ -264,9 +259,5 @@ public class TCPClient {
             }
         }
         throw new IOException();
-    }
-
-    public void setFirstConnect(boolean firstConnect) {
-        this.firstConnect = firstConnect;
     }
 }

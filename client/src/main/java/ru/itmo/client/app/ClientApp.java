@@ -1,6 +1,5 @@
 package ru.itmo.client.app;
 
-import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.utility.io.Console;
 import ru.itmo.general.utility.io.InputSteamer;
 
@@ -15,9 +14,7 @@ public class ClientApp {
     public static void main(String[] args) {
         InputSteamer.setScanner(new Scanner(System.in));
         Console console = new Console();
-        CommandManager manager = new CommandManager();
-        manager.initClientCommands(console);
 
-        new Runner(console, manager, PORT, SERVER_ADDRESS).fromConsole();
+        new Runner(console, PORT, SERVER_ADDRESS).fromConsole();
     }
 }

@@ -3,17 +3,40 @@ package ru.itmo.server.app;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.itmo.general.utility.io.Console;
-import ru.itmo.general.managers.CommandManager;
-import ru.itmo.server.managers.DumpManager;
+import ru.itmo.server.dao.ProductDAO;
+import ru.itmo.server.dao.UserDAO;
+import ru.itmo.server.managers.CommandManager;
+import ru.itmo.server.managers.DatabaseManager;
 import ru.itmo.server.managers.ProductCollectionManager;
+import ru.itmo.server.network.TCPReader;
 import ru.itmo.server.network.TCPServer;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Properties;
 
 /**
  * Класс для запуска серверного приложения.
  */
 public class ServerApp {
     private static final Logger logger = LoggerFactory.getLogger(ServerApp.class);
-    private static final int PORT = 8001;
+    private static final Properties properties = new Properties();
+    private static int PORT;
+
+    static {
+        try (InputStream input = ServerApp.class.getClassLoader().getResourceAsStream("server.properties")) {
+            if (input == null) {
+                logger.error("Sorry, unable to find server.properties");
+                throw new IOException("Unable to find server.properties");
+            }
+            properties.load(new InputStreamReader(input, StandardCharsets.UTF_8));
+            PORT = Integer.parseInt(properties.getProperty("server.port"));
+        } catch (IOException ex) {
+            logger.error("Error loading properties file", ex);
+        }
+    }
 
     /**
      * Точка входа в приложение сервера.
@@ -30,14 +53,14 @@ public class ServerApp {
             System.exit(1);
         }
         Console console = new Console();
-        DumpManager dumpManager = new DumpManager(args[0], console);
-        ProductCollectionManager productCollectionManager = new ProductCollectionManager(dumpManager);
+        DatabaseManager.createDatabaseIfNotExists();
+        UserDAO userDAO = new UserDAO();
+        ProductDAO productDAO = new ProductDAO();
+        TCPReader.setUserDAO(userDAO);
+        ProductCollectionManager productCollectionManager = new ProductCollectionManager(productDAO, userDAO);
 
-        CommandManager commandManager = new CommandManager();
-        CommandManager.initServerCommands(productCollectionManager);
+        CommandManager.initServerCommands(productCollectionManager, userDAO);
 
-        // Добавляем shutdown hook для корректного завершения работы
-        Runtime.getRuntime().addShutdownHook(new Thread(productCollectionManager::saveCollection));
         new Runner().start();
         new TCPServer(PORT).start();
     }

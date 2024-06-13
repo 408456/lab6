@@ -1,165 +1,75 @@
 package ru.itmo.server.managers;
 
+import lombok.Getter;
 import ru.itmo.general.data.Person;
 import ru.itmo.general.data.Product;
-import ru.itmo.general.managers.CollectionManager;
 import ru.itmo.general.utility.io.Console;
+import ru.itmo.server.dao.ProductDAO;
+import ru.itmo.server.dao.UserDAO;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-/**
- * Класс для управления коллекцией продуктов
- */
 public class ProductCollectionManager implements CollectionManager {
-    /**
-     * Коллекция продуктов
-     */
-    private final Hashtable<Long, Product> collection = new Hashtable<>();
-    /**
-     * Время последней инициализации коллекции
-     */
+    @Getter
+    private final ConcurrentHashMap<Long, Product> collection = new ConcurrentHashMap<>();
+    @Getter
     private LocalDateTime lastInitTime;
-    /**
-     * Время последнего сохранения коллекции
-     */
+    @Getter
     private LocalDateTime lastSaveTime;
-    /**
-     * Менеджер для сохранения/загрузки коллекции
-     */
-    private final DumpManager dumpManager;
+    private final ProductDAO productDAO;
+    private final UserDAO userDAO;
 
-    /**
-     * Конструктор класса.
-     *
-     * @param dumpManager Менеджер для сохранения/загрузки коллекции
-     */
-    public ProductCollectionManager(DumpManager dumpManager) {
+    public ProductCollectionManager(ProductDAO productDAO, UserDAO userDAO) {
+        this.productDAO = productDAO;
+        this.userDAO = userDAO;
         this.lastInitTime = null;
         this.lastSaveTime = null;
-        this.dumpManager = dumpManager;
 
         loadCollection();
     }
-//    /**
-//     * Проверяет, есть ли права на чтение файла и запись в файл
-//     * @return true, если есть права на запись, иначе false
-//     */
-//    public boolean canWriteToFile() {
-//        File file = new File(dumpManager.getFileName()); // предположим, что у менеджера есть метод для получения имени файла
-//        return file.canWrite();
-//    }
-//    public boolean canReadFromFile() {
-//        File file = new File(dumpManager.getFileName());
-//        return file.canRead();
-//    }
-    /**
-     * Получает коллекцию продуктов.
-     *
-     * @return Коллекция продуктов
-     */
-    public Hashtable<Long, Product> getCollection() {
-        return collection;
-    }
 
-    /**
-     * Получает время последней инициализации коллекции.
-     *
-     * @return Время последней инициализации коллекции
-     */
-    public LocalDateTime getLastInitTime() {
-        return lastInitTime;
-    }
-
-    /**
-     * Получает время последнего сохранения коллекции.
-     *
-     * @return Время последнего сохранения коллекции
-     */
-    public LocalDateTime getLastSaveTime() {
-        return lastSaveTime;
-    }
-
-    /**
-     * Возвращает тип коллекции.
-     *
-     * @return Тип коллекции
-     */
     public String getType() {
         return collection.getClass().getName();
     }
 
-    /**
-     * Возвращает размер коллекции.
-     *
-     * @return Размер коллекции
-     */
     public int getSize() {
         return collection.size();
     }
 
-    /**
-     * Возвращает последний добавленный продукт.
-     *
-     * @return Последний добавленный продукт
-     */
     public Product getLast() {
         if (collection.isEmpty()) return null;
         return collection.get(collection.keySet().stream().max(Long::compareTo).orElse(null));
     }
 
-    /**
-     * Возвращает продукт по указанному ключу.
-     *
-     * @param id Ключ продукта
-     * @return Продукт с указанным ключом
-     */
     public Product getById(long id) {
         return collection.get(id);
     }
 
-    // Методы для управления коллекцией
-
-    /**
-     * Добавляет продукт в коллекцию.
-     *
-     * @param product Добавляемый продукт
-     */
-    public void addToCollection(Product product) {
-        collection.put(product.getId(), product);
+    public void insertToCollection(Product product) {
+        if (productDAO.insertProduct(product, product.getUserId())) {
+            collection.put(product.getId(), product);
+            lastSaveTime = LocalDateTime.now();
+        }
     }
 
-    /**
-     * Очищает коллекцию продуктов.
-     */
-    public void clearCollection() {
-        collection.clear();
-    }
-
-    /**
-     * Сохраняет коллекцию продуктов.
-     */
-    public void saveCollection() {
-        dumpManager.writeCollection(collection.values());
+    public void clearCollection(int userId) {
+        collection.entrySet().removeIf(entry -> checkOwnership(entry.getKey(), userId) && productDAO.removeProductById(entry.getKey()));
         lastSaveTime = LocalDateTime.now();
     }
 
-    /**
-     * Загружает коллекцию продуктов.
-     */
     private void loadCollection() {
-        Map<Long, Product> loadedCollection = dumpManager.readCollection().stream()
-                .collect(Collectors.toMap(Product::getId, product -> product));
-        collection.putAll(loadedCollection);
+        List<Product> products = productDAO.getAllProducts();
+        collection.clear();
+        for (Product product : products) {
+            collection.put(product.getId(), product);
+        }
         lastInitTime = LocalDateTime.now();
+        lastSaveTime = LocalDateTime.now();
     }
 
-    /**
-     * Проверяет валидность всех продуктов в коллекции.
-     *
-     * @param console Консоль для вывода сообщений об ошибках
-     */
     public void validateAll(Console console) {
         if (collection.isEmpty()) {
             console.printError("Коллекция пуста!");
@@ -180,98 +90,75 @@ public class ProductCollectionManager implements CollectionManager {
     public String toString() {
         if (collection.isEmpty()) return "Коллекция пуста!";
 
-
         StringBuilder info = new StringBuilder();
-
         info.append("Продукты, отсортированные по убыванию цены:\n");
         for (Product product : getProductsSortedByPriceDesc()) {
             info.append(product).append("\n");
         }
-
         return info.toString();
     }
 
-
-    /**
-     * Удаляет из коллекции все элементы, ключ которых меньше заданного id.
-     *
-     * @param id Заданный id
-     */
-    public void removeLowerKey(Long id) {
-        collection.entrySet().removeIf(entry -> entry.getKey() < id);
+    public void removeLowerKey(Long id, int userId) {
+        collection.entrySet().removeIf(entry -> entry.getKey() < id && checkOwnership(entry.getKey(), userId) && productDAO.removeProductById(entry.getKey()));
+        lastSaveTime = LocalDateTime.now();
     }
 
-    /**
-     * Удаляет из коллекции все элементы, ключ которых больше заданного id.
-     *
-     * @param id Заданный id
-     */
-    public void removeGreaterKey(Long id) {
-        collection.entrySet().removeIf(entry -> entry.getKey() > id);
+    public void removeGreaterKey(Long id, int userId) {
+        collection.entrySet().removeIf(entry -> entry.getKey() > id && checkOwnership(entry.getKey(), userId) && productDAO.removeProductById(entry.getKey()));
+        lastSaveTime = LocalDateTime.now();
     }
 
-    /**
-     * Удаляет из коллекции все элементы, ключ которых больше, чем у заданного продукта.
-     *
-     * @param product заданный продукт
-     */
-    public void removeGreater(Product product) {
-        collection.values().removeIf(p -> p.compareTo(product) > 0);
+    public void removeGreater(Product product, int userId) {
+        collection.values().removeIf(p -> p.compareTo(product) > 0 && checkOwnership(p.getId(), userId) && productDAO.removeProductById(p.getId()));
+        lastSaveTime = LocalDateTime.now();
     }
 
-    /**
-     * Возвращает количество продуктов, у которых владелец меньше заданного.
-     *
-     * @param owner Владелец, с которым сравнивается владелец каждого продукта
-     * @return Количество продуктов, у которых владелец меньше заданного
-     */
     public long countLessThanOwner(Person owner) {
         return collection.values().stream()
-                .filter(product -> product.getOwner() != null)  // owner не null
+                .filter(product -> product.getOwner() != null)
                 .filter(product -> product.getOwner().compareTo(owner) < 0)
                 .count();
     }
 
-    /**
-     * Проверяет, содержит ли коллекция элемент с указанным ключом.
-     *
-     * @param key Ключ для проверки
-     * @return true, если коллекция содержит элемент с указанным ключом, иначе false
-     */
     public boolean contains(Long key) {
         return collection.containsKey(key);
     }
 
-    /**
-     * Возвращает отсортированный список ключей из коллекции.
-     *
-     * @return Отсортированный список ключей
-     */
     public List<Long> getSortedKeys() {
         List<Long> keys = new ArrayList<>(collection.keySet());
         Collections.sort(keys);
         return keys;
     }
 
-    /**
-     * Возвращает отсортированные продукты по возрастанию цены.
-     *
-     * @return Отсортированные продукты по возрастанию цены
-     */
     public List<Product> getProductsSortedByPriceAsc() {
         return collection.values().stream()
                 .sorted(Comparator.comparingInt(Product::getPrice))
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Возвращает отсортированные продукты по убыванию цены.
-     *
-     * @return Отсортированные продукты по убыванию цены
-     */
     public List<Product> getProductsSortedByPriceDesc() {
         return collection.values().stream()
                 .sorted(Comparator.comparingInt(Product::getPrice).reversed())
                 .collect(Collectors.toList());
+    }
+
+    public boolean checkOwnership(long productId, int userId) {
+        return productDAO.checkOwnership(productId, userId);
+    }
+
+    public void updateProduct(Product product, int userId) {
+        if (checkOwnership(product.getId(), userId) && productDAO.updateProduct(product)) {
+            collection.put(product.getId(), product);
+            lastSaveTime = LocalDateTime.now();
+        }
+    }
+
+    public boolean removeById(long productId, int userId) {
+        if (checkOwnership(productId, userId) && productDAO.removeProductById(productId)) {
+            collection.remove(productId);
+            lastSaveTime = LocalDateTime.now();
+            return true;
+        }
+        return false;
     }
 }

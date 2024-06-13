@@ -5,16 +5,19 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serial;
+
 /**
  * Класс для представления запроса к серверу.
  */
 @Getter
 @Setter
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class Request extends Sendable {
+    @Serial
     private static final long serialVersionUID = 1L;
-
+    private String login;
+    private String password;
     /**
      * Конструктор с параметрами.
      *

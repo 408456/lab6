@@ -25,7 +25,7 @@ public class ProductInput {
         this.console = console;
     }
 
-    public Product make() throws IncorrectScriptException, InvalidFormException, InvalidValueException {
+    public Product make() throws IncorrectScriptException, InvalidFormException {
         Product product = new Product(inputProductName(), inputCoordinates(), inputPrice(), inputUnitOfMeasure(), inputPerson());
         if (!product.validate()) throw new InvalidFormException();
         return product;

@@ -5,4 +5,10 @@ package ru.itmo.general.utility.exceptions;
  */
 
 public class InvalidAmountException extends Exception {
+    public InvalidAmountException() {
+        super();
+    }
+    public InvalidAmountException(String s) {
+        super(s);
+    }
 }

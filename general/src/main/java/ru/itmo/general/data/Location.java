@@ -1,5 +1,6 @@
 package ru.itmo.general.data;
 
+import lombok.Getter;
 import ru.itmo.general.utility.Validateable;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.util.Objects;
 /**
  * Класс, представляющий местоположение.
  */
+@Getter
 public class Location implements Validateable, Serializable {
     private long x;          // Координата X
     private int y;           // Координата Y
