@@ -27,7 +27,7 @@ public class Help extends Command {
         Map<String, String> commandsInfo = commandManager.getCommands().values().stream()
                 .collect(Collectors.toMap(Command::getName, Command::getDescription));
         StringBuilder table = new StringBuilder();
-        table.append(String.format("%-30s | %-50s%n", "", ""));
+        table.append(String.format("%-30s  %-50s%n", "", ""));
 //        table.append(String.format("%-30s | %-50s%n", "", ""));
         commandsInfo.forEach((name, description) -> {
             table.append(String.format("%-30s  %-50s%n", name, description));

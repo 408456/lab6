@@ -37,27 +37,14 @@ public class RemoveLowerKey extends Command {
      * @param request запрос, содержащий данные для выполнения команды
      * @return ответ с результатом выполнения команды
      */
-//    @Override
-//    public Response execute(Request request) {
-//        try {
-//            Long id = (Long) request.getData();
-//            collectionManager.removeLowerKey(id, userDAO.getUserByUsername(request.getLogin()).getId());
-//            return new Response(true, "Продукты успешно удалены!");
-//        } catch (Exception e) {
-//            return new Response(false, "Произошла ошибка при выполнении команды: " + e.getMessage());
-//        }
-//    }
     @Override
     public Response execute(Request request) {
         try {
-            Long id = Long.parseLong((String) request.getData());
+            Long id = (Long) request.getData();
             collectionManager.removeLowerKey(id, userDAO.getUserByUsername(request.getLogin()).getId());
             return new Response(true, "Продукты успешно удалены!");
-        } catch (NumberFormatException e) {
-            return new Response(false, "Ошибка: Некорректный формат ключа.");
         } catch (Exception e) {
             return new Response(false, "Произошла ошибка при выполнении команды: " + e.getMessage());
         }
     }
-
 }
